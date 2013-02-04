@@ -1,4 +1,4 @@
-# Zoomus
+# Zoomus Gem
 
 Ruby wrapper gem for zoom.us API v1.
 
