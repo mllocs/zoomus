@@ -20,5 +20,5 @@ def zoomus_url(url)
 end
 
 def zoomus_client
-  Zoomus::Client.new(:api_key => "xxx", :api_secret => "xxx")
+  Zoomus.new(:api_key => "xxx", :api_secret => "xxx")
 end

@@ -18,7 +18,7 @@ Or install it yourself as:
 
 ## Usage
 
-    @zc = Zoomus::Client.new(:api_key => "xxx", :api_secret => "xxx")
+    @zc = Zoomus.new(:api_key => "xxx", :api_secret => "xxx")
     @zc.user_list
 
 ## Contributing

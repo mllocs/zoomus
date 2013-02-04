@@ -4,7 +4,7 @@ require 'zoomus/actions/meeting'
 require 'zoomus/client'
 
 module Zoomus
-  class Client
+  class << self
     def new(*arg)
       Zoomus::Client.new(*arg)
     end
