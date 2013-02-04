@@ -1,6 +1,6 @@
 # Zoomus
 
-TODO: API wrapper for zoom.us API.
+Ruby wrapper gem for zoom.us API v1.
 
 ## Installation
 
