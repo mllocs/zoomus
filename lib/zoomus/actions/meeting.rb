@@ -8,6 +8,12 @@ module Zoomus
         parse_response self.class.post("/meeting/list", :query => options)
       end
 
+      def meeting_create(*args)
+        options = args.extract_options!
+        require_params([:host_id, :topic, :type], options)
+        parse_response self.class.post("/meeting/create", :query => options)
+      end
+
     end
   end
 end
