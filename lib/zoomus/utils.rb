@@ -8,6 +8,16 @@ module Zoomus
       def parse_response(http_response)
         JSON.parse(http_response.parsed_response)
       end
+
+      def require_params(params, options)
+        params = [params] unless params.is_a? Array
+        params.each do |param|
+          unless options[param]
+            raise argument_error(param.to_s)
+            break
+          end
+        end
+      end
   end
 end
 
