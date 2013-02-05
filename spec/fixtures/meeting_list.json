@@ -1,0 +1,20 @@
+{
+  "page_count": 1,
+  "page_number": 1,
+  "page_size": 30,
+  "total_records": 1,
+  "meetings": [{
+    "topic": "My Meeting",
+    "id": 521910404,
+    "start_url": "https://zoom.us/s/521910404?zpk=LRTNfaKqk15rJHbOQ5uCo92GP_iNykiboh9q5jqkoXU.BwUAAAE8qaCS4wAAHCAkYTEwNTc5ZDAtZTliNi00NGJjLTliZWQtMzVjMTQ4MDE2NWRkFnVmUjkzTTJwUnl5OGVQRk45MmR0dFEWdWZSOTNNMnBSeXk4ZVBGTjkyZHR0UQtNYXhpbSBDb2xsc2QAsjRlMDZwQ2pjNmRMYVB5RG9OeGZ2X0VtcXJxajJjRXBlOWF2UFI2VEhiREkuQmdFZ2NFOUhVVXRVTW1KdVZVdFdRMVJTU25kcFp6VjRPVUozUmtwU0wycE9TelpBTlRVeVpUTTRPR013WlRNeU1EazJZMlF4Tmpaa01HSXlZV0ZqTkRBMk5UUXpOMlE1TVdZek1HSm1abVEyTW1aa016WXhZV1U1Wm1FMk5ETm1OR0V5TmcAABZkUGJUUWoxelJuLVJ5R2ZCeW11QndBAAE",
+    "timezone": "Europe/Brussels",
+    "duration": 60,
+    "option_jbh": true,
+    "host_id": "ufR9342pRyf8ePFN92dttQ",
+    "join_url": "https://zoom.us/j/521910404",
+    "created_at": "2013-02-05T09:11:48Z",
+    "start_time": "2013-02-05T10:00:00Z",
+    "uuid": "g0OFRGGARfaTlDxbGjcVKQ==",
+    "type": 2
+  }]
+}
