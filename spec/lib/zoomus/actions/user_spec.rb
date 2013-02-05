@@ -16,8 +16,8 @@ describe Zoomus::Actions::User do
       expect(@zc.user_list).to be_kind_of(Hash)
     end
 
-    it "returns 'page_count'" do
-      expect(@zc.user_list["page_count"]).to eq(1)
+    it "returns 'total_records" do
+      expect(@zc.user_list["total_records"]).to eq(1)
     end
 
     it "returns 'users' Array" do
