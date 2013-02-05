@@ -4,6 +4,7 @@ describe Zoomus::Actions::Meeting do
 
   before :all do
     @zc = zoomus_client
+    @host_id = "ufR93M2pRyy8ePFN92dttq"
   end
 
   describe "#meeting_list action" do
@@ -13,15 +14,15 @@ describe Zoomus::Actions::Meeting do
     end
 
     it "returns a hash" do
-      expect(@zc.meeting_list).to be_kind_of(Hash)
+      expect(@zc.meeting_list(@host_id)).to be_kind_of(Hash)
     end
 
     it "returns 'total_records'" do
-      expect(@zc.meeting_list["total_records"]).to eq(1)
+      expect(@zc.meeting_list(@host_id)["total_records"]).to eq(1)
     end
 
     it "returns 'meetings' Array" do
-      expect(@zc.meeting_list["meetings"]).to be_kind_of(Array)
+      expect(@zc.meeting_list(@host_id)["meetings"]).to be_kind_of(Array)
     end
 
   end

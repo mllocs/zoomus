@@ -3,8 +3,8 @@ module Zoomus
 
     private
 
-      def argument_error
-        ArgumentError.new("You must provide the api_key and api_secret")
+      def argument_error(name = "api_key and api_secret")
+        ArgumentError.new("You must provide #{name}")
       end
 
       def parse(http_response)
