@@ -55,6 +55,5 @@ describe Zoomus::Actions::User do
       expect(res["last_name"]).to eq("Bar")
       expect(res["type"]).to eq(1)
     end
-
   end
 end
