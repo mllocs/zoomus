@@ -19,8 +19,12 @@ Or install it yourself as:
 ## Usage
 
     require 'zoomus'
-    zc = Zoomus.new(:api_key => "xxx", :api_secret => "xxx")
-    zc.user_list
+    zoomus_client = Zoomus.new(:api_key => "xxx", :api_secret => "xxx")
+    user_list = zoomus_client.user_list
+    user_list["users"].each do |user|
+      user_id = u["id"]
+      puts zoomus_client.meeting_list(:host_id => user_id)
+    end
 
 ## Contributing
 

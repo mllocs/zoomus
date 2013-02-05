@@ -14,14 +14,14 @@ module Zoomus
 
     def initialize(*args)
 
-      raise argument_error unless args.is_a? Array
-      args = args.inject { |options, option| options.merge(option) }
+      options = args.extract_options!
 
-      raise argument_error unless args[:api_key] and args[:api_secret]
+      raise argument_error("api_key and api_secret") unless options[:api_key] and options[:api_secret]
 
-      self.class.default_params :api_key => args[:api_key], 
-                                :api_secret => args[:api_secret]
+      self.class.default_params :api_key => options[:api_key], 
+                                :api_secret => options[:api_secret]
     end
 
   end
 end
+

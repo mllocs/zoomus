@@ -3,8 +3,7 @@ module Zoomus
     module User
 
       def user_list
-        http_response = self.class.post("/user/list")
-        hash_response = parse(http_response)
+        parse_response self.class.post("/user/list")
       end
 
     end

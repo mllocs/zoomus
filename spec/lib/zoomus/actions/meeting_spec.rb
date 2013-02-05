@@ -13,16 +13,20 @@ describe Zoomus::Actions::Meeting do
       stub_request(:post, zoomus_url("/meeting/list")).to_return(:body => json_response("meeting_list"))
     end
 
+    it "requires a 'host_id' argument" do
+      expect{@zc.meeting_list()}.to raise_error(ArgumentError)
+    end
+
     it "returns a hash" do
-      expect(@zc.meeting_list(@host_id)).to be_kind_of(Hash)
+      expect(@zc.meeting_list(:host_id => @host_id)).to be_kind_of(Hash)
     end
 
     it "returns 'total_records'" do
-      expect(@zc.meeting_list(@host_id)["total_records"]).to eq(1)
+      expect(@zc.meeting_list(:host_id => @host_id)["total_records"]).to eq(1)
     end
 
     it "returns 'meetings' Array" do
-      expect(@zc.meeting_list(@host_id)["meetings"]).to be_kind_of(Array)
+      expect(@zc.meeting_list(:host_id => @host_id)["meetings"]).to be_kind_of(Array)
     end
 
   end
