@@ -24,4 +24,3 @@ module Zoomus
 
   end
 end
-
