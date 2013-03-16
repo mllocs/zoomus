@@ -6,7 +6,9 @@ module Zoomus
       end
 
       def parse_response(http_response)
-        JSON.parse(http_response.parsed_response)
+        response = http_response.parsed_response
+        # Mocked response returns a string
+        response.kind_of?(Hash) ? response : JSON.parse(response)
       end
 
       def require_params(params, options)
