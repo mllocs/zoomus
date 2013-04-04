@@ -20,16 +20,16 @@ describe Zoomus::Actions::User do
     end
 
     it "returns a hash" do
-      expect(@zc.user_create(:email => "foo@bar.com", 
-                             :first_name => "Foo", 
-                             :last_name => "Bar", 
+      expect(@zc.user_create(:email => "foo@bar.com",
+                             :first_name => "Foo",
+                             :last_name => "Bar",
                              :type => 1)).to be_kind_of(Hash)
     end
 
     it "returns same params" do
-      res = @zc.user_create(:email => "foo@bar.com", 
-                            :first_name => "Foo", 
-                            :last_name => "Bar", 
+      res = @zc.user_create(:email => "foo@bar.com",
+                            :first_name => "Foo",
+                            :last_name => "Bar",
                             :type => 1)
 
       expect(res["email"]).to eq("foo@bar.com")

@@ -3,9 +3,9 @@ require 'json'
 
 module Zoomus
   class Client
-    
+
     include HTTParty
-    
+
     include Utils
     include Actions::User
     include Actions::Meeting
@@ -18,7 +18,7 @@ module Zoomus
 
       raise argument_error("api_key and api_secret") unless options[:api_key] and options[:api_secret]
 
-      self.class.default_params :api_key => options[:api_key], 
+      self.class.default_params :api_key => options[:api_key],
                                 :api_secret => options[:api_secret]
     end
 
