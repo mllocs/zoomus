@@ -1,0 +1,10 @@
+{
+  "id": "eIimBAXqSrWOcB_EOIXTog",
+  "email": "foo@bar.com",
+  "first_name": "Foo",
+  "last_name": "Bar",
+  "type": 1,
+  "verified": 0,
+  "created_at": "2013-04-04T15:57:55Z",
+  "token": null
+}
