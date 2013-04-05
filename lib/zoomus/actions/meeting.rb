@@ -20,6 +20,12 @@ module Zoomus
         Utils.parse_response self.class.post("/meeting/update", :query => options)
       end
 
+      def meeting_delete(*args)
+        options = Utils.extract_options!(args)
+        Utils.require_params([:id, :host_id], options)
+        Utils.parse_response self.class.post("/meeting/delete", :query => options)
+      end
+
       Utils.define_bang_methods(self)
 
     end
