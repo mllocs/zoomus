@@ -5,8 +5,6 @@ module Zoomus
   class Client
 
     include HTTParty
-
-    include Utils
     include Actions::User
     include Actions::Meeting
 
@@ -14,13 +12,14 @@ module Zoomus
 
     def initialize(*args)
 
-      options = extract_options!(args)
+      options = Utils.extract_options!(args)
 
-      raise argument_error("api_key and api_secret") unless options[:api_key] and options[:api_secret]
-
-      self.class.default_params :api_key => options[:api_key],
-                                :api_secret => options[:api_secret]
+      raise Utils.argument_error("api_key and api_secret") unless options[:api_key] &&
+                                                                  options[:api_secret]
+      self.class.default_params(
+        :api_key    => options[:api_key],
+        :api_secret => options[:api_secret]
+      )
     end
-
   end
 end
