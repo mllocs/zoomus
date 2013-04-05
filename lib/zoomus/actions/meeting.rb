@@ -20,6 +20,8 @@ module Zoomus
         parse_response self.class.post("/meeting/update", :query => options)
       end
 
+      Utils::define_bang_methods(self)
+
     end
   end
 end

@@ -18,6 +18,8 @@ module Zoomus
         parse_response self.class.post("/user/custcreate", :query => options)
       end
 
+      Utils::define_bang_methods(self)
+
     end
   end
 end
