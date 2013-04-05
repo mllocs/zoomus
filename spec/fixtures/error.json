@@ -1,0 +1,6 @@
+{
+  "error": {
+    "message": "Invalid api key or secret",
+    "code": 200
+  }
+}
