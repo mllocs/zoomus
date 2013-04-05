@@ -16,6 +16,16 @@ Or install it yourself as:
 
     $ gem install zoomus
 
+## Available actions
+
+- user/create
+- user/custcreate
+- user/list
+- meeting/create
+- meeting/delete
+- meeting/list
+- meeting/update
+
 ## Usage
 
     require 'zoomus'
