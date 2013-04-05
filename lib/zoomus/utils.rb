@@ -7,6 +7,14 @@ module Zoomus
       name ? ArgumentError.new("You must provide #{name}") : ArgumentError
     end
 
+    def raise_if_error!(response)
+      if response["error"]
+        raise Error.new(response["error"]["message"])
+      else
+        response
+      end
+    end
+
     def parse_response(http_response)
       response = http_response.parsed_response
       # Mocked response returns a string
@@ -22,11 +30,18 @@ module Zoomus
         end
       end
     end
-  end
-end
 
-class Array
-  def extract_options!
-    last.is_a?(::Hash) ? pop : {}
+    # Dinamically defines bang methods for Actions modules
+    def self.define_bang_methods(klass)
+      klass.instance_methods.each do |m|
+        klass.send(:define_method, "#{m}!") do |*args|
+          raise_if_error! send(m, *args)
+        end
+      end
+    end
+
+    def extract_options!(array)
+      array.last.is_a?(::Hash) ? array.pop : {}
+    end
   end
 end

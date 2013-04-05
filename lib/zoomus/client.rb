@@ -14,7 +14,7 @@ module Zoomus
 
     def initialize(*args)
 
-      options = args.extract_options!
+      options = extract_options!(args)
 
       raise argument_error("api_key and api_secret") unless options[:api_key] and options[:api_secret]
 

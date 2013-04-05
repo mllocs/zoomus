@@ -7,13 +7,13 @@ module Zoomus
       end
 
       def user_create(*args)
-        options = args.extract_options!
+        options = extract_options!(args)
         require_params([:type, :email], options)
         parse_response self.class.post("/user/create", :query => options)
       end
 
       def user_custcreate(*args)
-        options = args.extract_options!
+        options = extract_options!(args)
         require_params([:type, :email], options)
         parse_response self.class.post("/user/custcreate", :query => options)
       end
