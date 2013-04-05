@@ -2,6 +2,7 @@ require 'zoomus/utils'
 require 'zoomus/actions/user'
 require 'zoomus/actions/meeting'
 require 'zoomus/client'
+require 'zoomus/error'
 
 module Zoomus
 
