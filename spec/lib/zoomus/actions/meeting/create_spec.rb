@@ -9,7 +9,8 @@ describe Zoomus::Actions::Meeting do
 
   describe "#meeting_create action" do
     before :each do
-      stub_request(:post, zoomus_url("/meeting/create")).to_return(:body => json_response("meeting_create"))
+      stub_request(:post, zoomus_url("/meeting/create")).
+        to_return(:body => json_response("meeting_create"))
     end
 
     it "requires a 'host_id' argument" do
@@ -47,6 +48,20 @@ describe Zoomus::Actions::Meeting do
 
       expect(res["start_url"]).to_not be_nil
       expect(res["join_url"]).to_not be_nil
+    end
+  end
+
+  describe "#meeting_create! action" do
+    before :each do
+      stub_request(:post, zoomus_url("/meeting/create")).
+        to_return(:body => json_response("error"))
+    end
+
+    it "raises Zoomus::Error exception" do
+      expect{ @zc.meeting_create!(
+                :host_id => @host_id,
+                :type => 1,
+                :topic => "Foo")}.to raise_error(Zoomus::Error)
     end
   end
 end

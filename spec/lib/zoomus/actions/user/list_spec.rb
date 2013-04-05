@@ -23,4 +23,15 @@ describe Zoomus::Actions::User do
       expect(@zc.user_list["users"]).to be_kind_of(Array)
     end
   end
+
+  describe "#user_list! action" do
+    before :each do
+      stub_request(:post, zoomus_url("/user/list")).
+        to_return(:body => json_response("error"))
+    end
+
+    it "raises Zoomus::Error exception" do
+      expect{ @zc.user_list! }.to raise_error(Zoomus::Error)
+    end
+  end
 end

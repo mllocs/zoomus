@@ -46,4 +46,19 @@ describe Zoomus::Actions::Meeting do
       expect(res["updated_at"]).to eq("2013-02-25T15:52:38Z")
     end
   end
+
+  describe "#meeting_update! action" do
+    before :each do
+      stub_request(:post, zoomus_url("/meeting/update")).
+        to_return(:body => json_response("error"))
+    end
+
+    it "raises Zoomus::Error exception" do
+      expect{ @zc.meeting_update!(
+                :host_id => @host_id,
+                :id => @id,
+                :type => 1,
+                :topic => "Foo")}.to raise_error(Zoomus::Error)
+    end
+  end
 end

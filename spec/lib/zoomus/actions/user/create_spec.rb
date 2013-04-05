@@ -38,4 +38,20 @@ describe Zoomus::Actions::User do
       expect(res["type"]).to eq(1)
     end
   end
+
+  describe "#user_create! action" do
+    before :each do
+      stub_request(:post, zoomus_url("/user/create")).
+        to_return(:body => json_response("error"))
+    end
+
+    it "raises Zoomus::Error exception" do
+      expect{ @zc.user_create!(
+                :email => "foo@bar.com",
+                :first_name => "Foo",
+                :last_name => "Bar",
+                :type => 1)}.to raise_error(Zoomus::Error)
+    end
+  end
+
 end

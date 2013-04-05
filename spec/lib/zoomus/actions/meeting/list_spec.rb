@@ -28,4 +28,15 @@ describe Zoomus::Actions::Meeting do
       expect(@zc.meeting_list(:host_id => @host_id)["meetings"]).to be_kind_of(Array)
     end
   end
+
+  describe "#meeting_list! action" do
+    before :each do
+      stub_request(:post, zoomus_url("/meeting/list")).
+        to_return(:body => json_response("error"))
+    end
+
+    it "raises Zoomus::Error exception" do
+      expect{ @zc.meeting_list!(:host_id => @host_id)}.to raise_error(Zoomus::Error)
+    end
+  end
 end
