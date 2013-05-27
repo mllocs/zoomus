@@ -1,0 +1,8 @@
+Version 0.1.0
+  - Added /user and /meeting endpoints.
+
+Version 0.2.0
+  - Added /report endpoint (getuserreport and getaccountreport actions).
+  - Added support for Time objects as datetime parameters (from, to).
+  - Added configuration block Zoomus.configure.
+  - Deprecated Zoomus.new(:api_key => 'xxx', :api_secret => 'xxx') shortcut.
