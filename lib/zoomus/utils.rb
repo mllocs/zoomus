@@ -43,6 +43,16 @@ module Zoomus
       def extract_options!(array)
         array.last.is_a?(::Hash) ? array.pop : {}
       end
+
+      def process_datetime_params!(params, options)
+        params = [params] unless params.is_a? Array
+        params.each do |param|
+          if options[param].kind_of?(Time)
+            options[param] = options[param].strftime("%FT%TZ")
+          end
+        end
+        options
+      end
     end
   end
 end

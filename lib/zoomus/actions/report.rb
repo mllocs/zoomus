@@ -5,6 +5,7 @@ module Zoomus
       def report_getaccountreport(*args)
         options = Utils.extract_options!(args)
         Utils.require_params([:from, :to], options)
+        Utils.process_datetime_params!([:from, :to], options)
         Utils.parse_response self.class.post("/report/getaccountreport", :query => options)
       end
 

@@ -40,4 +40,17 @@ describe Zoomus::Utils do
       expect(Utils.extract_options!(args)).to be_kind_of(Hash)
     end
   end
+
+  describe "#process_datetime_params" do
+    it "converts the Time objects to formatted strings" do
+      args = {
+        :foo => 'foo',
+        :bar => Time.utc(2000, "jan", 1, 20, 15, 1)
+      }
+      expect(
+        Utils.process_datetime_params!(:bar, args)
+      ).to eq({:foo => 'foo',
+               :bar => "2000-01-01T20:15:01Z"})
+    end
+  end
 end
