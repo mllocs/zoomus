@@ -11,20 +11,28 @@ describe Zoomus::Actions::Meeting do
 
   describe "#meeting_create action" do
     before :each do
-      stub_request(:post, zoomus_url("/meeting/create")).
-        to_return(:body => json_response("meeting_create"))
+      stub_request(
+        :post,
+        zoomus_url("/meeting/create")
+      ).to_return(:body => json_response("meeting_create"))
     end
 
     it "requires a 'host_id' argument" do
-      expect{@zc.meeting_create(filter_key(@args, :host_id))}.to raise_error(ArgumentError)
+      expect {
+        @zc.meeting_create(filter_key(@args, :host_id))
+      }.to raise_error(ArgumentError)
     end
 
     it "requires a 'topic' argument" do
-      expect{@zc.meeting_create(filter_key(@args, :topic))}.to raise_error(ArgumentError)
+      expect {
+        @zc.meeting_create(filter_key(@args, :topic))
+      }.to raise_error(ArgumentError)
     end
 
     it "requires a 'type' argument" do
-      expect{@zc.meeting_create(filter_key(@args, :type))}.to raise_error(ArgumentError)
+      expect {
+        @zc.meeting_create(filter_key(@args, :type))
+      }.to raise_error(ArgumentError)
     end
 
     it "returns a hash" do
@@ -49,12 +57,16 @@ describe Zoomus::Actions::Meeting do
 
   describe "#meeting_create! action" do
     before :each do
-      stub_request(:post, zoomus_url("/meeting/create")).
-        to_return(:body => json_response("error"))
+      stub_request(
+        :post,
+        zoomus_url("/meeting/create")
+      ).to_return(:body => json_response("error"))
     end
 
     it "raises Zoomus::Error exception" do
-      expect{ @zc.meeting_create!(@args)}.to raise_error(Zoomus::Error)
+      expect {
+        @zc.meeting_create!(@args)
+      }.to raise_error(Zoomus::Error)
     end
   end
 end
