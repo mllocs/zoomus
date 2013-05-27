@@ -1,7 +1,7 @@
-Version 0.1.0
+Version 0.1.0 (March 2013)
   - Added /user and /meeting endpoints.
 
-Version 0.2.0
+Version 0.2.0 (May 2013)
   - Added /report endpoint (getuserreport and getaccountreport actions).
   - Added support for Time objects as datetime parameters (from, to).
   - Added configuration block Zoomus.configure.
