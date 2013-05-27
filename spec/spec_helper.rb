@@ -20,7 +20,7 @@ def zoomus_url(url)
 end
 
 def zoomus_client
-  Zoomus.new(:api_key => "xxx", :api_secret => "xxx")
+  Zoomus.new
 end
 
 def filter_key(hash, key)

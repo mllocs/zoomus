@@ -6,20 +6,28 @@ require 'zoomus/client'
 require 'zoomus/error'
 
 module Zoomus
-
   class << self
-    def new(*arg)
-      Zoomus::Client.new(*arg)
+    attr_accessor :configuration
+
+    def new
+      @configuration ||= Configuration.new
+      Zoomus::Client.new(
+        :api_key => @configuration.api_key,
+        :api_secret => @configuration.api_secret
+      )
+    end
+
+    def configure
+      @configuration ||= Configuration.new
+      yield(@configuration)
     end
   end
 
-  def self.included(base)
-    base.class_eval do
-      attr_accessor :zoomus_singleton
-      def zoomus_setup(api_key, api_secret)
-        @zoomus_singleton = Client.new(api_key, api_secret)
-      end
+  class Configuration
+    attr_accessor :api_key, :api_secret
+
+    def initialize
+      @api_key = @api_secret = 'xxx'
     end
   end
-
 end
