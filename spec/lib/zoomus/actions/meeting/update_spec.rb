@@ -6,7 +6,7 @@ describe Zoomus::Actions::Meeting do
     @zc = zoomus_client
     @args = {:host_id => 'ufR93M2pRyy8ePFN92dttq',
              :id => '252482092',
-             :type => '0',
+             :type => 0,
              :topic => 'Foo'}
   end
 

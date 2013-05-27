@@ -8,7 +8,10 @@ describe Zoomus::Actions::User do
 
   describe "#user_list action" do
     before :each do
-      stub_request(:post, zoomus_url("/user/list")).to_return(:body => json_response("user_list"))
+      stub_request(
+        :post,
+        zoomus_url("/user/list")
+      ).to_return(:body => json_response("user_list"))
     end
 
     it "returns a hash" do
@@ -26,12 +29,16 @@ describe Zoomus::Actions::User do
 
   describe "#user_list! action" do
     before :each do
-      stub_request(:post, zoomus_url("/user/list")).
-        to_return(:body => json_response("error"))
+      stub_request(
+        :post,
+        zoomus_url("/user/list")
+      ).to_return(:body => json_response("error"))
     end
 
     it "raises Zoomus::Error exception" do
-      expect{ @zc.user_list! }.to raise_error(Zoomus::Error)
+      expect {
+        @zc.user_list!
+      }.to raise_error(Zoomus::Error)
     end
   end
 end
