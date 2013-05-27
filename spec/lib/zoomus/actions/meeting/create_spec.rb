@@ -4,7 +4,9 @@ describe Zoomus::Actions::Meeting do
 
   before :all do
     @zc = zoomus_client
-    @host_id = "ufR93M2pRyy8ePFN92dttq"
+    @args = {:host_id => "ufR93M2pRyy8ePFN92dttq",
+             :type => 1,
+             :topic => "Foo"}
   end
 
   describe "#meeting_create action" do
@@ -14,37 +16,31 @@ describe Zoomus::Actions::Meeting do
     end
 
     it "requires a 'host_id' argument" do
-      expect{@zc.meeting_create(:type => 1, :topic => "Foo")}.to raise_error(ArgumentError)
+      expect{@zc.meeting_create(filter_key(@args, :host_id))}.to raise_error(ArgumentError)
     end
 
     it "requires a 'topic' argument" do
-      expect{@zc.meeting_create(:host_id => @host_id, :type => "Foo")}.to raise_error(ArgumentError)
+      expect{@zc.meeting_create(filter_key(@args, :topic))}.to raise_error(ArgumentError)
     end
 
     it "requires a 'type' argument" do
-      expect{@zc.meeting_create(:host_id => @host_id, :topic => "Foo")}.to raise_error(ArgumentError)
+      expect{@zc.meeting_create(filter_key(@args, :type))}.to raise_error(ArgumentError)
     end
 
     it "returns a hash" do
-      expect(@zc.meeting_create(:host_id => @host_id,
-                                :type => 1,
-                                :topic => "Foo")).to be_kind_of(Hash)
+      expect(@zc.meeting_create(@args)).to be_kind_of(Hash)
     end
 
     it "returns the setted params" do
-      res = @zc.meeting_create(:host_id => @host_id,
-                               :type => 1,
-                               :topic => "Foo")
+      res = @zc.meeting_create(@args)
 
-      expect(res["host_id"]).to eq(@host_id)
-      expect(res["type"]).to eq(1)
-      expect(res["topic"]).to eq("Foo")
+      expect(res["host_id"]).to eq(@args[:host_id])
+      expect(res["type"]).to eq(@args[:type])
+      expect(res["topic"]).to eq(@args[:topic])
     end
 
     it "returns 'start_url' and 'join_url'" do
-      res = @zc.meeting_create(:host_id => @host_id,
-                               :type => 1,
-                               :topic => "Foo")
+      res = @zc.meeting_create(@args)
 
       expect(res["start_url"]).to_not be_nil
       expect(res["join_url"]).to_not be_nil
@@ -58,10 +54,7 @@ describe Zoomus::Actions::Meeting do
     end
 
     it "raises Zoomus::Error exception" do
-      expect{ @zc.meeting_create!(
-                :host_id => @host_id,
-                :type => 1,
-                :topic => "Foo")}.to raise_error(Zoomus::Error)
+      expect{ @zc.meeting_create!(@args)}.to raise_error(Zoomus::Error)
     end
   end
 end

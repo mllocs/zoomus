@@ -22,3 +22,9 @@ end
 def zoomus_client
   Zoomus.new(:api_key => "xxx", :api_secret => "xxx")
 end
+
+def filter_key(hash, key)
+  copy = hash.dup
+  copy.delete(key)
+  copy
+end
