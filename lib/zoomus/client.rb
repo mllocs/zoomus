@@ -7,6 +7,7 @@ module Zoomus
     include HTTParty
     include Actions::User
     include Actions::Meeting
+    include Actions::Report
 
     base_uri 'https://api.zoom.us/v1'
 

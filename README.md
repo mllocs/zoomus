@@ -25,8 +25,9 @@ Or install it yourself as:
 - meeting/delete
 - meeting/list
 - meeting/update
+- report/getaccountreport
 
-## Usage
+## Example
 
     require 'zoomus'
     zoomus_client = Zoomus.new(:api_key => "xxx", :api_secret => "xxx")
