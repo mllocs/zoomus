@@ -4,22 +4,28 @@ describe Zoomus::Actions::Report do
 
   before :all do
     @zc = zoomus_client
-    @from = '2013-04-05T15:50:47Z'
-    @to = '2013-04-09T19:00:00Z'
-    @args = {:from => @from, :to => @to}
+    @args = {:from => '2013-04-05T15:50:47Z',
+             :to => '2013-04-09T19:00:00Z'}
   end
 
   describe "#report_getaccountreport action" do
     before :each do
-      stub_request(:post, zoomus_url("/report/getaccountreport")).to_return(:body => json_response("report_getaccountreport"))
+      stub_request(
+        :post,
+        zoomus_url("/report/getaccountreport")
+      ).to_return(:body => json_response("report_getaccountreport"))
     end
 
     it "requires a 'from' argument" do
-      expect{@zc.report_getaccountreport(:to => @to)}.to raise_error(ArgumentError)
+      expect {
+        @zc.report_getaccountreport(filter_key(@args, :from))
+      }.to raise_error(ArgumentError)
     end
 
     it "requires a 'to' argument" do
-      expect{@zc.report_getaccountreport(:from => @from)}.to raise_error(ArgumentError)
+      expect {
+        @zc.report_getaccountreport(filter_key(@args, :to))
+      }.to raise_error(ArgumentError)
     end
 
     it "returns a hash" do
@@ -37,12 +43,16 @@ describe Zoomus::Actions::Report do
 
   describe "#report_getaccountreport! action" do
     before :each do
-      stub_request(:post, zoomus_url("/report/getaccountreport")).
-        to_return(:body => json_response("error"))
+      stub_request(
+        :post,
+        zoomus_url("/report/getaccountreport")
+      ).to_return(:body => json_response("error"))
     end
 
     it "raises Zoomus::Error exception" do
-      expect{ @zc.report_getaccountreport!(@args) }.to raise_error(Zoomus::Error)
+      expect {
+        @zc.report_getaccountreport!(@args)
+      }.to raise_error(Zoomus::Error)
     end
   end
 end
