@@ -29,27 +29,28 @@ Or install it yourself as:
 - report/getuserreport
 
 ## Example
+```ruby
+require 'zoomus'
 
-    require 'zoomus'
+Zoomus.configure do |c|
+  c.api_key = 'xxx'
+  c.api_secret = 'xxx'
+end
 
-    Zoomus.configure do |c|
-      c.api_key = 'xxx'
-      c.api_secret = 'xxx'
-    end
+zoomus_client = Zoomus.new
 
-    zoomus_client = Zoomus.new
+user_list = zoomus_client.user_list
+user_list['users'].each do |user|
+  user_id = u['id']
+  puts zoomus_client.meeting_list(:host_id => user_id)
+end
 
-    user_list = zoomus_client.user_list
-    user_list['users'].each do |user|
-      user_id = u['id']
-      puts zoomus_client.meeting_list(:host_id => user_id)
-    end
-
-    begin
-      user_list = zoomus_client.user_list!
-    rescue Zoomus::Error => exception
-      puts 'Something went wrong'
-    end
+begin
+  user_list = zoomus_client.user_list!
+rescue Zoomus::Error => exception
+  puts 'Something went wrong'
+end
+```
 
 
 ## Contributing
