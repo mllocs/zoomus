@@ -47,7 +47,7 @@ module Zoomus
       def process_datetime_params!(params, options)
         params = [params] unless params.is_a? Array
         params.each do |param|
-          if options[param].kind_of?(Time)
+          if options[param] && options[param].kind_of?(Time)
             options[param] = options[param].strftime("%FT%TZ")
           end
         end
