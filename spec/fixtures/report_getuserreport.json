@@ -1,0 +1,24 @@
+{
+  "page_count": 1,
+  "page_number": 1,
+  "page_size": 30,
+  "total_records": 1,
+  "from": "2013-5-19",
+  "to": "2013-5-20",
+  "meetings": [
+    {
+      "number": 111111111,
+      "topic": "meeting topic",
+      "start_time": "2013-02-11T08:18:09Z",
+      "end_time": "2013-02-11T09:18:09Z",
+      "duration": 60,
+      "participants": [
+        {
+          "name": "John",
+          "join_time": "2013-02-11T08:30:09Z",
+          "leave_time": "2013-02-11T08:50:09Z"
+        }
+      ]
+    }
+  ]
+}
