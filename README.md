@@ -20,6 +20,7 @@ Or install it yourself as:
 
 - user/create
 - user/custcreate
+- user/update
 - user/list
 - meeting/create
 - meeting/delete
