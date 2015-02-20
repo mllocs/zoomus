@@ -20,7 +20,7 @@ describe Zoomus::Utils do
 
     it "does not raise Zoomus::Error if error is not present" do
       response = {}
-      expect{Utils.raise_if_error!(response)}.to_not raise_error(Zoomus::Error)
+      expect{Utils.raise_if_error!(response)}.to_not raise_error
     end
   end
 
@@ -30,7 +30,7 @@ describe Zoomus::Utils do
     end
 
     it "does not raise ArgumentError if the param is present" do
-      expect{Utils.require_params(:foo, {:foo => 'foo'})}.to_not raise_error(ArgumentError)
+      expect{Utils.require_params(:foo, {:foo => 'foo'})}.to_not raise_error
     end
   end
 
