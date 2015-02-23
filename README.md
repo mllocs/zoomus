@@ -22,6 +22,8 @@ Or install it yourself as:
 - user/custcreate
 - user/update
 - user/list
+- user/get
+- user/getbyemail
 - meeting/get
 - meeting/end
 - meeting/create
