@@ -18,7 +18,7 @@ module Zoomus
 
       def meeting_update(*args)
         options = Utils.extract_options!(args)
-        Utils.require_params([:id, :host_id, :topic, :type], options)
+        Utils.require_params([:id, :host_id], options)
         Utils.process_datetime_params!(:start_time, options)
         Utils.parse_response self.class.post("/meeting/update", :query => options)
       end

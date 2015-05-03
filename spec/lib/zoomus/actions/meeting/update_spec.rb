@@ -5,9 +5,7 @@ describe Zoomus::Actions::Meeting do
   before :all do
     @zc = zoomus_client
     @args = {:host_id => 'ufR93M2pRyy8ePFN92dttq',
-             :id => '252482092',
-             :type => 0,
-             :topic => 'Foo'}
+             :id => '252482092'}
   end
 
   describe "#meeting_update action" do
@@ -20,14 +18,6 @@ describe Zoomus::Actions::Meeting do
 
     it "requires a 'host_id' argument" do
       expect{@zc.meeting_update(filter_key(@args, :host_id))}.to raise_error(ArgumentError)
-    end
-
-    it "requires a 'topic' argument" do
-      expect{@zc.meeting_update(filter_key(@args, :topic))}.to raise_error(ArgumentError)
-    end
-
-    it "requires a 'type' argument" do
-      expect{@zc.meeting_update(filter_key(@args, :type))}.to raise_error(ArgumentError)
     end
 
     it "requires a 'id' argument" do
