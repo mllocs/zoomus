@@ -7,6 +7,11 @@ module Zoomus
         Utils.parse_response self.class.post('/user/list', :query => options)
       end
 
+      def user_pending(*args)
+        options = Utils.extract_options!(args)
+        Utils.parse_response self.class.post('/user/pending', :query => options)
+      end
+
       def user_create(*args)
         options = Utils.extract_options!(args)
         Utils.require_params([:type, :email], options)

@@ -22,6 +22,7 @@ Or install it yourself as:
 - user/custcreate
 - user/update
 - user/list
+- user/pending
 - user/get
 - user/getbyemail
 - meeting/get
