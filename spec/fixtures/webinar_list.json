@@ -1,6 +1,6 @@
 {
     "page_count": 5,
-    "total_records": 235,
+    "total_records": 2,
     "page_number": 1,
     "page_size": 50,
     "webinars": [
@@ -20,8 +20,8 @@
         "option_start_type": "video",
         "option_audio": "both",
         "status": 0 
-        }, 
-        {
+    },
+    {
             "uuid":"9qU8IsjNTUuFFjqyWohT7A==",
             "id": "456789123", 
             "start_url": "https://zoom.us/s/456789123?zpk=612h23khs65q23kd9sqliy",
@@ -38,5 +38,5 @@
             "option_audio": "both",
             "status": 0 
         }
-        ]
-    }
+    ]
+}
