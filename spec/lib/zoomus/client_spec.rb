@@ -10,6 +10,25 @@ describe Zoomus::Client do
     it "must have the base url set to Zoomus API endpoint" do
       expect(Zoomus::Client.base_uri).to eq('https://api.zoom.us/v1')
     end
+
+    it "must have a default timeout set to 15 seconds" do
+      Zoomus.configure do |config|
+        config.api_key = 'xxx'
+        config.api_secret = 'xxx'
+      end
+      Zoomus.new
+      expect(Zoomus::Client.default_options[:timeout]).to eq(15)
+    end
+
+    it "must get the timeout from the configuration" do
+      Zoomus.configure do |config|
+        config.api_key = 'xxx'
+        config.api_secret = 'xxx'
+        config.timeout = 20
+      end
+      Zoomus.new
+      expect(Zoomus::Client.default_options[:timeout]).to eq(20)
+    end
   end
 
   describe "constructor" do
