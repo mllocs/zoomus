@@ -37,7 +37,7 @@ describe Zoomus::Client do
     end
 
     it "creates instance of Zoomus::Client if api_key and api_secret is provided" do
-      expect(Zoomus::Client.new(:api_key => "xxx", :api_secret => "xxx")).to be_an_instance_of(Zoomus::Client)
+      expect(Zoomus::Client.new(:api_key => "xxx", :api_secret => "xxx", :timeout => 15)).to be_an_instance_of(Zoomus::Client)
     end
   end
 end

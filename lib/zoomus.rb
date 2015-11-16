@@ -1,3 +1,5 @@
+$:.unshift File.dirname(__FILE__)
+
 require 'zoomus/utils'
 require 'zoomus/actions/user'
 require 'zoomus/actions/meeting'

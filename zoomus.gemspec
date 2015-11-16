@@ -2,8 +2,12 @@
 
 Gem::Specification.new do |gem|
 
-  gem.add_dependency 'httparty', '0.13.3'
-  gem.add_dependency 'json', '1.8.2'
+  gem.add_dependency 'httparty', '~> 0.13'
+  gem.add_dependency 'json', '~> 1.8'
+
+  gem.add_development_dependency 'byebug'
+  gem.add_development_dependency 'rspec'
+  gem.add_development_dependency 'webmock'
 
   gem.authors       = ['Maxim Colls']
   gem.email         = ['collsmaxim@gmail.com']
