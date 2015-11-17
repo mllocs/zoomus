@@ -35,7 +35,12 @@ module Zoomus
       def define_bang_methods(klass)
         klass.instance_methods.each do |m|
           klass.send(:define_method, "#{m}!") do |*args|
-            Utils.raise_if_error! send(m, *args)
+            begin
+              response = send(m, *args)
+              Utils.raise_if_error!(response)
+            rescue Net::OpenTimeout, Net::ReadTimeout, Timeout::Error => _e
+              raise ::Zoomus::GatewayTimeout.new
+            end
           end
         end
       end

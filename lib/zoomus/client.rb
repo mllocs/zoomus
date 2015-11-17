@@ -21,6 +21,7 @@ module Zoomus
         :api_key    => options[:api_key],
         :api_secret => options[:api_secret]
       )
+      self.class.default_timeout(options[:timeout])
     end
   end
 end
