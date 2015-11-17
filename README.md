@@ -33,6 +33,12 @@ Or install it yourself as:
 - meeting/update
 - report/getaccountreport
 - report/getuserreport
+- webinar/create
+- webinar/update
+- webinar/delete
+- webinar/list
+- webinar/get
+- webinar/end
 
 ## Example
 ```ruby
