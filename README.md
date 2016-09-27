@@ -39,6 +39,9 @@ Or install it yourself as:
 - webinar/list
 - webinar/get
 - webinar/end
+- metrics/crc
+- metrics/meetings
+- metrics/meetingdetail
 
 ## Example
 ```ruby
