@@ -39,6 +39,10 @@ Or install it yourself as:
 - webinar/list
 - webinar/get
 - webinar/end
+- recording/list
+- mc/recording/list
+- recording/get
+- recording/delete
 
 ## Example
 ```ruby

@@ -1,0 +1,51 @@
+{
+"page_count": 1,
+"page_number": 1,
+"page_size": 15,
+"total_records": 1,
+"meetings": [{
+    "uuid": "j0N0YDBYSQGB4fRv444444==",
+    "meeting_number": 7565121024,
+    "host_id": "kEFomHcIRgqxZT8D086O6A",
+"account_id": "NyEqCEoYSNOr4jLMHoO2tA",
+    "topic": "Rcoky test recording delete",
+    "start_time": "2014-11-06T04:10:10Z",
+"timezone": "America/Los_Angeles",
+    "duration": 999,
+    "total_size": 4324324324,
+    "recording_count": 4,
+    "recording_files": [{
+        "id": "00401415-6783-0B14-608A-34C1DD9E3041",
+        "meeting_id": "j0N0YDBYSQGB4fRv444444==",
+        "recording_start": "2014-11-06T04:14:10Z",
+        "recording_end": "2014-11-06T04:24:10Z",
+"file_type": "M4A",
+        "file_size": 432432,
+        "play_url": "https://brand.zoom.us/recording/play/00401415-6783-0B14-608A-34C1DD9E3041"
+    }, {
+        "id": "00401415-6783-0B14-608A-34C1DD9E3042",
+        "meeting_id": "j0N0YDBYSQGB4fRv444444==",
+        "recording_start": "2014-11-06T04:25:10Z",
+        "recording_end": "2014-11-06T04:26:10Z",
+"file_type": "MP4",
+        "file_size": 432532465,
+        "play_url": "https://brand.zoom.us/recording/play/00401415-6783-0B14-608A-34C1DD9E3042"
+    }, {
+        "id": "00401415-6783-0B14-608A-34C1DD9E3043",
+        "meeting_id": "j0N0YDBYSQGB4fRv444444==",
+        "recording_start": "2014-11-06T04:36:10Z",
+        "recording_end": "2014-11-06T04:56:10Z",
+"file_type": "M4A",
+        "file_size": 564,
+        "file_path": "/home/cmr-ssh/replay/2015/03/27/454289936/EDB9994C-8E0D-4688-B1CE-6460F2742A10/GMT20150327-083026_test-pmem-recording.mp4"
+    }, {
+        "id": "00401415-6783-0B14-608A-34C1DD9E3044",
+        "meeting_id": "j0N0YDBYSQGB4fRv444444==",
+        "recording_start": "2014-11-06T04:56:10Z",
+        "recording_end": "2014-11-06T04:56:12Z",
+"file_type": "MP4",
+        "file_size": 643534,
+        "file_path": "/home/cmr-ssh/replay/2015/03/27/454289936/EDB9994C-8E0D-4688-B1CE-6460F2742A10/GMT20150327-083026_test-pmem-recording.mp4"
+    }]
+}]
+}
