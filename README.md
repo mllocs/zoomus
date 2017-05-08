@@ -19,12 +19,15 @@ Or install it yourself as:
 ## Available actions
 
 - user/create
+- user/autocreate
+- user/autocreate2
 - user/custcreate
 - user/update
 - user/list
 - user/pending
 - user/get
 - user/getbyemail
+- user/delete
 - meeting/get
 - meeting/end
 - meeting/create
