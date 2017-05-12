@@ -1,5 +1,7 @@
 # Zoomus Gem
 
+![](https://travis-ci.org/mllocs/zoomus.svg?branch=master)
+
 Ruby wrapper gem for zoom.us API v1.
 
 ## Installation
