@@ -48,6 +48,7 @@ Or install it yourself as:
 - mc/recording/list
 - recording/get
 - recording/delete
+- metrics/meetingdetail
 
 ## Example
 ```ruby
