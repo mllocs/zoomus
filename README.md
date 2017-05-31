@@ -1,5 +1,7 @@
 # Zoomus Gem
 
+![](https://travis-ci.org/mllocs/zoomus.svg?branch=master)
+
 Ruby wrapper gem for zoom.us API v1.
 
 ## Installation
@@ -19,12 +21,15 @@ Or install it yourself as:
 ## Available actions
 
 - user/create
+- user/autocreate
+- user/autocreate2
 - user/custcreate
 - user/update
 - user/list
 - user/pending
 - user/get
 - user/getbyemail
+- user/delete
 - meeting/get
 - meeting/end
 - meeting/create
@@ -39,6 +44,10 @@ Or install it yourself as:
 - webinar/list
 - webinar/get
 - webinar/end
+- recording/list
+- mc/recording/list
+- recording/get
+- recording/delete
 - metrics/crc
 - metrics/meetings
 - metrics/meetingdetail

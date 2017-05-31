@@ -48,8 +48,22 @@ module Zoomus
         Utils.parse_response self.class.post('/user/getbyemail', :query => options)
       end
 
+      def user_autocreate(*args)
+        options = Utils.extract_options!(args)
+        Utils.require_params([:type, :email, :password], options)
+        Utils.parse_response self.class.post('/user/autocreate', :query => options)
+      end
+
+      # Need to contact zoom support to enable autocreate2 on your account
+      # Behaves like autocreate, but users email address does not have to match managed domain
+      def user_autocreate2(*args)
+        options = Utils.extract_options!(args)
+        Utils.require_params([:type, :email, :password], options)
+        Utils.parse_response self.class.post('/user/autocreate2', :query => options)
+      end
+
       Utils.define_bang_methods(self)
-      
+
     end
   end
 end

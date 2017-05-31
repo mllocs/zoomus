@@ -10,6 +10,7 @@ module Zoomus
     include Actions::Metrics
     include Actions::Webinar
     include Actions::Report
+    include Actions::Recording
 
     base_uri 'https://api.zoom.us/v1'
 
