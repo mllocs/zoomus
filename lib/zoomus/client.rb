@@ -7,6 +7,7 @@ module Zoomus
     include HTTParty
     include Actions::User
     include Actions::Meeting
+    include Actions::Metrics
     include Actions::Webinar
     include Actions::Report
     include Actions::Recording

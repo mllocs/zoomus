@@ -1,0 +1,26 @@
+{
+    "from": "2016-09-26",
+    "to": "2016-09-27",
+    "page_count": 19,
+    "page_number": 1,
+    "page_size": 1,
+    "total_records": 1,
+    "type": "Live Meetings",
+    "meetings": [{
+        "uuid": "t13b6hjVQXybvGKyeHC96w==",
+        "id": 3035575664,
+        "host": "Some User",
+        "email": "some_user@some_domain.com",
+        "user_type": "Pro",
+        "start_time": "2016-09-27T12:02:26Z",
+        "end_time": "",
+        "duration": "",
+        "participants": 2,
+        "has_pstn": false,
+        "has_voip": true,
+        "has_3rd_party_audio": false,
+        "has_video": true,
+        "has_screen_share": false,
+        "recording": 0
+    }]
+}
