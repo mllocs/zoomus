@@ -16,6 +16,12 @@ module Zoomus
         Utils.parse_response self.class.post("/report/getuserreport", :query => options)
       end
 
+      def report_getdailyreport(*args)
+        options = Utils.extract_options!(args)
+        Utils.require_params([:year, :month],options)
+        Utils.parse_response self.class.post("/report/getdailyreport", :query => options)
+      end
+
       Utils.define_bang_methods(self)
 
     end

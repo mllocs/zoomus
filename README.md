@@ -38,6 +38,7 @@ Or install it yourself as:
 - meeting/update
 - report/getaccountreport
 - report/getuserreport
+- report/getdailyreport
 - webinar/create
 - webinar/update
 - webinar/delete
