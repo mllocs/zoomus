@@ -44,7 +44,7 @@ module Zoomus
 
       def user_getbyemail(*args)
         options = Utils.extract_options!(args)
-        Utils.require_params([:email, :login_type], options)
+        Utils.require_params([:email], options)
         Utils.parse_response self.class.post('/user/getbyemail', :query => options)
       end
 
