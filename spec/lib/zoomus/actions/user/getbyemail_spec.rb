@@ -17,10 +17,6 @@ describe Zoomus::Actions::User do
       expect{@zc.user_getbyemail(filter_key(@args, :email))}.to raise_error(ArgumentError)
     end
 
-    it "requires login_type param" do
-      expect{@zc.user_getbyemail(filter_key(@args, :login_type))}.to raise_error(ArgumentError)
-    end
-
     it "returns a hash" do
       expect(@zc.user_getbyemail(@args)).to be_kind_of(Hash)
     end
