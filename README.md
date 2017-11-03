@@ -30,6 +30,7 @@ Or install it yourself as:
 - user/get
 - user/getbyemail
 - user/delete
+- user/permanentdelete
 - meeting/get
 - meeting/end
 - meeting/create
