@@ -12,7 +12,7 @@ module Zoomus
     include Actions::Report
     include Actions::Recording
 
-    base_uri 'https://api.zoom.us/v1'
+    base_uri 'https://api.zoom.us/v2'
 
     def initialize(*args)
 
