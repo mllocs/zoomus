@@ -6,7 +6,7 @@ module Zoomus
         options = Utils.extract_options!(args)
         Utils.require_params(:host_id, options)
         Utils.process_datetime_params!(:start_time, options)
-        Utils.parse_response self.class.post("/webinar/#{'host_id'}/list", :query => options)
+        Utils.parse_response self.class.post("/webinar/#{options['host_id']}/list", :query => options)
       end
 
       def webinar_create(*args)
