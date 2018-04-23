@@ -1,5 +1,6 @@
 require 'httparty'
 require 'json'
+# require 'jwt'
 
 module Zoomus
   class Client
@@ -12,7 +13,7 @@ module Zoomus
     include Actions::Report
     include Actions::Recording
 
-    base_uri 'https://api.zoom.us/v2'
+    base_uri 'https://api.zoom.us/v1'
 
     def initialize(*args)
 
