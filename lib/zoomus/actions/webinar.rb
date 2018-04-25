@@ -47,6 +47,12 @@ module Zoomus
         Utils.parse_response self.class.post("/webinar/register", :query => options)
       end
 
+      def webinar_attendees_list(*args)
+        options = Utils.extract_options!(args)
+        Utils.require_params([:id, :host_id], options)
+        Utils.parse_response self.class.post("/webinar/attendees/list", :query => options)
+      end
+
       Utils.define_bang_methods(self)
 
     end
