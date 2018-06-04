@@ -6,6 +6,7 @@ module Zoomus
   class Client
 
     include HTTParty
+    include Actions::Account
     include Actions::User
     include Actions::Meeting
     include Actions::Metrics
