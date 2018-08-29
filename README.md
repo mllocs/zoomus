@@ -1,7 +1,8 @@
-# Zoomus Gem
+# Zoom.us Gem
 
 [![CircleCI](https://circleci.com/gh/hintmedia/zoomus.svg?style=svg)](https://circleci.com/gh/hintmedia/zoomus)
-
+[![Maintainability](https://api.codeclimate.com/v1/badges/802523e46478e660f96f/maintainability)](https://codeclimate.com/github/hintmedia/zoomus/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/802523e46478e660f96f/test_coverage)](https://codeclimate.com/github/hintmedia/zoomus/test_coverage)
 Ruby wrapper gem for zoom.us API (currently `v2`)
 
 ## Installation
@@ -18,43 +19,8 @@ Or install it yourself as:
 
     $ gem install zoomus
 
-## Available actions
+## Usage
 
-- user/create
-- user/autocreate
-- user/autocreate2
-- user/custcreate
-- user/update
-- user/list
-- user/pending
-- user/get
-- user/getbyemail
-- user/delete
-- user/permanentdelete
-- meeting/get
-- meeting/end
-- meeting/create
-- meeting/delete
-- meeting/list
-- meeting/update
-- report/getaccountreport
-- report/getuserreport
-- report/getdailyreport
-- webinar/create
-- webinar/update
-- webinar/delete
-- webinar/list
-- webinar/get
-- webinar/end
-- recording/list
-- mc/recording/list
-- recording/get
-- recording/delete
-- metrics/crc
-- metrics/meetings
-- metrics/meetingdetail
-
-## Example
 ```ruby
 require 'zoomus'
 
