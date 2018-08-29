@@ -11,9 +11,9 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'simplecov'
   gem.add_development_dependency 'webmock'
 
-  gem.authors       = ['Maxim Colls']
-  gem.email         = ['collsmaxim@gmail.com']
-  gem.description   = 'A Ruby wrapper for zoom.us API v2'
+  gem.authors       = ['Maxim Colls', 'Kyle Boe']
+  gem.email         = ['kyle@boe.codes']
+  gem.description   = 'A Ruby API wrapper for zoom.us API v2'
   gem.summary       = 'zoom.us API wrapper'
   gem.homepage      = 'https://github.com/hintmedia/zoomus'
   gem.licenses      = ['MIT']
@@ -21,7 +21,7 @@ Gem::Specification.new do |gem|
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
-  gem.name          = 'zoomus'
+  gem.name          = 'zoom_rb'
   gem.require_paths = ['lib']
   gem.version       = '0.7.0'
 end
