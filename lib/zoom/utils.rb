@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 module Zoom
   class Utils
-
     class << self
-
       def argument_error(name)
         name ? ArgumentError.new("You must provide #{name}") : ArgumentError.new
       end

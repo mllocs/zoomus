@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module Zoom
   module Actions
     module Report
-
       def report_getaccountreport(*args)
         options = Utils.extract_options!(args)
         Utils.require_params([:from, :to], options)
@@ -23,7 +24,6 @@ module Zoom
       end
 
       Utils.define_bang_methods(self)
-
     end
   end
 end

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Zoom
-  module Interface
+  module Actions
+    module Chat
+    end
   end
 end

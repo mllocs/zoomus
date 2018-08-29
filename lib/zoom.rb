@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 $:.unshift File.dirname(__FILE__)
 
 require 'zoom/utils'

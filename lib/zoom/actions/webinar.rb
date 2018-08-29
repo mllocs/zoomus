@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module Zoom
   module Actions
     module Webinar
-
       def webinar_list(*args)
         options = Utils.extract_options!(args)
         Utils.require_params(:host_id, options)
@@ -42,7 +43,6 @@ module Zoom
       end
 
       Utils.define_bang_methods(self)
-
     end
   end
 end

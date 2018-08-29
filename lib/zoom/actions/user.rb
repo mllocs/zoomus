@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module Zoom
   module Actions
     module User
-
       def user_list(*args)
         options = Utils.extract_options!(args)
         Utils.parse_response self.class.post('/user/list', :query => options)
@@ -69,7 +70,6 @@ module Zoom
       end
 
       Utils.define_bang_methods(self)
-
     end
   end
 end
