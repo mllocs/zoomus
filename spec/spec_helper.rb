@@ -5,7 +5,7 @@ SimpleCov.start
 
 require 'rubygems'
 require 'bundler/setup'
-require 'zoom_rb'
+require 'zoom'
 require 'webmock/rspec'
 
 RSpec.configure do |config|
