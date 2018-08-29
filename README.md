@@ -1,8 +1,8 @@
 # Zoomus Gem
 
-![](https://travis-ci.org/mllocs/zoomus.svg?branch=master)
+[![CircleCI](https://circleci.com/gh/hintmedia/zoomus.svg?style=svg)](https://circleci.com/gh/hintmedia/zoomus)
 
-Ruby wrapper gem for zoom.us API v1.
+Ruby wrapper gem for zoom.us API (currently `v2`)
 
 ## Installation
 
