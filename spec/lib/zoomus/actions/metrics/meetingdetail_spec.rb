@@ -9,12 +9,12 @@ describe Zoom::Actions::Metrics do
     @args = { meeting_id: 't13b6hjVQXybvGKyeHC96w==', type: 1 }
   end
 
-  describe "#metrics_meetingdetail action" do
+  describe '#metrics_meetingdetail action' do
     before :each do
       stub_request(
         :post,
-        zoom_url("/metrics/meetingdetail")
-      ).to_return(:body => json_response("metrics_meetingdetail"))
+        zoom_url('/metrics/meetingdetail')
+      ).to_return(body: json_response('metrics_meetingdetail'))
     end
 
     it "requires a 'meeting_id' argument" do
@@ -25,24 +25,24 @@ describe Zoom::Actions::Metrics do
       expect { @zc.metrics_meetingdetail(filter_key(@args, :type)) }.to raise_error(ArgumentError)
     end
 
-    it "returns a hash" do
+    it 'returns a hash' do
       expect(@zc.metrics_meetingdetail(@args)).to be_kind_of(Hash)
     end
 
     it "returns 'participants' Array" do
-      expect(@zc.metrics_meetingdetail(@args)["participants"]).to be_kind_of(Array)
+      expect(@zc.metrics_meetingdetail(@args)['participants']).to be_kind_of(Array)
     end
   end
 
-  describe "#metrics_meetingdetail! action" do
+  describe '#metrics_meetingdetail! action' do
     before :each do
       stub_request(
         :post,
-        zoom_url("/metrics/meetingdetail")
-      ).to_return(:body => json_response("error"))
+        zoom_url('/metrics/meetingdetail')
+      ).to_return(body: json_response('error'))
     end
 
-    it "raises Zoom::Error exception" do
+    it 'raises Zoom::Error exception' do
       expect {
         @zc.metrics_meetingdetail!(@args)
       }.to raise_error(Zoom::Error)

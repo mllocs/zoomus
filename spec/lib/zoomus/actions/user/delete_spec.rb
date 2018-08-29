@@ -6,7 +6,7 @@ describe Zoom::Actions::User do
 
   before :all do
     @zc = zoom_client
-    @args = {:id => '65q23kd9sqliy612h23k'}
+    @args = { id: '65q23kd9sqliy612h23k' }
   end
 
   describe '#user_delete action' do
@@ -14,7 +14,7 @@ describe Zoom::Actions::User do
       stub_request(
         :post,
         zoom_url('/user/delete')
-      ).to_return(:body => json_response('user_delete'))
+      ).to_return(body: json_response('user_delete'))
     end
 
     it 'requires id param' do
@@ -38,7 +38,7 @@ describe Zoom::Actions::User do
       stub_request(
         :post,
         zoom_url('/user/delete')
-      ).to_return(:body => json_response('error'))
+      ).to_return(body: json_response('error'))
     end
 
     it 'raises Zoom::Error exception' do

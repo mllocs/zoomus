@@ -13,7 +13,7 @@ describe Zoom::Actions::Report do
       stub_request(
         :post,
         zoom_url('/report/getdailyreport')
-      ).to_return(:body => json_response('report_getdailyreport'))
+      ).to_return(body: json_response('report_getdailyreport'))
     end
 
     it "requires a 'year' argument" do
@@ -28,7 +28,7 @@ describe Zoom::Actions::Report do
       }.to raise_error(ArgumentError)
     end
 
-    it "returs a Hash" do
+    it 'returs a Hash' do
       expect(@zc.report_getdailyreport(@args)).to be_kind_of(Hash)
     end
 
@@ -45,15 +45,15 @@ describe Zoom::Actions::Report do
     end
   end
 
-  describe "#report_getdailyreport! action" do
+  describe '#report_getdailyreport! action' do
     before :each do
       stub_request(
         :post,
-        zoom_url("/report/getdailyreport")
-      ).to_return(:body => json_response("error"))
+        zoom_url('/report/getdailyreport')
+      ).to_return(body: json_response('error'))
     end
 
-    it "raises Zoom::Error exception" do
+    it 'raises Zoom::Error exception' do
       expect {
         @zc.report_getdailyreport!(@args)
       }.to raise_error(Zoom::Error)

@@ -8,8 +8,8 @@ module Zoom
       end
 
       def raise_if_error!(response)
-        if response["error"]
-          raise Error.new(response["error"]["message"])
+        if response['error']
+          raise Error.new(response['error']['message'])
         else
           response
         end
