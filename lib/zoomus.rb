@@ -17,9 +17,9 @@ module Zoomus
     def new
       @configuration ||= Configuration.new
       Zoomus::Client.new(
-        :api_key => @configuration.api_key,
-        :api_secret => @configuration.api_secret,
-        :timeout => @configuration.timeout
+        api_key: @configuration.api_key,
+        api_secret: @configuration.api_secret,
+        timeout: @configuration.timeout
       )
     end
 
