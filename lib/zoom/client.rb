@@ -6,11 +6,11 @@ require 'json'
 module Zoom
   class Client
     include HTTParty
-    include Actions::Account
-    include Actions::Chat
-    include Actions::Group
-    include Actions::IMGroup
-    include Actions::M323Device
+    # include Actions::Account
+    # include Actions::Chat
+    # include Actions::Group
+    # include Actions::IMGroup
+    # include Actions::M323Device
     include Actions::User
     include Actions::Meeting
     include Actions::Metrics
