@@ -1,4 +1,4 @@
-# zoom_rb [![CircleCI](https://circleci.com/gh/hintmedia/zoom_rb.svg?style=svg)](https://circleci.com/gh/hintmedia/zoom_rb) [![Maintainability](https://api.codeclimate.com/v1/badges/802523e46478e660f96f/maintainability)](https://codeclimate.com/github/hintmedia/zoom_rb/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/802523e46478e660f96f/test_coverage)](https://codeclimate.com/github/hintmedia/zoom_rb/test_coverage)
+# zoom_rb [![CircleCI](https://circleci.com/gh/hintmedia/zoom_rb.svg?style=svg)](https://circleci.com/gh/hintmedia/zoom_rb) [![Maintainability](https://api.codeclimate.com/v1/badges/f41fdd0c73fd39c6732a/maintainability)](https://codeclimate.com/github/hintmedia/zoom_rb/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/f41fdd0c73fd39c6732a/test_coverage)](https://codeclimate.com/github/hintmedia/zoom_rb/test_coverage)
 
 Ruby wrapper gem for zoom.us API (currently `v2`)
 
