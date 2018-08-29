@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Zoomus::Actions::Recording do
+describe Zoom::Actions::Recording do
 
   before :all do
     @zc = zoomus_client
@@ -40,10 +40,10 @@ describe Zoomus::Actions::Recording do
       ).to_return(:body => json_response("error"))
     end
 
-    it "raises Zoomus::Error exception" do
+    it "raises Zoom::Error exception" do
       expect {
         @zc.recording_list!(@args)
-      }.to raise_error(Zoomus::Error)
+      }.to raise_error(Zoom::Error)
     end
   end
 end

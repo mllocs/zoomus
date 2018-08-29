@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Zoomus::Actions::User do
+describe Zoom::Actions::User do
 
   before :all do
     @zc = zoomus_client
@@ -45,10 +45,10 @@ describe Zoomus::Actions::User do
       ).to_return(:body => json_response("error"))
     end
 
-    it "raises Zoomus::Error exception" do
+    it "raises Zoom::Error exception" do
       expect {
         @zc.user_custcreate!(@args)
-      }.to raise_error(Zoomus::Error)
+      }.to raise_error(Zoom::Error)
     end
   end
 end

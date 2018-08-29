@@ -1,4 +1,4 @@
-module Zoomus
+module Zoom
   module Interface
   end
 end

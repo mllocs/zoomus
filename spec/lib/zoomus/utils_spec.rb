@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Zoomus::Utils do
+describe Zoom::Utils do
 
   before(:all) do
-    class Utils < Zoomus::Utils; end
+    class Utils < Zoom::Utils; end
   end
 
   describe "#argument_error" do
@@ -13,12 +13,12 @@ describe Zoomus::Utils do
   end
 
   describe "#raise_if_error!" do
-    it "raises Zoomus::Error if error is present" do
+    it "raises Zoom::Error if error is present" do
       response = {'error' => { 'message' => 'lol error'}}
-      expect{Utils.raise_if_error!(response)}.to raise_error(Zoomus::Error)
+      expect{Utils.raise_if_error!(response)}.to raise_error(Zoom::Error)
     end
 
-    it "does not raise Zoomus::Error if error is not present" do
+    it "does not raise Zoom::Error if error is not present" do
       response = {}
       expect{Utils.raise_if_error!(response)}.to_not raise_error
     end
@@ -59,13 +59,13 @@ describe Zoomus::Utils do
       stub_request(:post, zoomus_url("/user/custcreate")).to_timeout
     end
 
-    it "raises Zoomus::GatewayTimeout on timeout" do
+    it "raises Zoom::GatewayTimeout on timeout" do
       args = {:email => "foo@bar.com",
                :first_name => "Foo",
                :last_name => "Bar",
                :type => 1}
 
-      expect { zoomus_client.user_custcreate!(args) }.to raise_error(Zoomus::GatewayTimeout)
+      expect { zoomus_client.user_custcreate!(args) }.to raise_error(Zoom::GatewayTimeout)
     end
   end
 end

@@ -10,13 +10,13 @@ require 'zoomus/actions/recording'
 require 'zoomus/client'
 require 'zoomus/error'
 
-module Zoomus
+module Zoom
   class << self
     attr_accessor :configuration
 
     def new
       @configuration ||= Configuration.new
-      Zoomus::Client.new(
+      Zoom::Client.new(
         api_key: @configuration.api_key,
         api_secret: @configuration.api_secret,
         timeout: @configuration.timeout

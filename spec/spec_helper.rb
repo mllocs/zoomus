@@ -25,7 +25,7 @@ def zoomus_url(url)
 end
 
 def zoomus_client
-  Zoomus.new
+  Zoom.new
 end
 
 def filter_key(hash, key)

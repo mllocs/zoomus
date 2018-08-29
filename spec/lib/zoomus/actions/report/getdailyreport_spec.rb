@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Zoomus::Actions::Report do
+describe Zoom::Actions::Report do
 	before :all do
 		@zc = zoomus_client
 		@args = { year: 2017, month: 7 }
@@ -51,10 +51,10 @@ describe Zoomus::Actions::Report do
 			).to_return(:body => json_response("error"))
 		end
 
-		it "raises Zoomus::Error exception" do
+		it "raises Zoom::Error exception" do
 			expect {
 				@zc.report_getdailyreport!(@args)
-			}.to raise_error(Zoomus::Error)
+			}.to raise_error(Zoom::Error)
 		end
   end
 end

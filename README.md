@@ -19,14 +19,14 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
-require 'zoomus'
+require 'zoom_rb'
 
-Zoomus.configure do |c|
+Zoom.configure do |c|
   c.api_key = 'xxx'
   c.api_secret = 'xxx'
 end
 
-zoomus_client = Zoomus.new
+zoomus_client = Zoom.new
 
 user_list = zoomus_client.user_list
 user_list['users'].each do |user|
@@ -36,7 +36,7 @@ end
 
 begin
   user_list = zoomus_client.user_list!
-rescue Zoomus::Error => exception
+rescue Zoom::Error => exception
   puts 'Something went wrong'
 end
 ```

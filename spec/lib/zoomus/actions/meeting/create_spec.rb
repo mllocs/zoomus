@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Zoomus::Actions::Meeting do
+describe Zoom::Actions::Meeting do
 
   before :all do
     @zc = zoomus_client
@@ -63,10 +63,10 @@ describe Zoomus::Actions::Meeting do
       ).to_return(:body => json_response("error"))
     end
 
-    it "raises Zoomus::Error exception" do
+    it "raises Zoom::Error exception" do
       expect {
         @zc.meeting_create!(@args)
-      }.to raise_error(Zoomus::Error)
+      }.to raise_error(Zoom::Error)
     end
   end
 end
