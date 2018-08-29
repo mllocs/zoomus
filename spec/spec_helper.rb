@@ -21,7 +21,7 @@ def json_response(key)
 end
 
 def zoomus_url(url)
-  /https:\/\/api.zoom.us\/v1#{url}.*/
+  /https:\/\/api.zoom.us\/v2#{url}.*/
 end
 
 def zoomus_client
