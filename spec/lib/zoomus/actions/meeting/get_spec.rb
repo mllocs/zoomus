@@ -22,13 +22,13 @@ describe Zoom::Actions::Meeting do
 
     it "requires a 'host_id' argument" do
       expect {
-        @zc.meeting_create(filter_key(@args, :host_id))
+        @zc.meeting_get(filter_key(@args, :host_id))
       }.to raise_error(ArgumentError)
     end
 
     it "requires a 'id' argument" do
       expect {
-        @zc.meeting_create(filter_key(@args, :id))
+        @zc.meeting_get(filter_key(@args, :id))
       }.to raise_error(ArgumentError)
     end
 
