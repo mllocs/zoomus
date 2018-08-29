@@ -7,13 +7,14 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'byebug'
   gem.add_development_dependency 'rspec'
+  gem.add_development_dependency 'rspec_junit_formatter'
   gem.add_development_dependency 'webmock'
 
   gem.authors       = ['Maxim Colls']
   gem.email         = ['collsmaxim@gmail.com']
-  gem.description   = %q{A Ruby wrapper for zoom.us API v1}
-  gem.summary       = %q{zoom.us API wrapper}
-  gem.homepage      = 'https://github.com/mllocs/zoomus'
+  gem.description   = 'A Ruby wrapper for zoom.us API v2'
+  gem.summary       = 'zoom.us API wrapper'
+  gem.homepage      = 'https://github.com/hintmedia/zoomus'
   gem.licenses      = ['MIT']
 
   gem.files         = `git ls-files`.split($\)
