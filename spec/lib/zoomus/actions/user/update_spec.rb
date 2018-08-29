@@ -20,7 +20,7 @@ describe Zoom::Actions::User do
     end
 
     it "requires id param" do
-      expect{@zc.user_update(filter_key(@args, :id))}.to raise_error(ArgumentError)
+      expect { @zc.user_update(filter_key(@args, :id)) }.to raise_error(ArgumentError)
     end
 
     it "returns a hash" do

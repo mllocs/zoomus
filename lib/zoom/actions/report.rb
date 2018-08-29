@@ -19,7 +19,7 @@ module Zoom
 
       def report_getdailyreport(*args)
         options = Utils.extract_options!(args)
-        Utils.require_params([:year, :month],options)
+        Utils.require_params([:year, :month], options)
         Utils.parse_response self.class.post("/report/getdailyreport", :query => options)
       end
 

@@ -35,7 +35,7 @@ describe Zoom::Client do
 
   describe "constructor" do
     it "requires api_key and api_secret for a new instance" do
-      expect{Zoom::Client.new(:api_key => "xxx")}.to raise_error(ArgumentError)
+      expect { Zoom::Client.new(:api_key => "xxx") }.to raise_error(ArgumentError)
     end
 
     it "creates instance of Zoom::Client if api_key and api_secret is provided" do

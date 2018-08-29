@@ -19,11 +19,11 @@ describe Zoom::Actions::Webinar do
     end
 
     it "requires a 'host_id' argument" do
-      expect{@zc.webinar_update(filter_key(@args, :host_id))}.to raise_error(ArgumentError)
+      expect { @zc.webinar_update(filter_key(@args, :host_id)) }.to raise_error(ArgumentError)
     end
 
     it "requires a 'id' argument" do
-      expect{@zc.webinar_update(filter_key(@args, :id))}.to raise_error(ArgumentError)
+      expect { @zc.webinar_update(filter_key(@args, :id)) }.to raise_error(ArgumentError)
     end
 
     it "returns a hash" do

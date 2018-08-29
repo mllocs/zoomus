@@ -22,15 +22,15 @@ describe Zoom::Actions::User do
     end
 
     it "requires email param" do
-      expect{@zc.user_autocreate(filter_key(@args, :email))}.to raise_error(ArgumentError)
+      expect { @zc.user_autocreate(filter_key(@args, :email)) }.to raise_error(ArgumentError)
     end
 
     it "requires type param" do
-      expect{@zc.user_autocreate(filter_key(@args, :type))}.to raise_error(ArgumentError)
+      expect { @zc.user_autocreate(filter_key(@args, :type)) }.to raise_error(ArgumentError)
     end
 
     it "requires password param" do
-      expect{@zc.user_autocreate(filter_key(@args, :password))}.to raise_error(ArgumentError)
+      expect { @zc.user_autocreate(filter_key(@args, :password)) }.to raise_error(ArgumentError)
     end
 
     it "returns a hash" do

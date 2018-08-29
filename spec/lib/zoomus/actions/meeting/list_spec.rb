@@ -18,7 +18,7 @@ describe Zoom::Actions::Meeting do
     end
 
     it "requires a 'host_id' argument" do
-      expect{@zc.meeting_list}.to raise_error(ArgumentError)
+      expect { @zc.meeting_list }.to raise_error(ArgumentError)
     end
 
     it "returns a hash" do

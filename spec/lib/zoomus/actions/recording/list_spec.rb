@@ -18,7 +18,7 @@ describe Zoom::Actions::Recording do
     end
 
     it "requires a 'host_id' argument" do
-      expect{@zc.recording_list}.to raise_error(ArgumentError)
+      expect { @zc.recording_list }.to raise_error(ArgumentError)
     end
 
     it "returns a hash" do
