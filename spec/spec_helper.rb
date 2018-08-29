@@ -1,6 +1,11 @@
+# frozen_string_literal: true
+
+require 'simplecov'
+SimpleCov.start
+
 require 'rubygems'
 require 'bundler/setup'
-require "zoomus"
+require 'zoomus'
 require 'webmock/rspec'
 
 RSpec.configure do |config|
