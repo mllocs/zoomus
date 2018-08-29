@@ -12,7 +12,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'simplecov'
   gem.add_development_dependency 'webmock'
 
-  gem.authors       = ['Maxim Colls', 'Kyle Boe']
+  gem.authors       = ['Kyle Boe']
   gem.email         = ['kyle@boe.codes']
   gem.description   = 'A Ruby API wrapper for zoom.us API'
   gem.summary       = 'zoom.us API wrapper'
