@@ -7,7 +7,8 @@ describe Zoom::Actions::Meeting do
   before :all do
     @zc = zoom_client
     @args = { host_id: 'ufR93M2pRyy8ePFN92dttq',
-              id: '252482092' }
+              id: '252482092',
+              type: '2' }
   end
 
   describe '#meeting_update action' do
@@ -24,6 +25,10 @@ describe Zoom::Actions::Meeting do
 
     it "requires a 'id' argument" do
       expect { @zc.meeting_update(filter_key(@args, :id)) }.to raise_error(ArgumentError)
+    end
+
+    it "requires a 'type' argument" do
+      expect { @zc.meeting_update(filter_key(@args, :type)) }.to raise_error(ArgumentError)
     end
 
     it 'returns a hash' do
