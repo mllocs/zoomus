@@ -1,14 +1,14 @@
 $:.unshift File.dirname(__FILE__)
 
-require 'zoomus/utils'
-require 'zoomus/actions/user'
-require 'zoomus/actions/meeting'
-require 'zoomus/actions/metrics'
-require 'zoomus/actions/report'
-require 'zoomus/actions/webinar'
-require 'zoomus/actions/recording'
-require 'zoomus/client'
-require 'zoomus/error'
+require 'zoom/utils'
+require 'zoom/actions/user'
+require 'zoom/actions/meeting'
+require 'zoom/actions/metrics'
+require 'zoom/actions/report'
+require 'zoom/actions/webinar'
+require 'zoom/actions/recording'
+require 'zoom/client'
+require 'zoom/error'
 
 module Zoom
   class << self
