@@ -8,7 +8,7 @@ describe Zoomus::Client do
     end
 
     it "must have the base url set to Zoomus API endpoint" do
-      expect(Zoomus::Client.base_uri).to eq('https://api.zoom.us/v1')
+      expect(Zoomus::Client.base_uri).to eq('https://api.zoom.us/v2')
     end
 
     it "must have a default timeout set to 15 seconds" do
