@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Zoom::Actions::Report do
 	before :all do
-		@zc = zoomus_client
+		@zc = zoom_client
 		@args = { year: 2017, month: 7 }
 	end
 
@@ -10,7 +10,7 @@ describe Zoom::Actions::Report do
 		before :each do
 			stub_request(
 				:post,
-				zoomus_url('/report/getdailyreport')
+				zoom_url('/report/getdailyreport')
 			).to_return(:body => json_response('report_getdailyreport'))
 		end
 
@@ -47,7 +47,7 @@ describe Zoom::Actions::Report do
 		before :each do
 			stub_request(
 				:post,
-				zoomus_url("/report/getdailyreport")
+				zoom_url("/report/getdailyreport")
 			).to_return(:body => json_response("error"))
 		end
 

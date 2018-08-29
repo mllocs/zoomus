@@ -1,4 +1,4 @@
-# zoom_rb [![CircleCI](https://circleci.com/gh/hintmedia/zoom_rb.svg?style=svg)](https://circleci.com/gh/hintmedia/zoom_rb) [![Maintainability](https://api.codeclimate.com/v1/badges/802523e46478e660f96f/maintainability)](https://codeclimate.com/github/hintmedia/zoomus/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/802523e46478e660f96f/test_coverage)](https://codeclimate.com/github/hintmedia/zoomus/test_coverage)
+# zoom_rb [![CircleCI](https://circleci.com/gh/hintmedia/zoom_rb.svg?style=svg)](https://circleci.com/gh/hintmedia/zoom_rb) [![Maintainability](https://api.codeclimate.com/v1/badges/802523e46478e660f96f/maintainability)](https://codeclimate.com/github/hintmedia/zoom_rb/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/802523e46478e660f96f/test_coverage)](https://codeclimate.com/github/hintmedia/zoom_rb/test_coverage)
 
 Ruby wrapper gem for zoom.us API (currently `v2`)
 
@@ -6,7 +6,7 @@ Ruby wrapper gem for zoom.us API (currently `v2`)
 
 Add this line to your application's Gemfile:
 
-    gem 'zoomus'
+    gem 'zoom_rb'
 
 And then execute:
 
@@ -14,7 +14,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install zoomus
+    $ gem install zoom_rb
 
 ## Usage
 
@@ -26,16 +26,16 @@ Zoom.configure do |c|
   c.api_secret = 'xxx'
 end
 
-zoomus_client = Zoom.new
+zoom_client = Zoom.new
 
-user_list = zoomus_client.user_list
+user_list = zoom_client.user_list
 user_list['users'].each do |user|
   user_id = user['id']
-  puts zoomus_client.meeting_list(:host_id => user_id)
+  puts zoom_client.meeting_list(:host_id => user_id)
 end
 
 begin
-  user_list = zoomus_client.user_list!
+  user_list = zoom_client.user_list!
 rescue Zoom::Error => exception
   puts 'Something went wrong'
 end

@@ -3,14 +3,14 @@ require 'spec_helper'
 describe Zoom::Actions::User do
 
   before :all do
-    @zc = zoomus_client
+    @zc = zoom_client
   end
 
   describe "#user_pending action" do
     before :each do
       stub_request(
         :post,
-        zoomus_url("/user/pending")
+        zoom_url("/user/pending")
       ).to_return(:body => json_response("user_pending"))
     end
 
@@ -31,7 +31,7 @@ describe Zoom::Actions::User do
     before :each do
       stub_request(
         :post,
-        zoomus_url("/user/pending")
+        zoom_url("/user/pending")
       ).to_return(:body => json_response("error"))
     end
 

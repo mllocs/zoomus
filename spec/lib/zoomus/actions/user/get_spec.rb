@@ -3,13 +3,13 @@ require 'spec_helper'
 describe Zoom::Actions::User do
 
   before :all do
-    @zc = zoomus_client
+    @zc = zoom_client
     @args = {:id => "ufR9342pRyf8ePFN92dttQ"}
   end
 
   describe "#user_get action" do
     before :each do
-      stub_request(:post, zoomus_url("/user/get")).to_return(:body => json_response("user_get"))
+      stub_request(:post, zoom_url("/user/get")).to_return(:body => json_response("user_get"))
     end
 
     it "requires id param" do
@@ -35,7 +35,7 @@ describe Zoom::Actions::User do
     before :each do
       stub_request(
         :post,
-        zoomus_url("/user/get")
+        zoom_url("/user/get")
       ).to_return(:body => json_response("error"))
     end
 

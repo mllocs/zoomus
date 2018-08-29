@@ -5,7 +5,7 @@ SimpleCov.start
 
 require 'rubygems'
 require 'bundler/setup'
-require 'zoomus'
+require 'zoom_rb'
 require 'webmock/rspec'
 
 RSpec.configure do |config|
@@ -20,11 +20,11 @@ def json_response(key)
   open(fixture(key + '.json')).read
 end
 
-def zoomus_url(url)
+def zoom_url(url)
   /https:\/\/api.zoom.us\/v2#{url}.*/
 end
 
-def zoomus_client
+def zoom_client
   Zoom.new
 end
 

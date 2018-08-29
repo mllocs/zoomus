@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Zoom::Actions::User do
 
   before :all do
-    @zc = zoomus_client
+    @zc = zoom_client
     @args = {:email => "foo@bar.com",
              :first_name => "Foo",
              :last_name => "Bar",
@@ -12,7 +12,7 @@ describe Zoom::Actions::User do
 
   describe "#user_custcreate action" do
     before :each do
-      stub_request(:post, zoomus_url("/user/custcreate")).to_return(:body => json_response("user_custcreate"))
+      stub_request(:post, zoom_url("/user/custcreate")).to_return(:body => json_response("user_custcreate"))
     end
 
     it "requires email param" do
@@ -41,7 +41,7 @@ describe Zoom::Actions::User do
     before :each do
       stub_request(
         :post,
-        zoomus_url("/user/custcreate")
+        zoom_url("/user/custcreate")
       ).to_return(:body => json_response("error"))
     end
 

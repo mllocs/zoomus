@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Zoom::Actions::Metrics do
 
   before :all do
-    @zc = zoomus_client
+    @zc = zoom_client
     @args = { meeting_id: 't13b6hjVQXybvGKyeHC96w==', type: 1 }
   end
 
@@ -11,7 +11,7 @@ describe Zoom::Actions::Metrics do
     before :each do
       stub_request(
         :post,
-        zoomus_url("/metrics/meetingdetail")
+        zoom_url("/metrics/meetingdetail")
       ).to_return(:body => json_response("metrics_meetingdetail"))
     end
 
@@ -36,7 +36,7 @@ describe Zoom::Actions::Metrics do
     before :each do
       stub_request(
         :post,
-        zoomus_url("/metrics/meetingdetail")
+        zoom_url("/metrics/meetingdetail")
       ).to_return(:body => json_response("error"))
     end
 

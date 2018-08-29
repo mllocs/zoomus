@@ -56,7 +56,7 @@ describe Zoom::Utils do
 
   describe '#define_bang_methods' do
     before :each do
-      stub_request(:post, zoomus_url("/user/custcreate")).to_timeout
+      stub_request(:post, zoom_url("/user/custcreate")).to_timeout
     end
 
     it "raises Zoom::GatewayTimeout on timeout" do
@@ -65,7 +65,7 @@ describe Zoom::Utils do
                :last_name => "Bar",
                :type => 1}
 
-      expect { zoomus_client.user_custcreate!(args) }.to raise_error(Zoom::GatewayTimeout)
+      expect { zoom_client.user_custcreate!(args) }.to raise_error(Zoom::GatewayTimeout)
     end
   end
 end

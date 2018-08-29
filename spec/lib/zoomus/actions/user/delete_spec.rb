@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Zoom::Actions::User do
 
   before :all do
-    @zc = zoomus_client
+    @zc = zoom_client
     @args = {:id => '65q23kd9sqliy612h23k'}
   end
 
@@ -11,7 +11,7 @@ describe Zoom::Actions::User do
     before :each do
       stub_request(
         :post,
-        zoomus_url('/user/delete')
+        zoom_url('/user/delete')
       ).to_return(:body => json_response('user_delete'))
     end
 
@@ -35,7 +35,7 @@ describe Zoom::Actions::User do
     before :each do
       stub_request(
         :post,
-        zoomus_url('/user/delete')
+        zoom_url('/user/delete')
       ).to_return(:body => json_response('error'))
     end
 

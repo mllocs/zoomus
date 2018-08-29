@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
   gem.email         = ['kyle@boe.codes']
   gem.description   = 'A Ruby API wrapper for zoom.us API'
   gem.summary       = 'zoom.us API wrapper'
-  gem.homepage      = 'https://github.com/hintmedia/zoomus'
+  gem.homepage      = 'https://github.com/hintmedia/zoom_rb'
   gem.licenses      = ['MIT']
 
   gem.files         = `git ls-files`.split($\)

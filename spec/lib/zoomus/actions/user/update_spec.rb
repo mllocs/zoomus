@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Zoom::Actions::User do
 
   before :all do
-    @zc = zoomus_client
+    @zc = zoom_client
     @args = {:id => "eIimBAXqSrWOcB_EOIXTog",
              :first_name => "Bar",
              :last_name => "Foo"}
@@ -13,7 +13,7 @@ describe Zoom::Actions::User do
     before :each do
       stub_request(
         :post,
-        zoomus_url("/user/update")
+        zoom_url("/user/update")
       ).to_return(:body => json_response("user_update"))
     end
 
@@ -37,7 +37,7 @@ describe Zoom::Actions::User do
     before :each do
       stub_request(
         :post,
-        zoomus_url("/user/update")
+        zoom_url("/user/update")
       ).to_return(:body => json_response("error"))
     end
 

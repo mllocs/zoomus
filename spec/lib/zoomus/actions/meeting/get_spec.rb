@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Zoom::Actions::Meeting do
 
   before :all do
-    @zc = zoomus_client
+    @zc = zoom_client
     @args = {
       :host_id => "dh23hdu23gd",
       :id => "123456789"
@@ -14,7 +14,7 @@ describe Zoom::Actions::Meeting do
     before :each do
       stub_request(
         :post,
-        zoomus_url("/meeting/get")
+        zoom_url("/meeting/get")
       ).to_return(:body => json_response("meeting_get"))
     end
 
@@ -50,7 +50,7 @@ describe Zoom::Actions::Meeting do
     before :each do
       stub_request(
         :post,
-        zoomus_url("/meeting/get")
+        zoom_url("/meeting/get")
       ).to_return(:body => json_response("error"))
     end
 

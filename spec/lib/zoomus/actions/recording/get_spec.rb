@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Zoom::Actions::Recording do
 
   before :all do
-    @zc = zoomus_client
+    @zc = zoom_client
     @args = {
       :meeting_id => "ucc69C82Q5mTNyCRWE29Aw=="
     }
@@ -13,7 +13,7 @@ describe Zoom::Actions::Recording do
     before :each do
       stub_request(
         :post,
-        zoomus_url("/recording/get")
+        zoom_url("/recording/get")
       ).to_return(:body => json_response("recording_get"))
     end
 
@@ -51,7 +51,7 @@ describe Zoom::Actions::Recording do
     before :each do
       stub_request(
         :post,
-        zoomus_url("/recording/get")
+        zoom_url("/recording/get")
       ).to_return(:body => json_response("error"))
     end
 

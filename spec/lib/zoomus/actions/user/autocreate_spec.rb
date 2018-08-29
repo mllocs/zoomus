@@ -5,7 +5,7 @@ require 'spec_helper'
 describe Zoom::Actions::User do
 
   before :all do
-    @zc = zoomus_client
+    @zc = zoom_client
     @args = {:email => "foo@bar.com",
              :password => "somepassword123",
              :first_name => "Foo",
@@ -17,7 +17,7 @@ describe Zoom::Actions::User do
     before :each do
       stub_request(
         :post,
-        zoomus_url("/user/autocreate")
+        zoom_url("/user/autocreate")
       ).to_return(:body => json_response("user_autocreate"))
     end
 
@@ -51,7 +51,7 @@ describe Zoom::Actions::User do
     before :each do
       stub_request(
         :post,
-        zoomus_url("/user/autocreate")
+        zoom_url("/user/autocreate")
       ).to_return(:body => json_response("error"))
     end
 
