@@ -21,8 +21,8 @@ module Zoom
       raise Utils.argument_error('api_key and api_secret') unless options[:api_key] &&
                                                                   options[:api_secret]
       self.class.default_params(
-        :api_key    => options[:api_key],
-        :api_secret => options[:api_secret]
+        api_key: options[:api_key],
+        api_secret: options[:api_secret]
       )
       self.class.default_timeout(options[:timeout])
     end

@@ -6,6 +6,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'json', '>= 1.8'
 
   gem.add_development_dependency 'byebug'
+  gem.add_development_dependency 'hint-rubocop_style'
   gem.add_development_dependency 'rspec'
   gem.add_development_dependency 'rspec_junit_formatter'
   gem.add_development_dependency 'simplecov'

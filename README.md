@@ -31,7 +31,7 @@ zoom_client = Zoom.new
 user_list = zoom_client.user_list
 user_list['users'].each do |user|
   user_id = user['id']
-  puts zoom_client.meeting_list(:host_id => user_id)
+  puts zoom_client.meeting_list(host_id: user_id)
 end
 
 begin
