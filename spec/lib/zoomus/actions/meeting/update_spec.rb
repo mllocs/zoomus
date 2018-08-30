@@ -47,9 +47,7 @@ describe Zoom::Actions::Meeting do
     end
 
     it 'raises Zoom::Error exception' do
-      expect {
-        zc.meeting_update!(args)
-      }.to raise_error(Zoom::Error)
+      expect { zc.meeting_update!(args) }.to raise_error(Zoom::Error)
     end
   end
 end
