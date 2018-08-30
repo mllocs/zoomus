@@ -4,7 +4,8 @@ require 'spec_helper'
 
 describe Zoom::Actions::Meeting do
   let(:zc) { zoom_client }
-  let(:args) { { host_id: 'ufR93M2pRyy8ePFN92dttq', type: 1, topic: 'Foo' } }
+  let(:args) { { host_id: 'ufR93M2pRyy8ePFN92dttq', type: 2, topic: 'Foo' } }
+  let(:response) { zc.meeting_create(args) }
 
   describe '#meeting_create action' do
     before :each do
@@ -33,22 +34,18 @@ describe Zoom::Actions::Meeting do
     end
 
     it 'returns a hash' do
-      expect(zc.meeting_create(args)).to be_kind_of(Hash)
+      expect(response).to be_kind_of(Hash)
     end
 
-    it 'returns the setted params' do
-      res = zc.meeting_create(args)
-
-      expect(res['host_id']).to eq(args[:host_id])
-      expect(res['type']).to eq(args[:type])
-      expect(res['topic']).to eq(args[:topic])
+    it 'returns the set params' do
+      expect(response['host_id']).to eq(args[:host_id])
+      expect(response['type']).to eq(args[:type])
+      expect(response['topic']).to eq(args[:topic])
     end
 
     it "returns 'start_url' and 'join_url'" do
-      res = zc.meeting_create(args)
-
-      expect(res['start_url']).to_not be_nil
-      expect(res['join_url']).to_not be_nil
+      expect(response['start_url']).to_not be_nil
+      expect(response['join_url']).to_not be_nil
     end
   end
 

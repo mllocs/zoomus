@@ -23,7 +23,7 @@ describe Zoom::Actions::Meeting do
     end
 
     it "returns 'total_records'" do
-      expect(zc.meeting_list(args)['total_records']).to eq(1)
+      expect(zc.meeting_list(args)['total_records']).to eq(235)
     end
 
     it "returns 'meetings' Array" do
