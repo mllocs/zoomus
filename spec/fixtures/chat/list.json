@@ -1,0 +1,16 @@
+{
+  "from": "2018-08-28",
+  "to": "2018-08-29",
+  "page_size": 30,
+  "page_count": 1,
+  "next_page_token": "",
+  "chat_list": [
+    {
+      "session_id": "555",
+      "type": "Group",
+      "participants": "",
+      "group_name": "zoom test1",
+      "last_message_send_time": "2016-01-18T06:40:56Z"
+    }
+  ]
+}

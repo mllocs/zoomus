@@ -1,0 +1,16 @@
+{
+  "session_id": "123456",
+  "group_name": "zoom",
+  "from": "2018-08-28",
+  "to": "2018-08-29",
+  "page_size": 30,
+  "page_count": 1,
+  "next_page_token": "",
+  "chat_messages": [
+    {
+      "message": "test1",
+      "sender": "",
+      "date_time": "2016-01-18T06:40:56Z"
+    }
+  ]
+}
