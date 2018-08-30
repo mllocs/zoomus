@@ -1,0 +1,22 @@
+{
+  "from": "2016-01-08",
+  "to": "2016-01-21",
+  "page_count": 1,
+  "page_number": 1,
+  "page_size": 30,
+  "total_records": 1,
+  "telephony_usage": [
+    {
+      "meeting_id": 2932547621,
+      "phone_number": "+86 8208",
+      "type": "call-out",
+      "host_name": "test",
+      "host_email": "zoom.test@zoom.us",
+      "department": "",
+      "start_time": "2016-01-12T02:25:34Z",
+      "end_time": "2016-01-12T02:26:48Z",
+      "duration": 2,
+      "total": 0.12
+    }
+  ]
+}
