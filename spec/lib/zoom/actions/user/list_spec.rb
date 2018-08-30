@@ -21,7 +21,7 @@ describe Zoom::Actions::User do
     end
 
     it "returns 'total_records" do
-      expect(@zc.user_list['total_records']).to eq(1)
+      expect(@zc.user_list['total_records']).to eq(235)
     end
 
     it "returns 'users' Array" do
