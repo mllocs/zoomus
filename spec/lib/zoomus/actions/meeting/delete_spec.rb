@@ -11,7 +11,7 @@ describe Zoom::Actions::Meeting do
       stub_request(
         :post,
         zoom_url('/meeting/delete')
-      ).to_return(body: json_response('meeting_delete'))
+      ).to_return(body: json_response('meeting', 'delete'))
     end
 
     it "requires a 'host_id' argument" do

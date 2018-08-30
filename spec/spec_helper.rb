@@ -12,12 +12,12 @@ RSpec.configure do |config|
   # some (optional) config here
 end
 
-def fixture(filename)
-  File.dirname(__FILE__) + '/fixtures/' + filename
+def fixture(*path, filename)
+  File.join('spec', 'fixtures', path, filename)
 end
 
-def json_response(key)
-  open(fixture(key + '.json')).read
+def json_response(*path, endpoint)
+  open(fixture(path, endpoint + '.json')).read
 end
 
 def zoom_url(url)

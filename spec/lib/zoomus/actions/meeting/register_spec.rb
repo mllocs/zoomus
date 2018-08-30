@@ -12,7 +12,7 @@ describe Zoom::Actions::Meeting do
       stub_request(
         :post,
         zoom_url('/meeting/register')
-      ).to_return(body: json_response('meeting_register'))
+      ).to_return(body: json_response('meeting', 'register'))
     end
 
     it 'returns a hash' do
