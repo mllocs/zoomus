@@ -1,5 +1,5 @@
 {
-  "email": "email_address",
+  "email": "foo@bar.com",
   "id": "unique_id",
   "created_at": "2012-11-25T12:00:00Z",
   "first_name": "Zoomie",
