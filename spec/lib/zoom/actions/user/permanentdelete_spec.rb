@@ -14,7 +14,7 @@ describe Zoom::Actions::User do
       stub_request(
         :post,
         zoom_url('/user/permanentdelete')
-      ).to_return(body: json_response('user_permanent_delete'))
+      ).to_return(body: json_response('user', 'permanent_delete'))
     end
 
     it 'requires id param' do

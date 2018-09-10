@@ -17,7 +17,7 @@ describe Zoom::Actions::User do
       stub_request(
         :post,
         zoom_url('/user/create')
-      ).to_return(body: json_response('user_create'))
+      ).to_return(body: json_response('user', 'create'))
     end
 
     it 'requires email param' do

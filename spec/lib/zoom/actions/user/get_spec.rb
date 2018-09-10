@@ -11,7 +11,10 @@ describe Zoom::Actions::User do
 
   describe '#user_get action' do
     before :each do
-      stub_request(:post, zoom_url('/user/get')).to_return(body: json_response('user_get'))
+      stub_request(
+        :post,
+        zoom_url('/user/get')
+        ).to_return(body: json_response('user', 'get'))
     end
 
     it 'requires id param' do

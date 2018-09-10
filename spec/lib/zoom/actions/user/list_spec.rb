@@ -13,7 +13,7 @@ describe Zoom::Actions::User do
       stub_request(
         :post,
         zoom_url('/user/list')
-      ).to_return(body: json_response('user_list'))
+      ).to_return(body: json_response('user', 'list'))
     end
 
     it 'returns a hash' do

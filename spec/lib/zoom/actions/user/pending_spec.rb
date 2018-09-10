@@ -13,7 +13,7 @@ describe Zoom::Actions::User do
       stub_request(
         :post,
         zoom_url('/user/pending')
-      ).to_return(body: json_response('user_pending'))
+      ).to_return(body: json_response('user', 'pending'))
     end
 
     it 'returns a hash' do

@@ -12,7 +12,10 @@ describe Zoom::Actions::User do
 
   describe '#user_getbyemail action' do
     before :each do
-      stub_request(:post, zoom_url('/user/getbyemail')).to_return(body: json_response('user_getbyemail'))
+      stub_request(
+        :post,
+        zoom_url('/user/getbyemail')
+      ).to_return(body: json_response('user', 'getbyemail'))
     end
 
     it 'requires email param' do

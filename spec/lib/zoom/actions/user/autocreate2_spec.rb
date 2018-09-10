@@ -14,7 +14,7 @@ describe Zoom::Actions::User do
       stub_request(
         :post,
         zoom_url('/user/autocreate2')
-      ).to_return(body: json_response('user_autocreate'))
+      ).to_return(body: json_response('user','autocreate'))
       # the api for autocreate2 is basically all the same
     end
 

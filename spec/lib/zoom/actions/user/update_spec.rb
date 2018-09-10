@@ -16,7 +16,7 @@ describe Zoom::Actions::User do
       stub_request(
         :post,
         zoom_url('/user/update')
-      ).to_return(body: json_response('user_update'))
+      ).to_return(body: json_response('user', 'update'))
     end
 
     it 'requires id param' do
