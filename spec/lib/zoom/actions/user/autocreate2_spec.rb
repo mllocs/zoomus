@@ -4,8 +4,8 @@ describe Zoom::Actions::User do
   let(:zc) { zoom_client }
   let(:args) { { email: 'foo@bar.com',
                  password: 'somepassword123',
-                 first_name: 'Foo',
-                 last_name: 'Bar',
+                 first_name: 'Zoomie',
+                 last_name: 'Userton',
                  type: 1 } }
   let(:response) { zc.user_autocreate2(args) }
 
@@ -14,7 +14,7 @@ describe Zoom::Actions::User do
       stub_request(
         :post,
         zoom_url('/user/autocreate2')
-      ).to_return(body: json_response('user','autocreate'))
+      ).to_return(body: json_response('user', 'autocreate2'))
       # the api for autocreate2 is basically all the same
     end
 
