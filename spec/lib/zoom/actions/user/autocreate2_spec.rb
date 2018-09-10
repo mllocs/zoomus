@@ -47,13 +47,13 @@ describe Zoom::Actions::User do
       stub_request(
         :post,
         zoom_url('/user/autocreate2')
-      ).to_return(:body => json_response('error'))
+      ).to_return(body: json_response('error'))
     end
 
     it 'raises Zoomus::Error exception' do
       expect {
         zc.user_autocreate2!(args)
-      }.to raise_error(Zoomus::Error)
+      }.to raise_error(Zoom::Error)
     end
   end
 end
