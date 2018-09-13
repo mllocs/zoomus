@@ -1,9 +1,7 @@
 {
-  "id": "eIimBAXqSrWOcB_EOIXTog",
+  "id": "foobar",
+  "first_name": "Zoomie",
+  "last_name": "Userton",
   "email": "foo@bar.com",
-  "first_name": "Foo",
-  "last_name": "Bar",
-  "type": 1,
-  "created_at": "2013-02-05T11:23:58Z",
-  "token": null
+  "type": 1
 }
