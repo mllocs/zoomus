@@ -7,6 +7,10 @@ module Zoom
         name ? ArgumentError.new("You must provide #{name}") : ArgumentError.new
       end
 
+      def exclude_argument_error(name)
+        name ? ArgumentError.new("Unrecognized parameter #{name}") : ArgumentError.new
+      end
+
       def raise_if_error!(response)
         if response['error']
           raise Error.new(response['error']['message'])
@@ -25,6 +29,13 @@ module Zoom
         params = [params] unless params.is_a? Array
         params.each do |param|
           raise argument_error(param.to_s) unless options[param]
+        end
+      end
+
+      def permit_params(params, options)
+        params = [params] unless params.is_a? Array
+        options.keys.each do |key|
+          raise exclude_argument_error(key.to_s) unless params.include?(key)
         end
       end
 
