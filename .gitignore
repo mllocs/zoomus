@@ -16,3 +16,4 @@ test/version_tmp
 tmp
 build_and_publish
 .rubocop*
+.DS_Store
