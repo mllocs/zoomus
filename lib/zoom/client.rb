@@ -2,6 +2,8 @@
 
 require 'httparty'
 require 'json'
+require 'jwt'
+require 'pry'
 
 module Zoom
   class Client
@@ -20,16 +22,14 @@ module Zoom
 
     base_uri 'https://api.zoom.us/v2'
 
-    def initialize(*args)
-      options = Utils.extract_options!(args)
+    def initialize(config)
+      Utils.require_params(%i[api_key api_secret], config)
+      config.each { |k, v| self.instance_variable_set("@#{k}", v) }
+      self.class.default_timeout(@timeout)
+    end
 
-      raise Utils.argument_error('api_key and api_secret') unless options[:api_key] &&
-                                                                  options[:api_secret]
-      self.class.default_params(
-        api_key: options[:api_key],
-        api_secret: options[:api_secret]
-      )
-      self.class.default_timeout(options[:timeout])
+    def access_token
+      JWT.encode({ iss: @api_key, exp: Time.now.to_i + @timeout }, @api_secret, 'HS256', { typ: 'JWT' })
     end
   end
 end
