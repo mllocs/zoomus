@@ -2,11 +2,10 @@
 
 $:.unshift File.dirname(__FILE__)
 
+require 'zoom/defaults'
 require 'zoom/utils'
 require 'zoom/actions/account'
-require 'zoom/actions/chat'
 require 'zoom/actions/group'
-require 'zoom/actions/im_group'
 require 'zoom/actions/m323_device'
 require 'zoom/actions/meeting'
 require 'zoom/actions/metrics'
@@ -14,6 +13,8 @@ require 'zoom/actions/recording'
 require 'zoom/actions/report'
 require 'zoom/actions/user'
 require 'zoom/actions/webinar'
+require 'zoom/actions/im/chat'
+require 'zoom/actions/im/group'
 require 'zoom/client'
 require 'zoom/error'
 
