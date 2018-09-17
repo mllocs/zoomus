@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-xxdescribe Zoom::Actions::User do
+xdescribe Zoom::Actions::User do
 
   before :all do
     @zc = zoom_client

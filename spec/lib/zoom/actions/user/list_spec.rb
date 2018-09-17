@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-xxdescribe Zoom::Actions::User do
+xdescribe Zoom::Actions::User do
   let(:zc) { zoom_client }
 
   xdescribe '#user_list action' do

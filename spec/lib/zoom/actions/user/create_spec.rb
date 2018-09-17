@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-xxdescribe Zoom::Actions::User do
+xdescribe Zoom::Actions::User do
   let(:zc) { zoom_client }
   before :all do
     @args = { email: 'foo@bar.com',

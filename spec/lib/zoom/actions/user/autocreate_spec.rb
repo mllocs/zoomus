@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-xxdescribe Zoom::Actions::User do
+xdescribe Zoom::Actions::User do
   let(:zc) { zoom_client }
   let(:args) { { email: 'foo@bar.com',
                  password: 'somepassword123',
