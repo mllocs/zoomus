@@ -55,6 +55,11 @@ module Zoom
         array.last.is_a?(::Hash) ? array.pop : {}
       end
 
+      def validate_password(password)
+        password_regex = /\A[a-zA-Z0-9@-_*]{0,10}\z/
+        raise(Error , 'Invalid Password') unless password[password_regex].nil?
+      end
+
       def process_datetime_params!(params, options)
         params = [params] unless params.is_a? Array
         params.each do |param|
