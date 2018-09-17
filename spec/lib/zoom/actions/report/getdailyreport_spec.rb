@@ -2,13 +2,13 @@
 
 require 'spec_helper'
 
-describe Zoom::Actions::Report do
+xdescribe Zoom::Actions::Report do
   before :all do
     @zc = zoom_client
     @args = { year: 2017, month: 7 }
   end
 
-  describe '#report_getdailyreport action' do
+  xdescribe '#report_getdailyreport action' do
     before :each do
       stub_request(
         :post,
@@ -45,7 +45,7 @@ describe Zoom::Actions::Report do
     end
   end
 
-  describe '#report_getdailyreport! action' do
+  xdescribe '#report_getdailyreport! action' do
     before :each do
       stub_request(
         :post,

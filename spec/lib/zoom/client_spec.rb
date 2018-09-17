@@ -2,9 +2,9 @@
 
 require 'spec_helper'
 
-describe Zoom::Client do
+xdescribe Zoom::Client do
 
-  describe 'default attributes' do
+  xdescribe 'default attributes' do
     it 'must include httparty methods' do
       expect(Zoom::Client).to include(HTTParty)
     end
@@ -33,7 +33,7 @@ describe Zoom::Client do
     end
   end
 
-  describe 'constructor' do
+  xdescribe 'constructor' do
     it 'requires api_key and api_secret for a new instance' do
       expect { Zoom::Client.new(api_key: 'xxx') }.to raise_error(ArgumentError)
     end

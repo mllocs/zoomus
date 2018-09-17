@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Zoom::Actions::User do
+xxdescribe Zoom::Actions::User do
   let(:zc) { zoom_client }
   before :all do
     @args = { email: 'foo@bar.com',
@@ -11,7 +11,7 @@ describe Zoom::Actions::User do
               type: 1 }
   end
 
-  describe '#user_create action' do
+  xdescribe '#user_create action' do
     before :each do
       stub_request(
         :post,
@@ -42,7 +42,7 @@ describe Zoom::Actions::User do
     end
   end
 
-  describe '#user_create! action' do
+  xdescribe '#user_create! action' do
     before :each do
       stub_request(
         :post,

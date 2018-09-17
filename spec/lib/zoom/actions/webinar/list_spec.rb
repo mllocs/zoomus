@@ -2,14 +2,14 @@
 
 require 'spec_helper'
 
-describe Zoom::Actions::Webinar do
+xdescribe Zoom::Actions::Webinar do
 
   before :all do
     @zc = zoom_client
     @args = { host_id: 'ufR93M2pRyy8ePFN92dttq' }
   end
 
-  describe '#webinar_list action' do
+  xdescribe '#webinar_list action' do
     before :each do
       stub_request(
         :post,
@@ -34,7 +34,7 @@ describe Zoom::Actions::Webinar do
     end
   end
 
-  describe '#webinar_list! action' do
+  xdescribe '#webinar_list! action' do
     before :each do
       stub_request(
         :post,

@@ -2,10 +2,10 @@
 
 require 'spec_helper'
 
-describe Zoom::Actions::Meeting do
+xdescribe Zoom::Actions::Meeting do
   let(:zc) { zoom_client }
 
-  describe '#meeting_live action' do
+  xdescribe '#meeting_live action' do
     before :each do
       stub_request(
         :post,
@@ -26,7 +26,7 @@ describe Zoom::Actions::Meeting do
     end
   end
 
-  describe '#meeting_live! action' do
+  xdescribe '#meeting_live! action' do
     before :each do
       stub_request(
         :post,

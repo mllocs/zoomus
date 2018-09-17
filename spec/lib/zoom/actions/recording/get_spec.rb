@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Zoom::Actions::Recording do
+xdescribe Zoom::Actions::Recording do
 
   before :all do
     @zc = zoom_client
@@ -11,7 +11,7 @@ describe Zoom::Actions::Recording do
     }
   end
 
-  describe '#recording_get action' do
+  xdescribe '#recording_get action' do
     before :each do
       stub_request(
         :post,
@@ -49,7 +49,7 @@ describe Zoom::Actions::Recording do
     end
   end
 
-  describe '#recording_get! action' do
+  xdescribe '#recording_get! action' do
     before :each do
       stub_request(
         :post,

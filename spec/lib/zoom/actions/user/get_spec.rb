@@ -2,14 +2,14 @@
 
 require 'spec_helper'
 
-describe Zoom::Actions::User do
+xxdescribe Zoom::Actions::User do
 
   before :all do
     @zc = zoom_client
     @args = { id: 'ufR9342pRyf8ePFN92dttQ' }
   end
 
-  describe '#user_get action' do
+  xdescribe '#user_get action' do
     before :each do
       stub_request(
         :post,
@@ -36,7 +36,7 @@ describe Zoom::Actions::User do
     end
   end
 
-  describe '#user_get! action' do
+  xdescribe '#user_get! action' do
     before :each do
       stub_request(
         :post,

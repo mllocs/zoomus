@@ -2,11 +2,11 @@
 
 require 'spec_helper'
 
-describe Zoom::Actions::Meeting do
+xdescribe Zoom::Actions::Meeting do
   let(:zc) { zoom_client }
   let(:args) { { host_id: 'ufR93M2pRyy8ePFN92dttq', id: '252482092', type: '2' } }
 
-  describe '#meeting_update action' do
+  xdescribe '#meeting_update action' do
     before :each do
       stub_request(
         :post,
@@ -38,7 +38,7 @@ describe Zoom::Actions::Meeting do
     end
   end
 
-  describe '#meeting_update! action' do
+  xdescribe '#meeting_update! action' do
     before :each do
       stub_request(
         :post,

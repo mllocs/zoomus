@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Zoom::Actions::User do
+xxdescribe Zoom::Actions::User do
   let(:zc) { zoom_client }
   let(:args) { { email: 'foo@bar.com',
                  password: 'somepassword123',
@@ -9,13 +9,12 @@ describe Zoom::Actions::User do
                  type: 1 } }
   let(:response) { zc.user_autocreate(args) }
 
-  describe '#user_autocreate action' do
+  xdescribe '#user_autocreate action' do
     before :each do
       stub_request(
         :post,
         zoom_url('/user/autocreate')
       ).to_return(body: json_response('user', 'autocreate'))
-      # the api for autocreate is basically all the same
     end
 
     it 'requires email param' do
@@ -42,7 +41,7 @@ describe Zoom::Actions::User do
     end
   end
 
-  describe '#user_autocreate! action' do
+  xdescribe '#user_autocreate! action' do
     before :each do
       stub_request(
         :post,

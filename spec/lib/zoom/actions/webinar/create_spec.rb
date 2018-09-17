@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Zoom::Actions::Webinar do
+xdescribe Zoom::Actions::Webinar do
 
   before :all do
     @zc = zoom_client
@@ -10,7 +10,7 @@ describe Zoom::Actions::Webinar do
               topic: 'create webinar via rest api' }
   end
 
-  describe '#webinar_create action' do
+  xdescribe '#webinar_create action' do
     before :each do
       stub_request(
         :post,
@@ -49,7 +49,7 @@ describe Zoom::Actions::Webinar do
     end
   end
 
-  describe '#webinar_create! action' do
+  xdescribe '#webinar_create! action' do
     before :each do
       stub_request(
         :post,

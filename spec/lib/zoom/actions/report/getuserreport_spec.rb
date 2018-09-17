@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Zoom::Actions::Report do
+xdescribe Zoom::Actions::Report do
 
   before :all do
     @zc = zoom_client
@@ -11,7 +11,7 @@ describe Zoom::Actions::Report do
               user_id: 'ufR93M2pRyy8ePFN92dttq' }
   end
 
-  describe '#report_getuserreport action' do
+  xdescribe '#report_getuserreport action' do
     before :each do
       stub_request(
         :post,
@@ -50,7 +50,7 @@ describe Zoom::Actions::Report do
     end
   end
 
-  describe '#report_getuserreport! action' do
+  xdescribe '#report_getuserreport! action' do
     before :each do
       stub_request(
         :post,

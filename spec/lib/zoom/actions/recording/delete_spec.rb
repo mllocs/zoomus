@@ -2,14 +2,14 @@
 
 require 'spec_helper'
 
-describe Zoom::Actions::Recording do
+xdescribe Zoom::Actions::Recording do
 
   before :all do
     @zc = zoom_client
     @args = { meeting_id: 'ucc69C82Q5mTNyCRWE29Aw==' }
   end
 
-  describe '#recording_delete action' do
+  xdescribe '#recording_delete action' do
     before :each do
       stub_request(
         :post,
@@ -35,7 +35,7 @@ describe Zoom::Actions::Recording do
     end
   end
 
-  describe '#recording_delete! action' do
+  xdescribe '#recording_delete! action' do
     before :each do
       stub_request(
         :post,

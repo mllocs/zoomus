@@ -2,14 +2,14 @@
 
 require 'spec_helper'
 
-describe Zoom::Actions::Metrics do
+xdescribe Zoom::Actions::Metrics do
 
   before :all do
     @zc = zoom_client
     @args = { meeting_id: 't13b6hjVQXybvGKyeHC96w==', type: 1 }
   end
 
-  describe '#metrics_meetingdetail action' do
+  xdescribe '#metrics_meetingdetail action' do
     before :each do
       stub_request(
         :post,
@@ -34,7 +34,7 @@ describe Zoom::Actions::Metrics do
     end
   end
 
-  describe '#metrics_meetingdetail! action' do
+  xdescribe '#metrics_meetingdetail! action' do
     before :each do
       stub_request(
         :post,

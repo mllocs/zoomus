@@ -2,12 +2,12 @@
 
 require 'spec_helper'
 
-describe Zoom::Actions::Meeting do
+xdescribe Zoom::Actions::Meeting do
   let(:zc) { zoom_client }
   let(:args) { { id: 1, email: 'foo@bar.com', first_name: 'Foo', last_name: 'Bar' } }
   let(:join_url) { 'https://www.zoom.us/w/869275230?tk=2DsQiu6nZVsZVATrPLvXgqPvw8mmKyxgAGaDMizLv34.DQEAAAAAM9AWXhZ2Nm5vRjIyMlRoUzE3ZktWM3l4cHVRAA' }
 
-  describe '#meeting_register action' do
+  xdescribe '#meeting_register action' do
     before :each do
       stub_request(
         :post,
@@ -28,7 +28,7 @@ describe Zoom::Actions::Meeting do
     end
   end
 
-  describe '#meeting_register! action' do
+  xdescribe '#meeting_register! action' do
     before :each do
       stub_request(
         :post,

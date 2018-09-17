@@ -2,12 +2,12 @@
 
 require 'spec_helper'
 
-describe Zoom::Actions::Meeting do
+xdescribe Zoom::Actions::Meeting do
   let(:zc) { zoom_client }
   let(:args) { { host_id: 'ufR93M2pRyy8ePFN92dttq', type: 2, topic: 'Foo' } }
   let(:response) { zc.meeting_create(args) }
 
-  describe '#meeting_create action' do
+  xdescribe '#meeting_create action' do
     before :each do
       stub_request(
         :post,
@@ -49,7 +49,7 @@ describe Zoom::Actions::Meeting do
     end
   end
 
-  describe '#meeting_create! action' do
+  xdescribe '#meeting_create! action' do
     before :each do
       stub_request(
         :post,

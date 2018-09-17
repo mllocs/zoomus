@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Zoom::Actions::Metrics do
+xdescribe Zoom::Actions::Metrics do
 
   before :all do
     @zc = zoom_client
@@ -11,7 +11,7 @@ describe Zoom::Actions::Metrics do
               to: '2013-04-09T19:00:00Z' }
   end
 
-  describe '#metrics_meetings action' do
+  xdescribe '#metrics_meetings action' do
     before :each do
       stub_request(
         :post,
@@ -44,7 +44,7 @@ describe Zoom::Actions::Metrics do
     end
   end
 
-  describe '#metrics_meetings! action' do
+  xdescribe '#metrics_meetings! action' do
     before :each do
       stub_request(
         :post,

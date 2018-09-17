@@ -2,12 +2,12 @@
 
 require 'spec_helper'
 
-describe Zoom::Actions::Report do
+xdescribe Zoom::Actions::Report do
   let(:zc) { zoom_client}
   let(:args) { { from: '2013-04-05T15:50:47Z', to: '2013-04-09T19:00:00Z' } }
   let(:response) { zc.report_getaccountreport(args) }
 
-  describe '#report_getaccountreport action' do
+  xdescribe '#report_getaccountreport action' do
     before :each do
       stub_request(
         :post,
@@ -40,7 +40,7 @@ describe Zoom::Actions::Report do
     end
   end
 
-  describe '#report_getaccountreport! action' do
+  xdescribe '#report_getaccountreport! action' do
     before :each do
       stub_request(
         :post,

@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Zoom::Actions::Webinar do
+xdescribe Zoom::Actions::Webinar do
 
   before :all do
     @zc = zoom_client
@@ -10,7 +10,7 @@ describe Zoom::Actions::Webinar do
               id: '123456789' }
   end
 
-  describe '#webinar_delete action' do
+  xdescribe '#webinar_delete action' do
     before :each do
       stub_request(
         :post,
@@ -42,7 +42,7 @@ describe Zoom::Actions::Webinar do
     end
   end
 
-  describe '#webinar_delete! action' do
+  xdescribe '#webinar_delete! action' do
     before :each do
       stub_request(
         :post,

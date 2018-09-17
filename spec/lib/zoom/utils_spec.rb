@@ -2,19 +2,19 @@
 
 require 'spec_helper'
 
-describe Zoom::Utils do
+xdescribe Zoom::Utils do
 
   before(:all) do
     class Utils < Zoom::Utils; end
   end
 
-  describe '#argument_error' do
+  xdescribe '#argument_error' do
     it 'raises ArgumentError' do
       expect(Utils.argument_error('foo')).to be_instance_of(ArgumentError)
     end
   end
 
-  describe '#raise_if_error!' do
+  xdescribe '#raise_if_error!' do
     it 'raises Zoom::Error if error is present' do
       response = { 'error' => { 'message' => 'lol error' } }
       expect { Utils.raise_if_error!(response) }.to raise_error(Zoom::Error)
@@ -26,7 +26,7 @@ describe Zoom::Utils do
     end
   end
 
-  describe '#require_params' do
+  xdescribe '#require_params' do
     it 'raises ArgumentError if the param is not present' do
       expect { Utils.require_params(:foo, { bar: 'bar' }) }.to raise_error(ArgumentError)
     end
@@ -36,14 +36,14 @@ describe Zoom::Utils do
     end
   end
 
-  describe '#extract_options!' do
+  xdescribe '#extract_options!' do
     it 'converts array to hash options' do
       args = [{ foo: 'foo' }, { bar: 'bar' }, { zemba: 'zemba' }]
       expect(Utils.extract_options!(args)).to be_kind_of(Hash)
     end
   end
 
-  describe '#process_datetime_params' do
+  xdescribe '#process_datetime_params' do
     it 'converts the Time objects to formatted strings' do
       args = {
         foo: 'foo',
@@ -56,7 +56,7 @@ describe Zoom::Utils do
     end
   end
 
-  describe '#define_bang_methods' do
+  xdescribe '#define_bang_methods' do
     before :each do
       stub_request(:post, zoom_url('/user/custcreate')).to_timeout
     end

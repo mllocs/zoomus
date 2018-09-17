@@ -2,10 +2,10 @@
 
 require 'spec_helper'
 
-describe Zoom::Actions::User do
+xxdescribe Zoom::Actions::User do
   let(:zc) { zoom_client }
 
-  describe '#user_list action' do
+  xdescribe '#user_list action' do
     before :each do
       stub_request(
         :get,
@@ -30,7 +30,7 @@ describe Zoom::Actions::User do
     end
   end
 
-  describe '#user_list! action' do
+  xdescribe '#user_list! action' do
     before :each do
       stub_request(
         :get,

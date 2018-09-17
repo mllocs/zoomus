@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Zoom::Actions::Chat do
+xdescribe Zoom::Actions::Chat do
   let(:zc) { zoom_client }
   let(:args) { { access_token: 'foobar',
                  session_id: '123456',
@@ -10,7 +10,7 @@ describe Zoom::Actions::Chat do
                  to: '2018-08-29' } }
   let(:response) { zc.chat_get(args) }
 
-  describe '#chat_get action' do
+  xdescribe '#chat_get action' do
     before :each do
       stub_request(
         :post,
@@ -49,7 +49,7 @@ describe Zoom::Actions::Chat do
     end
   end
 
-  describe '#chat_get! action' do
+  xdescribe '#chat_get! action' do
     before :each do
       stub_request(
         :post,
