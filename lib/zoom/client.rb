@@ -9,9 +9,7 @@ module Zoom
   class Client
     include HTTParty
     include Actions::Account
-    include Actions::Chat
     include Actions::Group
-    include Actions::IMGroup
     include Actions::M323Device
     include Actions::User
     include Actions::Meeting
@@ -19,6 +17,8 @@ module Zoom
     include Actions::Webinar
     include Actions::Report
     include Actions::Recording
+    include Actions::IM::Chat
+    include Actions::IM::Group
 
     base_uri 'https://api.zoom.us/v2'
 
