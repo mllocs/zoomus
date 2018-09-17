@@ -2,7 +2,9 @@
 
 module Zoom
   module Actions
-    module IMGroup
+    module IM
+      module Group
+      end
     end
   end
 end
