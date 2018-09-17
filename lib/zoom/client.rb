@@ -24,7 +24,7 @@ module Zoom
 
     def initialize(config)
       Utils.require_params(%i[api_key api_secret], config)
-      config.each { |k, v| self.instance_variable_set("@#{k}", v) }
+      config.each { |k, v| instance_variable_set("@#{k}", v) }
       self.class.default_timeout(@timeout)
     end
 
