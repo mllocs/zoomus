@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-xdescribe Zoom::Actions::Chat do
+xdescribe Zoom::Actions::IM::Chat do
   let(:zc) { zoom_client }
   let(:args) { { access_token: 'foobar',
                  from: '2018-08-28',
