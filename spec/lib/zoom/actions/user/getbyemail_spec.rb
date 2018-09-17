@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Zoom::Actions::User do
+xxdescribe Zoom::Actions::User do
 
   before :all do
     @zc = zoom_client
@@ -10,7 +10,7 @@ describe Zoom::Actions::User do
               login_type: 99 }
   end
 
-  describe '#user_getbyemail action' do
+  xdescribe '#user_getbyemail action' do
     before :each do
       stub_request(
         :post,
@@ -37,7 +37,7 @@ describe Zoom::Actions::User do
     end
   end
 
-  describe '#user_getbyemail! action' do
+  xdescribe '#user_getbyemail! action' do
     before :each do
       stub_request(
         :post,
