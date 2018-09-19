@@ -21,6 +21,8 @@ module Zoom
     include Actions::IM::Group
 
     base_uri 'https://api.zoom.us/v2'
+    headers 'Accept' => 'application/json'
+    headers 'Content-Type' => 'application/json'
 
     def initialize(config)
       Utils.require_params(%i[api_key api_secret], config)
