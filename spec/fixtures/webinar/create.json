@@ -1,0 +1,29 @@
+{
+    "uuid": "someBase64str!ng",
+    "id": 1234567890,
+    "host_id": "test_user_id",
+    "topic": "testing123",
+    "type": 5,
+    "start_time": "2018-09-17T21:55:25Z",
+    "duration": 60,
+    "timezone": "America/New_York",
+    "created_at": "2018-09-17T21:55:25Z",
+    "start_url": "https://zoom.us/s/really_long_string_here",
+    "join_url": "https://zoom.us/j/1234567890",
+    "settings": {
+        "host_video": false,
+        "panelists_video": false,
+        "approval_type": 2,
+        "audio": "both",
+        "auto_recording": "none",
+        "enforce_login": false,
+        "enforce_login_domains": "",
+        "alternative_hosts": "",
+        "close_registration": false,
+        "show_share_button": true,
+        "allow_multiple_devices": true,
+        "practice_session": false,
+        "hd_video": false,
+        "question_answer": true
+    }
+}
