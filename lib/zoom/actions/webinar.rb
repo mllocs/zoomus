@@ -7,14 +7,14 @@ module Zoom
         options = Utils.extract_options!(args)
         Utils.require_params(:user_id, options)
         Utils.process_datetime_params!(:start_time, options)
-        Utils.parse_response self.class.get("/users/#{options[:user_id]}/webinars", query: options)
+        Utils.parse_response self.class.get("/users/#{options[:user_id]}/webinars", query: options.merge(access_token: access_token))
       end
 
       def webinar_create(*args)
         options = Utils.extract_options!(args)
         Utils.require_params(%i[user_id topic], options)
         Utils.process_datetime_params!(:start_time, options)
-        Utils.parse_response self.class.post("/users/#{options[:user_id]}/webinars", query: options)
+        Utils.parse_response self.class.post("/users/#{options[:user_id]}/webinars", body: options.to_json, query: { access_token: access_token })
       end
 
       def webinar_get(*args)
