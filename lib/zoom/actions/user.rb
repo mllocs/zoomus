@@ -36,21 +36,25 @@ module Zoom
       end
 
       def user_assistants_list(*args)
+        raise Zoom::NotImplemented, 'user_assistants_list is not yet implemented'
         # TODO: implement user_assistants_list
         # options = Utils.extract_options!(args)
-        raise Zoom::NotImplemented, 'user_assistants_list is not yet implemented'
+        # Utils.require_params([:user_id], options)
+        Utils.parse_response self.class.get("/users/#{options.slice!(:id)}/assistants", query: options.merge(access_token: access_token))
       end
 
       def user_assistants_create(*args)
-        # TODO: implement user_assistants_create
-        # options = Utils.extract_options!(args)
         raise Zoom::NotImplemented, 'user_assistants_create is not yet implemented'
+        # TODO: validate body attributes
+        options = Utils.extract_options!(args)
+        Utils.parse_response self.class.post("/users/#{options.slice!(:id)}/assistants", body: options, query: { access_token: access_token })
       end
 
       def user_assistants_delete_all(*args)
-        # TODO: implement user_assistants_delete_all
-        # options = Utils.extract_options!(args)
         raise Zoom::NotImplemented, 'user_assistants_delete_all is not yet implemented'
+        # TODO: implement user_assistants_delete_all
+        options = Utils.extract_options!(args)
+        Utils.parse_response self.class.delete("/users/#{options.slice!(:id)}/assistants", body: options, query: { access_token: access_token })
       end
 
       def user_assistants_delete(*args)
