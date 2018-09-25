@@ -11,7 +11,7 @@ module Zoom
 
       def user_create(*args)
         options = Utils.extract_options!(args)
-        Utils.require_params(%i[email type first_name last_name password], options)
+        Zoom::Params.new(options).require(%i[email type first_name last_name password])
         Utils.parse_response self.class.post('/users', body: { action: 'create', user_info: options }, query: { access_token: access_token })
       end
 
