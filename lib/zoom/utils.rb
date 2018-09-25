@@ -12,8 +12,11 @@ module Zoom
       end
 
       def raise_if_error!(response)
-        if response['error']
-          raise Error.new(response['error']['message'])
+        if response['code'] == 300
+          error_hash = { base: response['message']}
+          raise Error, error_hash unless response['errors']
+          error_hash[response['message']] = response['errors']
+          raise Error, error_hash
         else
           response
         end
