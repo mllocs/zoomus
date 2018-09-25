@@ -1,0 +1,10 @@
+{
+  "code": 300,
+  "message": "Validation Failed.",
+  "errors": [
+    {
+      "field": "user_info.type",
+      "message": "Missing field."
+    }
+  ]
+}
