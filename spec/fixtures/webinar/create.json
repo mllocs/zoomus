@@ -2,7 +2,7 @@
     "uuid": "someBase64str!ng",
     "id": 1234567890,
     "host_id": "test_user_id",
-    "topic": "testing123",
+    "topic": "create webinar via rest api",
     "type": 5,
     "start_time": "2018-09-17T21:55:25Z",
     "duration": 60,

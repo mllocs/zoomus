@@ -5,7 +5,7 @@ require 'spec_helper'
 RSpec.describe Zoom::Actions::Webinar do
   let(:zc) { zoom_client }
   let(:args) do
-    { user_id: 'AjXQQ36-RxGis5_7In8wZQ',
+    { user_id: 'test_user_id',
       topic: 'create webinar via rest api' }
   end
 
@@ -13,7 +13,7 @@ RSpec.describe Zoom::Actions::Webinar do
     before :each do
       stub_request(
         :post,
-        zoom_url("/users/#{args[:user_id]}/create")
+        zoom_url("/users/#{args[:user_id]}/webinars")
       ).to_return(body: json_response('webinar', 'create'))
     end
 
@@ -32,7 +32,7 @@ RSpec.describe Zoom::Actions::Webinar do
     it 'returns the setted params' do
       res = zc.webinar_create(args)
 
-      expect(res['host_id']).to eq(args[:host_id])
+      expect(res['host_id']).to eq(args[:user_id])
       expect(res['topic']).to eq(args[:topic])
     end
 
@@ -48,8 +48,8 @@ RSpec.describe Zoom::Actions::Webinar do
     before :each do
       stub_request(
         :post,
-        zoom_url('/webinar/create')
-      ).to_return(body: json_response('error'))
+        zoom_url("/users/#{args[:user_id]}/webinars")
+      ).to_return(body: json_response('error', 'validation'))
     end
 
     it 'raises Zoom::Error exception' do

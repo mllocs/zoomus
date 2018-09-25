@@ -36,7 +36,7 @@ RSpec.describe Zoom::Actions::Webinar do
       stub_request(
         :get,
         zoom_url("/users/#{args[:user_id]}/webinars")
-      ).to_return(body: json_response('error'))
+      ).to_return(body: json_response('error', 'validation'))
     end
 
     it 'raises Zoom::Error exception' do
