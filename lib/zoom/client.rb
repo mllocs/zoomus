@@ -3,7 +3,6 @@
 require 'httparty'
 require 'json'
 require 'jwt'
-require 'pry'
 
 module Zoom
   class Client

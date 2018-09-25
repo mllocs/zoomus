@@ -4,4 +4,6 @@ module Zoom
   class Error < StandardError; end
   class GatewayTimeout < StandardError; end
   class NotImplemented < StandardError; end
+  class ParameterMissing < StandardError; end
+  class ParameterNotPermitted < StandardError; end
 end
