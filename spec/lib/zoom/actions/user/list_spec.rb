@@ -2,10 +2,10 @@
 
 require 'spec_helper'
 
-xdescribe Zoom::Actions::User do
+describe Zoom::Actions::User do
   let(:zc) { zoom_client }
 
-  xdescribe '#user_list action' do
+  describe '#user_list action' do
     before :each do
       stub_request(
         :get,
@@ -26,16 +26,16 @@ xdescribe Zoom::Actions::User do
     end
 
     it 'raises an error when passed an invalid option' do
-      expect { zc.user_list(foo: 'bar', status: 'active') }.to raise_error(ArgumentError, 'Unrecognized parameter foo')
+      expect { zc.user_list(foo: 'bar', status: 'active') }.to raise_error(Zoom::ParameterNotPermitted, [:foo].to_s)
     end
   end
 
-  xdescribe '#user_list! action' do
+  describe '#user_list! action' do
     before :each do
       stub_request(
         :get,
         zoom_url('/users')
-      ).to_return(body: json_response('error'))
+      ).to_return(body: json_response('error', 'validation'))
     end
 
     it 'raises Zoom::Error exception' do

@@ -4,15 +4,15 @@ module Zoom
   module Actions
     module User
       def user_list(*args)
-        options = Utils.extract_options!(args)
-        Utils.permit_params(%i[status page_size page_number], options)
-        Utils.parse_response self.class.get('/users', query: options.merge(access_token: access_token))
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.permit(%i[status page_size page_number])
+        Utils.parse_response self.class.get('/users', query: params.merge(access_token: access_token))
       end
 
       def user_create(*args)
-        options = Utils.extract_options!(args)
-        Zoom::Params.new(options).require(%i[email type first_name last_name password])
-        Utils.parse_response self.class.post('/users', body: { action: 'create', user_info: options }, query: { access_token: access_token })
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(%i[email type first_name last_name password])
+        Utils.parse_response self.class.post('/users', body: { action: 'create', user_info: params }, query: { access_token: access_token })
       end
 
       def user_get(*args)
