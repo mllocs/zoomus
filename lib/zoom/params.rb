@@ -12,8 +12,11 @@ module Zoom
 
     def require(key)
       return key.map { |k| require(k) } if key.is_a?(Array)
-      value = self[key]
-      return self.class.new(value) unless value.nil?
+      unless self[key].nil?
+        new_params = @parameters.dup
+        new_params.delete(key)
+        return self.class.new(new_params)
+      end
       raise Zoom::ParameterMissing, key
     end
 

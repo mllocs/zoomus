@@ -1,5 +1,5 @@
 {
-  "id": "foobar",
+  "id": "ufR9342pRyf8ePFN92dttQ",
   "first_name": "Zoomie",
   "last_name": "Userton",
   "email": "foo@bar.com",
@@ -7,8 +7,8 @@
   "pmi": "string",
   "timezone": "string",
   "dept": "string",
-  "created_at": "2018-09-12T21:15:08.524Z",
-  "last_login_time": "2018-09-12T21:15:08.525Z",
+  "created_at": "2018-09-25T23:13:05.014Z",
+  "last_login_time": "2018-09-25T23:13:05.014Z",
   "last_client_version": "string",
   "vanity_url": "string",
   "personal_meeting_url": "string",
@@ -17,6 +17,7 @@
   "cms_user_id": "string",
   "account_id": "string",
   "host_key": "string",
+  "use_pmi": true,
   "group_ids": ["string"],
   "im_group_ids": ["string"]
 }

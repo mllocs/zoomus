@@ -16,10 +16,9 @@ module Zoom
       end
 
       def user_get(*args)
-        options = Utils.extract_options!(args)
-        Utils.require_params([:id], options)
-        Utils.permit_params(%i[id login_type], options)
-        Utils.parse_response self.class.get("/users/#{options[:id]}", query: options.merge(access_token: access_token))
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:id).permit(%i[login_type])
+        Utils.parse_response self.class.get("/users/#{params[:id]}", query: params.merge(access_token: access_token))
       end
 
       def user_update(*args)

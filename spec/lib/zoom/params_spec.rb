@@ -16,7 +16,7 @@ RSpec.describe Zoom::Params do
   end
 
   describe '#permit' do
-    let(:params) { Zoom::Params.new(foo: { bar: :baz })}
+    let(:params) { Zoom::Params.new(foo: true, bar: :baz ) }
 
     it 'does not raise an error when permitted keys are present' do
       expect { params.require(:foo).permit(:bar) }.not_to raise_error(Zoom::ParameterNotPermitted)
@@ -27,19 +27,16 @@ RSpec.describe Zoom::Params do
     end
 
     context 'raises an error' do
-      let(:bad_params) { Zoom::Params.new(foo: { bar: :baz, bang: :boom }) }
+      let(:bad_params) { Zoom::Params.new(foo: true, bar: :baz, bang: :boom) }
       let(:other_bad_params) {
-        Zoom::Params.new(foo: {
-          bar: {
+        Zoom::Params.new(foo: true, bar: {
             baz: :bang,
             boom: :pow,
             asdf: :test,
             testerino: :other
-          }
-        })
+          })
       }
-      let(:really_bad_params) { Zoom::Params.new(foo: {
-        bar: {
+      let(:really_bad_params) { Zoom::Params.new(foo: true, bar: {
           baz: {
             bang: {
               nested: true,
@@ -48,8 +45,7 @@ RSpec.describe Zoom::Params do
               bad_param: :asdf
             }
           }
-        }
-      }) }
+        }) }
       it 'when non-permitted keys are present' do
         expect { bad_params.require(:foo).permit(:bar) }.to raise_error(Zoom::ParameterNotPermitted, [:bang].to_s)
       end
@@ -59,7 +55,7 @@ RSpec.describe Zoom::Params do
       end
 
       it 'when deeply nested non-permitted keys are present' do
-        expect { really_bad_params.require(:foo).permit(bar: { baz: {bang: [:nested, :this, :is] } }) }.to raise_error(Zoom::ParameterNotPermitted, [:bad_param].to_s)
+        expect { really_bad_params.require(:foo).permit(bar: { baz: { bang: [:nested, :this, :is] } }) }.to raise_error(Zoom::ParameterNotPermitted, [:bad_param].to_s)
       end
     end
   end
