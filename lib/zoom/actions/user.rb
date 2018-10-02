@@ -23,16 +23,15 @@ module Zoom
       end
 
       def user_update(*args)
-        options = Utils.extract_options!(args)
-        Utils.permit_params(%i[first_name last_name type pmi timezone dept vanity_name host_key cms_user_id], options)
-        Utils.parse_response self.class.patch('/users', body: options, query: { access_token: access_token })
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:id).permit(%i[first_name last_name type pmi timezone dept vanity_name host_key cms_user_id])
+        Utils.parse_response self.class.patch("/users/#{params[:id]}", body: params.except(:id).to_json, query: { access_token: access_token })
       end
 
       def user_delete(*args)
-        options = Utils.extract_options!(args)
-        Utils.require_params([:id], options)
-        Utils.permit_params(%i[action transfer_email transfer_meeting transfer_webinar transfer_recording], options)
-        Utils.parse_response self.class.delete("/users/#{options.slice!(:id)}", query: options.merge(access_token: access_token))
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:id).permit(%i[action transfer_email transfer_meeting transfer_webinar transfer_recording])
+        Utils.parse_response self.class.delete("/users/#{params[:id]}", query: params.except(:id).merge(access_token: access_token))
       end
 
       def user_assistants_list(*args)

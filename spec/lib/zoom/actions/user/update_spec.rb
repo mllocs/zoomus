@@ -2,51 +2,39 @@
 
 require 'spec_helper'
 
-xdescribe Zoom::Actions::User do
+describe Zoom::Actions::User do
+  let(:zc) { zoom_client }
+  let(:args) { { id: 'eIimBAXqSrWOcB_EOIXTog',
+                 first_name: 'Bar',
+                 last_name: 'Foo' } }
 
-  before :all do
-    @zc = zoom_client
-    @args = { id: 'eIimBAXqSrWOcB_EOIXTog',
-              first_name: 'Bar',
-              last_name: 'Foo' }
-  end
-
-  xdescribe '#user_update action' do
+  describe '#user_update' do
     before :each do
       stub_request(
-        :post,
-        zoom_url('/user/update')
-      ).to_return(body: json_response('user', 'update'))
+        :patch,
+        zoom_url("/users/#{args[:id]}")
+      ).to_return(status: 204, body: json_response('user', 'update'))
     end
 
     it 'requires id param' do
-      expect { @zc.user_update(filter_key(@args, :id)) }.to raise_error(ArgumentError)
+      expect { zc.user_update(filter_key(args, :id)) }.to raise_error(Zoom::ParameterMissing, [:id].to_s)
     end
 
-    it 'returns a hash' do
-      expect(@zc.user_update(@args)).to be_kind_of(Hash)
-    end
-
-    it 'returns id and updated_at' do
-      res = @zc.user_update(@args)
-
-      expect(res['id']).to eq(@args[:id])
-      expect(res).to have_key('updated_at')
+    it 'returns the http status code as a number' do
+      expect(zc.user_update(args)).to eql(204)
     end
   end
 
-  xdescribe '#user_update! action' do
+  describe '#user_update!' do
     before :each do
       stub_request(
-        :post,
-        zoom_url('/user/update')
-      ).to_return(body: json_response('error'))
+        :patch,
+        zoom_url("/users/#{args[:id]}")
+      ).to_return(status: 404, body: json_response('error', 'validation'))
     end
 
     it 'raises Zoom::Error exception' do
-      expect {
-        @zc.user_update!(@args)
-      }.to raise_error(Zoom::Error)
+      expect { zc.user_update!(args) }.to raise_error(Zoom::Error)
     end
   end
 end
