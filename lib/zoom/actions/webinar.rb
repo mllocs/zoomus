@@ -27,22 +27,24 @@ module Zoom
       end
 
       def webinar_get(*args)
-        options = Utils.extract_options!(args)
-        Utils.require_params([:id], options)
-        Utils.parse_response self.class.get("/webinars/#{options[:id]}", query: options)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:id)
+        Utils.parse_response self.class.get("/webinars/#{params[:id]}", query: { access_token: access_token })
       end
 
       def webinar_update(*args)
-        options = Utils.extract_options!(args)
-        Utils.require_params([:id], options)
-        Utils.process_datetime_params!(:start_time, options)
-        Utils.parse_response self.class.post("/webinars/#{options[:id]}", query: options)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:id).permit(:topic, :type, :start_time, :duration,
+                                   :timezone, :password, :agenda,
+                                   recurrence: RECURRENCE_KEYS,
+                                   settings: SETTINGS_KEYS)
+        Utils.parse_response self.class.patch("/webinars/#{options[:id]}", body: params.except(:id).to_json, query: { access_token: access_token })
       end
 
       def webinar_delete(*args)
-        options = Utils.extract_options!(args)
-        Utils.require_params([:id], options)
-        Utils.parse_response self.class.delete("/webinars/#{options[:id]}", query: options)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:id).permit(:occurrence_id)
+        Utils.parse_response self.class.delete("/webinars/#{params[:id]}", query: params.except(:id).merge(access_token: access_token))
       end
 
       def webinar_status_update(*args)
