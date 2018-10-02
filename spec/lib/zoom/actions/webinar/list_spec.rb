@@ -4,9 +4,9 @@ require 'spec_helper'
 
 RSpec.describe Zoom::Actions::Webinar do
   let(:zc) { zoom_client }
-  let(:args) { { user_id: 'ufR93M2pRyy8ePFN92dttq' } }
+  let(:args) { { host_id: 'ufR93M2pRyy8ePFN92dttq' } }
 
-  describe '#webinar_list action' do
+  describe '#webinar_list' do
     before :each do
       stub_request(
         :get,
@@ -15,7 +15,7 @@ RSpec.describe Zoom::Actions::Webinar do
     end
 
     it "requires a 'host_id' argument" do
-      expect { zc.webinar_list }.to raise_error(ArgumentError)
+      expect { zc.webinar_list }.to raise_error(Zoom::ParameterMissing, [:host_id].to_s)
     end
 
     it 'returns a hash' do
