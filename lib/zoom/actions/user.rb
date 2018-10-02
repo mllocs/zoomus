@@ -6,7 +6,8 @@ module Zoom
       def user_list(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.permit(%i[status page_size page_number])
-        Utils.parse_response self.class.get('/users', query: params.merge(access_token: access_token))
+        response = self.class.get('/users', query: params.merge(access_token: access_token))
+        Utils.parse_response(response)
       end
 
       def user_create(*args)
@@ -17,8 +18,8 @@ module Zoom
 
       def user_get(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:id).permit(%i[login_type])
-        Utils.parse_response self.class.get("/users/#{params[:id]}", query: params.merge(access_token: access_token))
+        params.require(:id).permit(:login_type)
+        Utils.parse_response self.class.get("/users/#{params[:id]}", query: params.except(:id).merge(access_token: access_token))
       end
 
       def user_update(*args)

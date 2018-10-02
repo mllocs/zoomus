@@ -12,7 +12,7 @@ module Zoom
 
 
     def require(*keys)
-      missing_keys = find_missing_keys(keys)
+      missing_keys = find_missing_keys(keys.flatten)
       return self.class.new(except(keys)) if missing_keys.empty?
       raise Zoom::ParameterMissing, missing_keys.to_s
     end
@@ -30,8 +30,8 @@ module Zoom
       raise Zoom::ParameterNotPermitted, non_permitted_params.to_s unless non_permitted_params.empty?
     end
 
-    def except(keys)
-      dup.except!(keys)
+    def except(*keys)
+      dup.except!(keys.flatten)
     end
 
     def except!(keys)

@@ -15,7 +15,7 @@ describe Zoom::Actions::User do
     end
 
     it 'requires id param' do
-      expect { zc.user_get(filter_key(args, :id)) }.to raise_error(Zoom::ParameterMissing, 'id')
+      expect { zc.user_get(filter_key(args, :id)) }.to raise_error(Zoom::ParameterMissing, '[:id]')
     end
 
     it 'returns a hash' do
@@ -33,12 +33,12 @@ describe Zoom::Actions::User do
     end
   end
 
-  xdescribe '#user_get! action' do
+  describe '#user_get! action' do
     before :each do
       stub_request(
-        :post,
-        zoom_url('/user/get')
-      ).to_return(body: json_response('error'))
+        :get,
+        zoom_url("/users/#{args[:id]}")
+      ).to_return(body: json_response('error', 'validation'))
     end
 
     it 'raises Zoom::Error exception' do
