@@ -12,7 +12,7 @@ module Zoom
       def webinar_list(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:host_id).permit(:page_size, :page_number)
-        Utils.parse_response self.class.get("/users/#{params[:user_id]}/webinars", query: params.merge(access_token: access_token))
+        Utils.parse_response self.class.get("/users/#{params[:host_id]}/webinars", query: params.merge(access_token: access_token))
       end
 
       def webinar_create(*args)
