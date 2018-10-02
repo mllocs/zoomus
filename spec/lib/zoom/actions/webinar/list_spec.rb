@@ -4,13 +4,13 @@ require 'spec_helper'
 
 RSpec.describe Zoom::Actions::Webinar do
   let(:zc) { zoom_client }
-  let(:args) { { host_id: 'ufR93M2pRyy8ePFN92dttq' } }
+  let(:args) { { host_id: 'test_user_id' } }
 
   describe '#webinar_list' do
     before :each do
       stub_request(
         :get,
-        zoom_url("/users/#{args[:user_id]}/webinars")
+        zoom_url("/users/#{args[:host_id]}/webinars")
       ).to_return(body: json_response('webinar', 'list'))
     end
 
@@ -35,7 +35,7 @@ RSpec.describe Zoom::Actions::Webinar do
     before :each do
       stub_request(
         :get,
-        zoom_url("/users/#{args[:user_id]}/webinars")
+        zoom_url("/users/#{args[:host_id]}/webinars")
       ).to_return(body: json_response('error', 'validation'))
     end
 

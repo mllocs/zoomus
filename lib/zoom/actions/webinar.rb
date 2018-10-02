@@ -20,10 +20,10 @@ module Zoom
         params.require(:host_id).permit(:topic, :type, :start_time, :duration,
                                         :timezone, :password, :agenda,
                                         recurrence: RECURRENCE_KEYS,
-                                        settings: PERMITTED_SETTINGS)
+                                        settings: SETTINGS_KEYS)
         # process recurrence keys based on defaults
         # process settings keys based on defaults
-        Utils.parse_response self.class.post("/users/#{params[:user_id]}/webinars", body: params.except(:host_id).to_json, query: { access_token: access_token })
+        Utils.parse_response self.class.post("/users/#{params[:host_id]}/webinars", body: params.except(:host_id).to_json, query: { access_token: access_token })
       end
 
       def webinar_get(*args)
