@@ -5,13 +5,18 @@ require 'spec_helper'
 RSpec.describe Zoom::Params do
 
   describe '#require' do
-    let(:params) { Zoom::Params.new(foo: :bar)}
+    let(:params) { Zoom::Params.new(foo: :bar, baz: :bang) }
+
     it 'does not raise an error when required keys are present' do
       expect { params.require(:foo) }.not_to raise_error(Zoom::ParameterMissing)
     end
 
     it 'does raise an error when required keys are missing' do
-      expect { params.require(:bar) }.to raise_error(Zoom::ParameterMissing, 'bar')
+      expect { params.require(:bar) }.to raise_error(Zoom::ParameterMissing, [:bar].to_s)
+    end
+
+    it 'returns the rest of the params' do
+      expect(params.require(:foo)).to eql(baz: :bang)
     end
   end
 
@@ -28,34 +33,35 @@ RSpec.describe Zoom::Params do
 
     context 'raises an error' do
       let(:bad_params) { Zoom::Params.new(foo: true, bar: :baz, bang: :boom) }
-      let(:other_bad_params) {
-        Zoom::Params.new(foo: true, bar: {
-            baz: :bang,
-            boom: :pow,
-            asdf: :test,
-            testerino: :other
-          })
-      }
-      let(:really_bad_params) { Zoom::Params.new(foo: true, bar: {
-          baz: {
-            bang: {
-              nested: true,
-              this: :thing,
-              is: [:very, :deep],
-              bad_param: :asdf
-            }
-          }
-        }) }
+      let(:other_bad_params) do
+        Zoom::Params.new(foo: true, bar: { baz: :bang,
+                                           boom: :pow,
+                                           asdf: :test,
+                                           testerino: :other })
+      end
+      let(:really_bad_params) do
+        Zoom::Params.new(foo: true,
+                         bar: {
+                           baz: {
+                             bang: {
+                               nested: true,
+                               this: :thing,
+                               is: { very: :deep },
+                               bad_param: :asdf
+                             }
+                           }
+                         })
+      end
       it 'when non-permitted keys are present' do
         expect { bad_params.require(:foo).permit(:bar) }.to raise_error(Zoom::ParameterNotPermitted, [:bang].to_s)
       end
 
       it 'when nested non-permitted keys are present' do
-        expect { other_bad_params.require(:foo).permit(bar: [:baz, :boom])}.to raise_error(Zoom::ParameterNotPermitted, [:asdf, :testerino].to_s)
+        expect { other_bad_params.require(:foo).permit(bar: [:baz, :boom]) }.to raise_error(Zoom::ParameterNotPermitted, [:asdf, :testerino].to_s)
       end
 
       it 'when deeply nested non-permitted keys are present' do
-        expect { really_bad_params.require(:foo).permit(bar: { baz: { bang: [:nested, :this, :is] } }) }.to raise_error(Zoom::ParameterNotPermitted, [:bad_param].to_s)
+        expect { really_bad_params.require(:foo).permit(bar: { baz: { bang: [ :nested, :this, { is: :very } ] } }) }.to raise_error(Zoom::ParameterNotPermitted, [:bad_param].to_s)
       end
     end
   end

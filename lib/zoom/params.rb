@@ -10,14 +10,11 @@ module Zoom
       super
     end
 
-    def require(key)
-      return key.map { |k| require(k) } if key.is_a?(Array)
-      unless self[key].nil?
-        new_params = @parameters.dup
-        new_params.delete(key)
-        return self.class.new(new_params)
-      end
-      raise Zoom::ParameterMissing, key
+
+    def require(*keys)
+      missing_keys = find_missing_keys(keys)
+      return self.class.new(except(keys)) if missing_keys.empty?
+      raise Zoom::ParameterMissing, missing_keys.to_s
     end
 
     def permit(*filters)
@@ -26,33 +23,41 @@ module Zoom
                          when Symbol, String
                            array << filter
                          when Hash
-                           hash_filter(self.class.new, filter)
+                           array << hash_filter(filter)
                          end
                        end
-      non_permitted_params = @parameters.keys - permitted_keys
+      non_permitted_params = @parameters.keys - permitted_keys.flatten
       raise Zoom::ParameterNotPermitted, non_permitted_params.to_s unless non_permitted_params.empty?
+    end
+
+    def except(keys)
+      dup.except!(keys)
+    end
+
+    def except!(keys)
+      keys.each { |key| delete(key) }
+      self
     end
 
     EMPTY_ARRAY = [].freeze
     EMPTY_HASH  = {}.freeze
 
-    def hash_filter(params, filter)
+    def hash_filter(filter)
       # Slicing filters out non-declared keys.
       slice(*filter.keys).each do |key, value|
         next unless value
         next unless key? key
+        next if filter[key] == EMPTY_ARRAY
+        next if filter[key] == EMPTY_HASH
+        # Declaration { user: :name } or { user: [:name, :age, { address: ... }] }.
+        self.class.new(value).permit(filter[key])
+      end
+      filter.keys
+    end
 
-        if filter[key] == EMPTY_ARRAY
-          # Declaration { comment_ids: [] }.
-          params[key] = self[key]
-        elsif filter[key] == EMPTY_HASH
-          # Declaration { preferences: {} }.
-          params[key] = self.class.new
-        else
-          # Declaration { user: :name } or { user: [:name, :age, { address: ... }] }.
-          params.merge!(value)
-          params.permit(filter[key])
-        end
+    def find_missing_keys(keys)
+      keys.each_with_object([]) do |k, array|
+        array << k if self[k].nil?
       end
     end
   end
