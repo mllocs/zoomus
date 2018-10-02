@@ -2,48 +2,38 @@
 
 require 'spec_helper'
 
-xdescribe Zoom::Actions::User do
+describe Zoom::Actions::User do
+  let(:zc) { zoom_client }
+  let(:args) { { id: 'eIimBAXqSrWOcB_EOIXTog' } }
 
-  before :all do
-    @zc = zoom_client
-    @args = { id: '65q23kd9sqliy612h23k' }
-  end
-
-  xdescribe '#user_delete action' do
+  describe '#user_delete' do
     before :each do
       stub_request(
-        :post,
-        zoom_url('/user/delete')
-      ).to_return(body: json_response('user', 'delete'))
+        :delete,
+        zoom_url("/users/#{args[:id]}")
+      ).to_return(status: 204, body: json_response('user', 'delete'))
     end
 
     it 'requires id param' do
-      expect { @zc.user_delete(filter_key(@args, :id)) }.to raise_error(ArgumentError)
+      expect { zc.user_delete(filter_key(args, :id)) }.to raise_error(Zoom::ParameterMissing, [:id].to_s)
     end
 
-    it 'returns a hash' do
-      expect(@zc.user_delete(@args)).to be_kind_of(Hash)
-    end
-
-    it 'returns the id and the deleted_at' do
-      res = @zc.user_delete(@args)
-
-      expect(res['id']).to eq(@args[:id])
-      expect(res['deleted_at'].length).to be
+    it 'returns the http status code as a number' do
+      expect(zc.user_delete(args)).to eql(204)
     end
   end
 
-  xdescribe '#user_delete! action' do
+  describe '#user_delete!' do
     before :each do
       stub_request(
-        :post,
-        zoom_url('/user/delete')
-      ).to_return(body: json_response('error'))
+        :delete,
+        zoom_url("/users/#{args[:id]}")
+      ).to_return(status: 404, body: json_response('error', 'validation'))
     end
 
     it 'raises Zoom::Error exception' do
       expect {
-        @zc.user_delete!(@args)
+        zc.user_delete!(args)
       }.to raise_error(Zoom::Error)
     end
   end
