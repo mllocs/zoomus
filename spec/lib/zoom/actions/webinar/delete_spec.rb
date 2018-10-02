@@ -19,7 +19,7 @@ describe Zoom::Actions::Webinar do
     end
 
     it 'returns the http status code as a number' do
-      expect(zc.webinar_delete(args)).to be_kind_of(Integer)
+      expect(zc.webinar_delete(args)).to eql(204)
     end
   end
 

@@ -38,7 +38,7 @@ module Zoom
                                    :timezone, :password, :agenda,
                                    recurrence: RECURRENCE_KEYS,
                                    settings: SETTINGS_KEYS)
-        Utils.parse_response self.class.patch("/webinars/#{options[:id]}", body: params.except(:id).to_json, query: { access_token: access_token })
+        Utils.parse_response self.class.patch("/webinars/#{params[:id]}", body: params.except(:id).to_json, query: { access_token: access_token })
       end
 
       def webinar_delete(*args)
@@ -48,9 +48,9 @@ module Zoom
       end
 
       def webinar_status_update(*args)
-        options = Utils.extract_options!(args)
-        Utils.require_params(%i[id status], options)
-        Utils.parse_response self.class.post("/webinars/#{options[:id]}/status}", query: options)
+        # TODO: implement webinar_panelists_list
+        # options = Utils.extract_options!(args)
+        raise Zoom::NotImplemented, 'webinar_status_update is not yet implemented'
       end
 
       def webinar_panelists_list(*args)
