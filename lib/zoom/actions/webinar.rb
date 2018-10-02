@@ -3,18 +3,27 @@
 module Zoom
   module Actions
     module Webinar
+      RECURRENCE_KEYS = %i[type repeat_interval weekly_days monthly_day monthly_week
+                           monthly_week_day end_times end_date_time].freeze
+      SETTINGS_KEYS = %i[panelists_video practice_session hd_video approval_type
+                         registration_type audio auto_recording enforce_login
+                         enforce_login_domains alternative_hosts close_registration
+                         show_share_button allow_multiple_devices].freeze
       def webinar_list(*args)
-        options = Utils.extract_options!(args)
-        Utils.require_params(:user_id, options)
-        Utils.process_datetime_params!(:start_time, options)
-        Utils.parse_response self.class.get("/users/#{options[:user_id]}/webinars", query: options.merge(access_token: access_token))
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:host_id).permit(:page_size, :page_number)
+        Utils.parse_response self.class.get("/users/#{params[:user_id]}/webinars", query: params.merge(access_token: access_token))
       end
 
       def webinar_create(*args)
-        options = Utils.extract_options!(args)
-        Utils.require_params(%i[user_id topic], options)
-        Utils.process_datetime_params!(:start_time, options)
-        Utils.parse_response self.class.post("/users/#{options[:user_id]}/webinars", body: options.to_json, query: { access_token: access_token })
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:host_id).permit(:topic, :type, :start_time, :duration,
+                                        :timezone, :password, :agenda,
+                                        recurrence: RECURRENCE_KEYS,
+                                        settings: PERMITTED_SETTINGS)
+        # process recurrence keys based on defaults
+        # process settings keys based on defaults
+        Utils.parse_response self.class.post("/users/#{params[:user_id]}/webinars", body: params.except(:host_id).to_json, query: { access_token: access_token })
       end
 
       def webinar_get(*args)
