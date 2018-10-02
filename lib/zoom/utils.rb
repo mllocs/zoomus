@@ -24,8 +24,7 @@ module Zoom
 
       def parse_response(http_response)
         response = http_response.parsed_response
-        # Mocked response returns a string
-        response.is_a?(Hash) ? response : JSON.parse(response)
+        response.nil? ? http_response.code : JSON.parse(response)
       end
 
       def require_params(params, options)
