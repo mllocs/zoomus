@@ -89,7 +89,7 @@ module Zoom
               .permit(%i[occurrence_ids address city country zip state phone
                          industry org job_title purchasing_time_frame role_in_purchase_process
                          no_of_employees comments custom_questions])
-        Utils.parse_response self.class.post("/webinars/#{params[:id]}/registrants", query: params.slice(:occurrence_ids).merge(access_token: access_token))
+        Utils.parse_response self.class.post("/webinars/#{params[:id]}/registrants", body: params.except(:id, :occurrence_ids), query: params.slice(:occurrence_ids).merge(access_token: access_token))
       end
 
       def webinar_registrants_status_update(*args)
