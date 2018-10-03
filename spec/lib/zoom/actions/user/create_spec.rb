@@ -67,7 +67,7 @@ describe Zoom::Actions::User do
                     headers: {"Content-Type"=> "application/json"})
       end
 
-      it 'does a thing' do
+      it 'raises an error' do
         expect { zc.user_create(args) }.to raise_error(Zoom::Error)
       end
     end
