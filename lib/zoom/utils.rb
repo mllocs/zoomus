@@ -41,14 +41,12 @@ module Zoom
         end
       end
 
-      # Dinamically defines bang methods for Actions modules
+      # Dynamically defines bang methods for Actions modules
       def define_bang_methods(klass)
         klass.instance_methods.each do |m|
           klass.send(:define_method, "#{m}!") do |*args|
             response = send(m, *args)
             Utils.raise_if_error!(response)
-          rescue Net::OpenTimeout, Net::ReadTimeout, Timeout::Error => _e
-            raise ::Zoom::GatewayTimeout.new
           end
         end
       end

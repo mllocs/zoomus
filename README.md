@@ -19,7 +19,7 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
-require 'zoom_rb'
+require 'zoom'
 
 Zoom.configure do |c|
   c.api_key = 'xxx'

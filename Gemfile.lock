@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    zoom_rb (0.8.0)
+    zoom_rb (0.8.1)
       httparty (~> 0.13)
       json (>= 1.8)
       jwt
