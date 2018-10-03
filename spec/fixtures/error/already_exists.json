@@ -1,0 +1,4 @@
+{
+  "code": 1005,
+  "message": "User already in the account: foo@bar.com"
+}

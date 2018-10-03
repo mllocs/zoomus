@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Zoom
-  class Defaults
+  class Constants
     ACCOUNT_OPTIONS_PAY_MODES = { 'Master account holder pays' => 'master', # default
                                   'Sub account holder pays' => 'sub'
                                 }.freeze
