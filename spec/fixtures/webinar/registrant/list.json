@@ -1,0 +1,36 @@
+{
+  "page_count": 1,
+  "page_size": 1,
+  "total_records": 1,
+  "next_page_token": "string",
+  "registrants": [
+    {
+      "id": "string",
+      "email": "string",
+      "first_name": "string",
+      "last_name": "string",
+      "address": "string",
+      "city": "string",
+      "country": "string",
+      "zip": "string",
+      "state": "string",
+      "phone": "string",
+      "industry": "string",
+      "org": "string",
+      "job_title": "string",
+      "purchasing_time_frame": "Within a month",
+      "role_in_purchase_process": "Decision Maker",
+      "no_of_employees": "1-20",
+      "comments": "string",
+      "custom_questions": [
+        {
+          "title": "string",
+          "value": "string"
+        }
+      ],
+      "status": "string",
+      "create_time": "2018-10-02T23:59:31.080Z",
+      "join_url": "string"
+    }
+  ]
+}

@@ -78,9 +78,9 @@ module Zoom
       end
 
       def webinar_registrants_list(*args)
-        # TODO: implement webinar_registrants_list
-        # options = Utils.extract_options!(args)
-        raise Zoom::NotImplemented, 'webinar_registrants_list is not yet implemented'
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:id).permit(%i[occurrence_id status page_size page_number])
+        Utils.parse_response self.class.get("/webinars/#{params[:id]}/registrants", query: params.except(:id).merge(access_token: access_token))
       end
 
       def webinar_registrant_add(*args)
