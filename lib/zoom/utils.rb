@@ -24,7 +24,7 @@ module Zoom
 
       def parse_response(http_response)
         response = http_response.parsed_response
-        response.nil? ? http_response.code : JSON.parse(response)
+        response || http_response.code
       end
 
       def require_params(params, options)
