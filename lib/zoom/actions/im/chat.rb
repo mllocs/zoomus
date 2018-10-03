@@ -21,8 +21,6 @@ module Zoom
           # TODO implement `next_page_token`, will be returned whenever the set of available chat history list exceeds 100. The expiration period is 30 minutes.
           Utils.parse_response self.class.post('/chat/list', query: options)
         end
-
-        Utils.define_bang_methods(self)
       end
     end
   end

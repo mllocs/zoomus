@@ -73,8 +73,6 @@ module Zoom
         # TODO Handle `option_auto_record_type`, Can be "local", “cloud” or "none".
         Utils.parse_response self.class.post('/meeting/update', query: options)
       end
-
-      Utils.define_bang_methods(self)
     end
   end
 end

@@ -21,8 +21,8 @@ module Zoom
                                         :timezone, :password, :agenda,
                                         recurrence: RECURRENCE_KEYS,
                                         settings: SETTINGS_KEYS)
-        # process recurrence keys based on defaults
-        # process settings keys based on defaults
+        # process recurrence keys based on constants
+        # process settings keys based on constants
         Utils.parse_response self.class.post("/users/#{params[:host_id]}/webinars", body: params.except(:host_id).to_json, query: { access_token: access_token })
       end
 
@@ -103,8 +103,6 @@ module Zoom
         # options = Utils.extract_options!(args)
         raise Zoom::NotImplemented, 'past_webinars_list is not yet implemented'
       end
-
-      Utils.define_bang_methods(self)
     end
   end
 end

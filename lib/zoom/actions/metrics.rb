@@ -22,8 +22,6 @@ module Zoom
         Utils.require_params(%i[meeting_id type], options)
         Utils.parse_response self.class.post('/metrics/meetingdetail', query: options)
       end
-
-      Utils.define_bang_methods(self)
     end
   end
 end

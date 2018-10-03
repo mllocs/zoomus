@@ -12,7 +12,7 @@ module Zoom
       end
 
       def raise_if_error!(response)
-        if response['code'] == 300
+        if response['code'] && response['code'] >= 300
           error_hash = { base: response['message']}
           raise Error, error_hash unless response['errors']
           error_hash[response['message']] = response['errors']
@@ -23,8 +23,7 @@ module Zoom
       end
 
       def parse_response(http_response)
-        response = http_response.parsed_response
-        response || http_response.code
+        raise_if_error!(http_response.parsed_response) || http_response.code
       end
 
       def require_params(params, options)
@@ -42,14 +41,14 @@ module Zoom
       end
 
       # Dynamically defines bang methods for Actions modules
-      def define_bang_methods(klass)
-        klass.instance_methods.each do |m|
-          klass.send(:define_method, "#{m}!") do |*args|
-            response = send(m, *args)
-            Utils.raise_if_error!(response)
-          end
-        end
-      end
+      # def define_bang_methods(klass)
+      #   klass.instance_methods.each do |m|
+      #     klass.send(:define_method, "#{m}!") do |*args|
+      #       response = send(m, *args)
+      #       Utils.raise_if_error!(response)
+      #     end
+      #   end
+      # end
 
       def extract_options!(array)
         array.last.is_a?(::Hash) ? array.pop : {}

@@ -13,57 +13,63 @@ describe Zoom::Actions::User do
   end
 
   describe '#user_create' do
-    before :each do
-      stub_request(
-        :post,
-        zoom_url('/users')
-      ).to_return(body: json_response('user', 'create'))
+    context 'with 201 response' do
+      before :each do
+        stub_request(
+          :post,
+          zoom_url('/users')
+        ).to_return(status: 201,
+                    body: json_response('user', 'create'),
+                    headers: {"Content-Type"=> "application/json"})
+      end
+
+      it 'requires email param' do
+        expect { zc.user_create(filter_key(args, :email)) }.to raise_error(Zoom::ParameterMissing, [:email].to_s)
+      end
+
+      it 'requires first_name param' do
+        expect { zc.user_create(filter_key(args, :first_name)) }.to raise_error(Zoom::ParameterMissing, [:first_name].to_s)
+      end
+
+      it 'requires last_name param' do
+        expect { zc.user_create(filter_key(args, :last_name)) }.to raise_error(Zoom::ParameterMissing, [:last_name].to_s)
+      end
+
+      it 'requires type param' do
+        expect { zc.user_create(filter_key(args, :type)) }.to raise_error(Zoom::ParameterMissing, [:type].to_s)
+      end
+
+      it 'requires password param' do
+        expect { zc.user_create(filter_key(args, :password)) }.to raise_error(Zoom::ParameterMissing, [:password].to_s)
+      end
+
+      it 'returns a hash' do
+        expect(zc.user_create(args)).to be_kind_of(Hash)
+      end
+
+      it 'returns same params' do
+        res = zc.user_create(args)
+
+        expect(res['email']).to eq(args[:email])
+        expect(res['first_name']).to eq(args[:first_name])
+        expect(res['last_name']).to eq(args[:last_name])
+        expect(res['type']).to eq(args[:type])
+      end
     end
 
-    it 'requires email param' do
-      expect { zc.user_create(filter_key(args, :email)) }.to raise_error(Zoom::ParameterMissing, [:email].to_s)
-    end
+    context 'with 409 response' do
+      before :each do
+        stub_request(
+          :post,
+          zoom_url('/users')
+        ).to_return(status: 409,
+                    body: json_response('error', 'already_exists'),
+                    headers: {"Content-Type"=> "application/json"})
+      end
 
-    it 'requires first_name param' do
-      expect { zc.user_create(filter_key(args, :first_name)) }.to raise_error(Zoom::ParameterMissing, [:first_name].to_s)
-    end
-
-    it 'requires last_name param' do
-      expect { zc.user_create(filter_key(args, :last_name)) }.to raise_error(Zoom::ParameterMissing, [:last_name].to_s)
-    end
-
-    it 'requires type param' do
-      expect { zc.user_create(filter_key(args, :type)) }.to raise_error(Zoom::ParameterMissing, [:type].to_s)
-    end
-
-    it 'requires password param' do
-      expect { zc.user_create(filter_key(args, :password)) }.to raise_error(Zoom::ParameterMissing, [:password].to_s)
-    end
-
-    it 'returns a hash' do
-      expect(zc.user_create(args)).to be_kind_of(Hash)
-    end
-
-    it 'returns same params' do
-      res = zc.user_create(args)
-
-      expect(res['email']).to eq(args[:email])
-      expect(res['first_name']).to eq(args[:first_name])
-      expect(res['last_name']).to eq(args[:last_name])
-      expect(res['type']).to eq(args[:type])
-    end
-  end
-
-  describe '#user_create! action' do
-    before :each do
-      stub_request(
-        :post,
-        zoom_url('/users')
-      ).to_return(body: json_response('error', 'validation'))
-    end
-
-    it 'raises Zoom::Error exception' do
-      expect { zc.user_create!(args) }.to raise_error(Zoom::Error)
+      it 'does a thing' do
+        expect { zc.user_create(args) }.to raise_error(Zoom::Error)
+      end
     end
   end
 end

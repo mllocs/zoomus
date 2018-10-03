@@ -13,7 +13,7 @@ module Zoom
       def user_create(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(%i[email type first_name last_name password])
-        Utils.parse_response self.class.post('/users', body: { action: 'create', user_info: params }, query: { access_token: access_token })
+        Utils.parse_response self.class.post('/users', body: { action: 'create', user_info: params }.to_json, query: { access_token: access_token })
       end
 
       def user_get(*args)
@@ -139,8 +139,6 @@ module Zoom
         # options = Utils.extract_options!(args)
         raise Zoom::NotImplemented, 'user_vanity_name_check is not yet implemented'
       end
-
-      Utils.define_bang_methods(self)
     end
   end
 end

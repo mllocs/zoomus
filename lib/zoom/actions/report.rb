@@ -22,8 +22,6 @@ module Zoom
         Utils.require_params(%i[year month], options)
         Utils.parse_response self.class.post('/report/getdailyreport', query: options)
       end
-
-      Utils.define_bang_methods(self)
     end
   end
 end

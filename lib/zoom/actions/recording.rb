@@ -28,8 +28,6 @@ module Zoom
         Utils.require_params([:meeting_id], options)
         Utils.parse_response self.class.post('/recording/delete', query: options)
       end
-
-      Utils.define_bang_methods(self)
     end
   end
 end

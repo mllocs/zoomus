@@ -17,7 +17,8 @@ xdescribe Zoom::Actions::Webinar do
       stub_request(
         :post,
         zoom_url('/webinar/get')
-      ).to_return(body: json_response('webinar_get'))
+      ).to_return(body: json_response('webinar_get'),
+                  headers: {"Content-Type"=> "application/json"})
     end
 
     it "requires a 'host_id' argument" do

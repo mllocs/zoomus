@@ -55,19 +55,4 @@ xdescribe Zoom::Utils do
                 bar: '2000-01-01T20:15:01Z' })
     end
   end
-
-  xdescribe '#define_bang_methods' do
-    before :each do
-      stub_request(:post, zoom_url('/user/custcreate')).to_timeout
-    end
-
-    it 'raises Zoom::GatewayTimeout on timeout' do
-      args = { email: 'foo@bar.com',
-               first_name: 'Foo',
-               last_name: 'Bar',
-               type: 1 }
-
-      expect { zoom_client.user_custcreate!(args) }.to raise_error(Zoom::GatewayTimeout)
-    end
-  end
 end

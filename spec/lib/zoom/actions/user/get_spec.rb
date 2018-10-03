@@ -11,7 +11,9 @@ describe Zoom::Actions::User do
       stub_request(
         :get,
         zoom_url("/users/#{args[:id]}")
-        ).to_return(body: json_response('user', 'get'))
+        ).to_return(status: 200,
+                    body: json_response('user', 'get'),
+                    headers: {"Content-Type"=> "application/json"})
     end
 
     it 'requires id param' do
@@ -38,7 +40,9 @@ describe Zoom::Actions::User do
       stub_request(
         :get,
         zoom_url("/users/#{args[:id]}")
-      ).to_return(body: json_response('error', 'validation'))
+      ).to_return(status: 404,
+                  body: json_response('error', 'validation'),
+                  headers: {"Content-Type"=> "application/json"})
     end
 
     it 'raises Zoom::Error exception' do
