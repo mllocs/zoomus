@@ -84,9 +84,12 @@ module Zoom
       end
 
       def webinar_registrant_add(*args)
-        # TODO: implement webinar_registrant_add
-        # options = Utils.extract_options!(args)
-        raise Zoom::NotImplemented, 'webinar_registrant_add is not yet implemented'
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:id, :email, :first_name, :last_name)
+              .permit(%i[occurrence_ids address city country zip state phone
+                         industry org job_title purchasing_time_frame role_in_purchase_process
+                         no_of_employees comments custom_questions])
+        Utils.parse_response self.class.post("/webinars/#{params[:id]}/registrants", query: params.slice(:occurrence_ids).merge(access_token: access_token))
       end
 
       def webinar_registrants_status_update(*args)
