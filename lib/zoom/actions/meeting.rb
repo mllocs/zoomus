@@ -5,10 +5,10 @@ module Zoom
     module Meeting
       # Create a meeting on Zoom, return the created meeting URL
       def meeting_create(*args)
-        options = Utils.extract_options!(args)
-        Utils.require_params(%i[host_id topic type], options)
-        Utils.process_datetime_params!(:start_time, options)
-        Utils.parse_response self.class.post('/meeting/create', query: options)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(%i[user_id])
+        Utils.process_datetime_params!(:start_time, params)
+        Utils.parse_response self.class.post("/users/#{params[:user_id]}/meetings", body: params.except(:user_id).to_json, query: { access_token: access_token })
       end
 
       # Delete a meeting on Zoom, return the deleted meeting ID.
