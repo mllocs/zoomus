@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require 'pry'
+
 module Zoom
   class Params < SimpleDelegator
     # delegate :keys, :key?, :has_key?, :values, :has_value?, :value?, :empty?,
