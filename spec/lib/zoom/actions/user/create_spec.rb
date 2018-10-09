@@ -57,19 +57,16 @@ describe Zoom::Actions::User do
         expect { zc.user_create(filter_key(args, :email)) }.to raise_error(Zoom::ParameterMissing, [:email].to_s)
       end
 
-      it 'requires first_name param' do
-        expect { zc.user_create(filter_key(args, :first_name)) }.to raise_error(Zoom::ParameterMissing, [:first_name].to_s)
-      end
-
-      it 'requires last_name param' do
-        expect { zc.user_create(filter_key(args, :last_name)) }.to raise_error(Zoom::ParameterMissing, [:last_name].to_s)
-      end
-
       it 'requires type param' do
         expect { zc.user_create(filter_key(args, :type)) }.to raise_error(Zoom::ParameterMissing, [:type].to_s)
       end
 
-      it 'requires password param' do
+      it 'does not require password param when action is not autoCreate' do
+        expect { zc.user_create(filter_key(args, :password)) }.not_to raise_error
+      end
+
+      it 'requires password param when action is autoCreate' do
+        args[:action] = 'autoCreate'
         expect { zc.user_create(filter_key(args, :password)) }.to raise_error(Zoom::ParameterMissing, [:password].to_s)
       end
 
