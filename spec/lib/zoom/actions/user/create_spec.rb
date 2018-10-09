@@ -5,7 +5,8 @@ require 'spec_helper'
 describe Zoom::Actions::User do
   let(:zc) { zoom_client }
   let(:args) do
-    { email: 'foo@bar.com',
+    { action: 'create',
+      email: 'foo@bar.com',
       first_name: 'Zoomie',
       last_name: 'Userton',
       type: 1,
@@ -21,6 +22,35 @@ describe Zoom::Actions::User do
         ).to_return(status: 201,
                     body: json_response('user', 'create'),
                     headers: {"Content-Type"=> "application/json"})
+      end
+
+      it 'requires action param' do
+        expect { zc.user_create(filter_key(args, :action)) }.to raise_error(Zoom::ParameterMissing, [:action].to_s)
+      end
+
+      it 'does not raise an error when action is create' do
+        args[:action] = 'create'
+        expect { zc.user_create(args) }.not_to raise_error
+      end
+
+      it 'does not raise an error when action is custCreate' do
+        args[:action] = 'custCreate'
+        expect { zc.user_create(args) }.not_to raise_error
+      end
+
+      it 'does not raise an error when action is autoCreate' do
+        args[:action] = 'autoCreate'
+        expect { zc.user_create(args) }.not_to raise_error
+      end
+
+      it 'does not raise an error when action is ssoCreate' do
+        args[:action] = 'ssoCreate'
+        expect { zc.user_create(args) }.not_to raise_error
+      end
+
+      it 'requires valid action' do
+        args[:action] = 'baz'
+        expect { zc.user_create(args) }.to raise_error(Zoom::ParameterValueNotPermitted, "#{:action.to_s}: #{args[:action].to_s}")
       end
 
       it 'requires email param' do

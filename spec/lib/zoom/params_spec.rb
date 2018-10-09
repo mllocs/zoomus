@@ -65,4 +65,17 @@ RSpec.describe Zoom::Params do
       end
     end
   end
+
+  describe '#permit_value' do
+    let(:params) { Zoom::Params.new(foo: :bar, baz: :bang) }
+    let(:values) { %i(bar baz) }
+
+    it 'does not raise an error when required value are present in values' do
+      expect { params.permit_value(:foo, values) }.not_to raise_error
+    end
+
+    it 'does raise an error when required keys are missing' do
+      expect { params.permit_value(:baz, values) }.to raise_error(Zoom::ParameterValueNotPermitted, "#{:baz.to_s}: #{:bang.to_s}")
+    end
+  end
 end

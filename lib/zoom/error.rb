@@ -6,4 +6,5 @@ module Zoom
   class NotImplemented < StandardError; end
   class ParameterMissing < StandardError; end
   class ParameterNotPermitted < StandardError; end
+  class ParameterValueNotPermitted < StandardError; end
 end
