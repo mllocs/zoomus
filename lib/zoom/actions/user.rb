@@ -12,8 +12,9 @@ module Zoom
 
       def user_create(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(%i[email type first_name last_name password])
-        Utils.parse_response self.class.post('/users', body: { action: 'create', user_info: params }.to_json, query: { access_token: access_token })
+        params.require(%i[action email type first_name last_name password])
+        params.permit_value(:action, Zoom::Constants::USER_CREATE_TYPES.values)
+        Utils.parse_response self.class.post('/users', body: { action: params[:action], user_info: params.except(:action) }.to_json, query: { access_token: access_token })
       end
 
       def user_get(*args)

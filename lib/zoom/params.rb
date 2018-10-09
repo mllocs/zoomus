@@ -60,5 +60,12 @@ module Zoom
         array << k if self[k].nil?
       end
     end
+
+    def permit_value(key, values)
+      value = @parameters[key]
+      if !values.include?(value)
+        raise Zoom::ParameterValueNotPermitted, "#{key}: #{value}"
+      end
+    end
   end
 end
