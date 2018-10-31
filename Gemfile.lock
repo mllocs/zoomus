@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    zoom_rb (0.8.1)
+    zoom_rb (0.8.2)
       httparty (~> 0.13)
       json (>= 1.8)
       jwt
@@ -88,4 +88,4 @@ DEPENDENCIES
   zoom_rb!
 
 BUNDLED WITH
-   1.16.1
+   1.17.1
