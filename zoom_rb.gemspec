@@ -3,15 +3,15 @@
 Gem::Specification.new do |gem|
 
   gem.add_dependency 'httparty', '~> 0.13'
-  gem.add_dependency 'json', '>= 1.8'
-  gem.add_dependency 'jwt'
+  gem.add_dependency 'json', '~> 2.1'
+  gem.add_dependency 'jwt', '~> 2.1'
 
-  gem.add_development_dependency 'pry'
-  gem.add_development_dependency 'hint-rubocop_style'
-  gem.add_development_dependency 'rspec'
-  gem.add_development_dependency 'rspec_junit_formatter'
-  gem.add_development_dependency 'simplecov'
-  gem.add_development_dependency 'webmock'
+  gem.add_development_dependency 'pry', '~> 0'
+  gem.add_development_dependency 'hint-rubocop_style', '~> 0'
+  gem.add_development_dependency 'rspec', '~> 3.8'
+  gem.add_development_dependency 'rspec_junit_formatter', '~> 0.4.1'
+  gem.add_development_dependency 'simplecov', '~> 0.16.1'
+  gem.add_development_dependency 'webmock', '~> 3.4'
 
   gem.authors       = ['Kyle Boe']
   gem.email         = ['kyle@boe.codes']
