@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require 'pry'
+
 module Zoom
   class Params < SimpleDelegator
     # delegate :keys, :key?, :has_key?, :values, :has_value?, :value?, :empty?,
@@ -58,6 +58,13 @@ module Zoom
     def find_missing_keys(keys)
       keys.each_with_object([]) do |k, array|
         array << k if self[k].nil?
+      end
+    end
+
+    def permit_value(key, values)
+      value = @parameters[key]
+      if !values.include?(value)
+        raise Zoom::ParameterValueNotPermitted, "#{key}: #{value}"
       end
     end
   end

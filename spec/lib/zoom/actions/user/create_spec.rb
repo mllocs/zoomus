@@ -5,7 +5,8 @@ require 'spec_helper'
 describe Zoom::Actions::User do
   let(:zc) { zoom_client }
   let(:args) do
-    { email: 'foo@bar.com',
+    { action: 'create',
+      email: 'foo@bar.com',
       first_name: 'Zoomie',
       last_name: 'Userton',
       type: 1,
@@ -23,23 +24,49 @@ describe Zoom::Actions::User do
                     headers: {"Content-Type"=> "application/json"})
       end
 
+      it 'requires action param' do
+        expect { zc.user_create(filter_key(args, :action)) }.to raise_error(Zoom::ParameterMissing, [:action].to_s)
+      end
+
+      it 'does not raise an error when action is create' do
+        args[:action] = 'create'
+        expect { zc.user_create(args) }.not_to raise_error
+      end
+
+      it 'does not raise an error when action is custCreate' do
+        args[:action] = 'custCreate'
+        expect { zc.user_create(args) }.not_to raise_error
+      end
+
+      it 'does not raise an error when action is autoCreate' do
+        args[:action] = 'autoCreate'
+        expect { zc.user_create(args) }.not_to raise_error
+      end
+
+      it 'does not raise an error when action is ssoCreate' do
+        args[:action] = 'ssoCreate'
+        expect { zc.user_create(args) }.not_to raise_error
+      end
+
+      it 'requires valid action' do
+        args[:action] = 'baz'
+        expect { zc.user_create(args) }.to raise_error(Zoom::ParameterValueNotPermitted, "#{:action.to_s}: #{args[:action].to_s}")
+      end
+
       it 'requires email param' do
         expect { zc.user_create(filter_key(args, :email)) }.to raise_error(Zoom::ParameterMissing, [:email].to_s)
-      end
-
-      it 'requires first_name param' do
-        expect { zc.user_create(filter_key(args, :first_name)) }.to raise_error(Zoom::ParameterMissing, [:first_name].to_s)
-      end
-
-      it 'requires last_name param' do
-        expect { zc.user_create(filter_key(args, :last_name)) }.to raise_error(Zoom::ParameterMissing, [:last_name].to_s)
       end
 
       it 'requires type param' do
         expect { zc.user_create(filter_key(args, :type)) }.to raise_error(Zoom::ParameterMissing, [:type].to_s)
       end
 
-      it 'requires password param' do
+      it 'does not require password param when action is not autoCreate' do
+        expect { zc.user_create(filter_key(args, :password)) }.not_to raise_error
+      end
+
+      it 'requires password param when action is autoCreate' do
+        args[:action] = 'autoCreate'
         expect { zc.user_create(filter_key(args, :password)) }.to raise_error(Zoom::ParameterMissing, [:password].to_s)
       end
 
