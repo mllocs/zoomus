@@ -15,7 +15,7 @@ module Zoom
         require_param_keys = %i[action email type]
         require_param_keys.append(:password) if params[:action] == 'autoCreate'
         params.require(require_param_keys)
-        params.permit_value(:action, Zoom::Constants::USER_CREATE_TYPES.values)
+        params.permit_value(:action, Zoom::Constants::USER_CREATE_TYPES.keys)
         Utils.parse_response self.class.post('/users', body: { action: params[:action], user_info: params.except(:action) }.to_json, query: { access_token: access_token })
       end
 
