@@ -3,8 +3,8 @@ PATH
   specs:
     zoom_rb (0.8.3)
       httparty (~> 0.13)
-      json (>= 1.8)
-      jwt
+      json (~> 2.1)
+      jwt (~> 2.1)
 
 GEM
   remote: https://rubygems.org/
@@ -79,12 +79,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  hint-rubocop_style
-  pry
-  rspec
-  rspec_junit_formatter
-  simplecov
-  webmock
+  hint-rubocop_style (~> 0)
+  pry (~> 0)
+  rspec (~> 3.8)
+  rspec_junit_formatter (~> 0.4.1)
+  simplecov (~> 0.16.1)
+  webmock (~> 3.4)
   zoom_rb!
 
 BUNDLED WITH
