@@ -3,8 +3,8 @@
 Gem::Specification.new do |gem|
 
   gem.add_dependency 'httparty', '~> 0.13'
-  gem.add_dependency 'json', '~> 2.1'
-  gem.add_dependency 'jwt', '~> 2.1'
+  gem.add_dependency 'json', '>= 1.8'
+  gem.add_dependency 'jwt'
 
   gem.add_development_dependency 'pry', '~> 0'
   gem.add_development_dependency 'hint-rubocop_style', '~> 0'
