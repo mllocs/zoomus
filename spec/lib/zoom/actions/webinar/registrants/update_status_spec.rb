@@ -27,8 +27,8 @@ RSpec.describe Zoom::Actions::Webinar do
     context 'with a 4xx response' do
       before :each do
         stub_request(
-          :get,
-          zoom_url("/webinars/#{args[:id]}/registrants")
+          :put,
+          zoom_url("/webinars/#{args[:id]}/registrants/status")
         ).to_return(status: 404,
                     body: json_response('error', 'validation'),
                     headers: {"Content-Type"=> "application/json"})

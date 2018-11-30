@@ -1,10 +1,10 @@
 PATH
   remote: .
   specs:
-    zoom_rb (0.8.3)
+    zoom_rb (0.8.5)
       httparty (~> 0.13)
-      json (~> 2.1)
-      jwt (~> 2.1)
+      json (>= 1.8)
+      jwt
 
 GEM
   remote: https://rubygems.org/
