@@ -93,9 +93,10 @@ module Zoom
       end
 
       def webinar_registrants_status_update(*args)
-        # TODO: implement webinar_registrants_status_update
-        # options = Utils.extract_options!(args)
-        raise Zoom::NotImplemented, 'webinar_registrants_status_update is not yet implemented'
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:id, :action)
+              .permit(:occurrence_id, registrants: [])
+        Utils.parse_response self.class.put("/webinars/#{params[:id]}/registrants/status", body: params.except(:id, :occurrence_ids).to_json, query: params.slice(:occurrence_ids).merge(access_token: access_token))
       end
 
       def past_webinar_list(*args)
