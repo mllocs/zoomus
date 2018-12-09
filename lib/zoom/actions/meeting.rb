@@ -51,7 +51,7 @@ module Zoom
       # Register for a meeting.
       def meeting_register(*args)
         options = Utils.extract_options!(args)
-        Utils.require_params(%i[id email first_name last_name], options, headers: request_headers)
+        Utils.require_params(%i[id email first_name last_name], options)
         # TODO Verify country param by referring to the id value in country list JSON file
         # TODO Verify Purchasing Time Frame, should be "Within a month", "1-3 months", "4-6 months", "More than 6 months", "No timeframe".
         # TODO Verify Role in Purchase Process, should be "Decision Maker", "Evaluator/Recommender", "Influencer", "Not involved".
