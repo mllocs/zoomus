@@ -8,7 +8,8 @@ module Zoom
         options = Zoom::Params.new(Utils.extract_options!(args)).require(%i[user_id])
         # TODO Handle `page_size` attr, Defaults to 30. Max of 300 meetings.
         # TODO Handle `page_number` attr, Defaults to 1.
-        Utils.parse_response self.class.get("/users/#{options[:user_id]}/meetings", query: options.except(:user_id), headers: request_headers)
+        ["/users/#{options[:user_id]}/meetings", query: options.except(:user_id), headers: request_headers]
+        # Utils.parse_response self.class.get("/users/#{options[:user_id]}/meetings", query: options.except(:user_id), headers: request_headers)
       end
 
       # Create a meeting on Zoom, return the created meeting URL
