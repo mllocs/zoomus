@@ -49,7 +49,7 @@ module Zoom
       def meeting_update_status(*args)
         options = Zoom::Params.new(Utils.extract_options!(args))
         options.require(%i[meeting_id])
-        Utils.parse_response self.class.patch("/meetings/#{options[:meeting_id]}/status", body: options.except(:meeting_id).to_json, headers: request_headers)
+        Utils.parse_response self.class.put("/meetings/#{options[:meeting_id]}/status", body: options.except(:meeting_id).to_json, headers: request_headers)
       end
 
       # End a meeting on Zoom, return the deleted meeting ID.
