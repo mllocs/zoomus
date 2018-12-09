@@ -21,7 +21,7 @@ module Zoom
       # Get a meeting on Zoom via meeting ID, return the meeting info.
       def meeting_get(*args)
         options = Zoom::Params.new(Utils.extract_options!(args)).require(%i[meeting_id])
-        Utils.parse_response self.class.get("/meetings/#{options[:meeting_id]}", headers: request_headers)
+        self.class.get("/meetings/#{options[:meeting_id]}", headers: request_headers)
       end
 
       # Update meeting info on Zoom via meeting ID.
