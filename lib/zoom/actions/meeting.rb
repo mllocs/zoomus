@@ -49,7 +49,6 @@ module Zoom
       end
 
       # End a meeting on Zoom, return the deleted meeting ID.
-      de
       def meeting_end(*args)
         options = Utils.extract_options!(args)
         meeting_update_status(options.merge(action: 'end'))
