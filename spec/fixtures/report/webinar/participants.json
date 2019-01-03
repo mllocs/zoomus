@@ -1,0 +1,18 @@
+{
+  "page_count": 1,
+  "page_size": 1,
+  "total_records": 1,
+  "next_page_token": "test",
+  "participants": [
+    {
+      "id": "test-uuid",
+      "user_id": "test@test.com",
+      "name": "Test",
+      "user_email": "testuser@test.com",
+      "join_time": "2019-01-01T09:00:00Z",
+      "leave_time": "2019-01-01T09:00:00Z",
+      "duration": 60,
+      "attentiveness_score": "10"
+    }
+  ]
+}

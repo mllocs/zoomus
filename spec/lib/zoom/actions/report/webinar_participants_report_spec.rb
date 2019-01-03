@@ -22,15 +22,15 @@ describe Zoom::Actions::Report do
       end
 
       it 'returns the http status code as a number' do
-        expect(zc.webinar_update(args)).to eql(204)
+        expect(zc.webinar_participants_report(args)).to eql(200)
       end
     end
 
     context 'with a 4xx response' do
       before :each do
         stub_request(
-          :patch,
-          zoom_url("/webinars/#{args[:id]}")
+          :get,
+          zoom_url("/report/webinars/#{args[:id]}/participants")
         ).to_return(status: 404,
                     body: json_response('error', 'not_found'),
                     headers: {"Content-Type"=> "application/json"})
