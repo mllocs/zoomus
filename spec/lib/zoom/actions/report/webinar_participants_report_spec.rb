@@ -18,7 +18,7 @@ describe Zoom::Actions::Report do
       end
 
       it "requires a 'id' argument" do
-        expect { zc.webinar_update(filter_key(args, :id)) }.to raise_error(Zoom::ParameterMissing, [:id].to_s)
+        expect { zc.webinar_participants_report(filter_key(args, :id)) }.to raise_error(Zoom::ParameterMissing, [:id].to_s)
       end
 
       it 'returns an array of participants' do
@@ -37,7 +37,7 @@ describe Zoom::Actions::Report do
       end
 
       it 'raises an error' do
-        expect { zc.webinar_update(args) }.to raise_error(Zoom::Error)
+        expect { zc.webinar_participants_report(args) }.to raise_error(Zoom::Error)
       end
     end
   end
