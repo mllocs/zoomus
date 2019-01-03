@@ -6,7 +6,7 @@ module Zoom
       def daily_report(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.permit(:year, :month)
-        Utils.parse_response self.class.post('/report/daily', query: params)
+        Utils.parse_response self.class.get('/report/daily', query: params)
       end
 
       def hosts_report(*args)
@@ -36,7 +36,7 @@ module Zoom
       def webinar_participants_report(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:id).permit(:page_size, :next_page_token)
-        Utils.parse_response self.class.post("/report/webinars/#{params[:id]}/participants", query: params.except(:id).merge(access_token: access_token))
+        Utils.parse_response self.class.get("/report/webinars/#{params[:id]}/participants", query: params.except(:id).merge(access_token: access_token))
       end
 
       def webinar_polls_report(*args)

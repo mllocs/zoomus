@@ -21,8 +21,8 @@ describe Zoom::Actions::Report do
         expect { zc.webinar_update(filter_key(args, :id)) }.to raise_error(Zoom::ParameterMissing, [:id].to_s)
       end
 
-      it 'returns the http status code as a number' do
-        expect(zc.webinar_participants_report(args)).to eql(200)
+      it 'returns an array of participants' do
+        expect(zc.webinar_participants_report(args)['participants']).to be_kind_of(Array)
       end
     end
 
