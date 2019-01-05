@@ -21,7 +21,7 @@ describe Zoom::Actions::User do
           zoom_url('/users')
         ).to_return(status: 201,
                     body: json_response('user', 'create'),
-                    headers: {"Content-Type"=> "application/json"})
+                    headers: { 'Content-Type' => 'application/json' })
       end
 
       it 'requires action param' do
@@ -91,7 +91,7 @@ describe Zoom::Actions::User do
           zoom_url('/users')
         ).to_return(status: 409,
                     body: json_response('error', 'already_exists'),
-                    headers: {"Content-Type"=> "application/json"})
+                    headers: { 'Content-Type' => 'application/json' })
       end
 
       it 'raises an error' do

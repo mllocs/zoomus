@@ -31,7 +31,7 @@ RSpec.describe Zoom::Actions::Webinar do
           zoom_url("/webinars/#{args[:id]}/registrants/status")
         ).to_return(status: 404,
                     body: json_response('error', 'validation'),
-                    headers: {"Content-Type"=> "application/json"})
+                    headers: { 'Content-Type' => 'application/json' })
       end
 
       it 'raises Zoom::Error exception' do
