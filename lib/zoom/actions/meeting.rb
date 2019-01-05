@@ -70,6 +70,20 @@ module Zoom
         options.require(%i[meeting_id email first_name last_name])
         Utils.parse_response self.class.post("/meetings/#{options[:meeting_id]}/registrants", body: options.except(:meeting_id).to_json, headers: request_headers)
       end
+
+      # Retrieve ended meeting details
+      def past_meeting_details(*args)
+        options = Zoom::Params.new(Utils.extract_options!(args))
+        options.require(%i[meeting_uuid])
+        Utils.parse_response self.class.get("/past_meetings/#{options[:meeting_uuid]}", headers: request_headers)
+      end
+
+      # Retrieve ended meeting participants
+      def past_meeting_participants(*args)
+        options = Zoom::Params.new(Utils.extract_options!(args))
+        options.require(%i[meeting_uuid])
+        Utils.parse_response self.class.get("/past_meetings/#{options[:meeting_uuid]}/participants", headers: request_headers)
+      end
     end
   end
 end
