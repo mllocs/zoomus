@@ -9,6 +9,13 @@ module Zoomus
         Utils.parse_response self.class.post("/report/getaccountreport", :query => options)
       end
 
+      def report_getaudioreport(*args)
+        options = Utils.extract_options!(args)
+        Utils.require_params([:from, :to], options)
+        Utils.process_datetime_params!([:from, :to], options)
+        Utils.parse_response self.class.post("/report/getaudioreport", :query => options)
+      end
+
       def report_getuserreport(*args)
         options = Utils.extract_options!(args)
         Utils.require_params([:user_id, :from, :to], options)
