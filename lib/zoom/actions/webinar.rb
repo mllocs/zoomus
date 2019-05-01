@@ -100,9 +100,9 @@ module Zoom
       end
 
       def past_webinar_list(*args)
-        # TODO: implement past_webinars_list
-        # options = Utils.extract_options!(args)
-        raise Zoom::NotImplemented, 'past_webinars_list is not yet implemented'
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:id)
+        Utils.parse_response self.class.get("/past_webinars/#{params[:id]}/instances", headers: request_headers)
       end
     end
   end

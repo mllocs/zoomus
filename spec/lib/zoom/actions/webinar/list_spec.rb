@@ -13,7 +13,7 @@ RSpec.describe Zoom::Actions::Webinar do
           :get,
           zoom_url("/users/#{args[:host_id]}/webinars")
         ).to_return(body: json_response('webinar', 'list'),
-                    headers: {"Content-Type"=> "application/json"})
+                    headers: { 'Content-Type' => 'application/json' })
       end
 
       it "requires a 'host_id' argument" do
@@ -39,7 +39,7 @@ RSpec.describe Zoom::Actions::Webinar do
           :get,
           zoom_url("/users/#{args[:host_id]}/webinars")
         ).to_return(body: json_response('error', 'validation'),
-                    headers: {"Content-Type"=> "application/json"})
+                    headers: { 'Content-Type' => 'application/json' })
       end
 
       it 'raises Zoom::Error exception' do

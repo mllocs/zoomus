@@ -12,7 +12,7 @@ describe Zoom::Actions::User do
           :get,
           zoom_url('/users')
         ).to_return(body: json_response('user', 'list'),
-                    headers: {"Content-Type"=> "application/json"})
+                    headers: { 'Content-Type' => 'application/json' })
       end
 
       it 'returns a hash' do
@@ -39,7 +39,7 @@ describe Zoom::Actions::User do
           zoom_url('/users')
         ).to_return(status: 404,
                     body: json_response('error', 'not_found'),
-                    headers: {"Content-Type"=> "application/json"})
+                    headers: { 'Content-Type' => 'application/json' })
       end
 
       it 'raises Zoom::Error exception' do

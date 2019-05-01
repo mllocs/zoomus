@@ -18,7 +18,7 @@ xdescribe Zoom::Actions::Webinar do
         :post,
         zoom_url('/webinar/get')
       ).to_return(body: json_response('webinar_get'),
-                  headers: {"Content-Type"=> "application/json"})
+                  headers: { 'Content-Type' => 'application/json' })
     end
 
     it "requires a 'host_id' argument" do

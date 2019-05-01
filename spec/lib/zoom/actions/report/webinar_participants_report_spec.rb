@@ -14,7 +14,7 @@ describe Zoom::Actions::Report do
           zoom_url("/report/webinars/#{args[:id]}/participants")
         ).to_return(status: 200,
                     body: json_response('report', 'webinar', 'participants'),
-                    headers: {"Content-Type"=> "application/json"})
+                    headers: { 'Content-Type' => 'application/json' })
       end
 
       it "requires a 'id' argument" do
@@ -33,7 +33,7 @@ describe Zoom::Actions::Report do
           zoom_url("/report/webinars/#{args[:id]}/participants")
         ).to_return(status: 404,
                     body: json_response('error', 'not_found'),
-                    headers: {"Content-Type"=> "application/json"})
+                    headers: { 'Content-Type' => 'application/json' })
       end
 
       it 'raises an error' do

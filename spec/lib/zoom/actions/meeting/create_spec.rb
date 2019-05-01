@@ -15,7 +15,7 @@ describe Zoom::Actions::Meeting do
           zoom_url("/users/#{args[:user_id]}/meetings")
         ).to_return(status: 201,
                     body: json_response('meeting','create'),
-                    headers: {"Content-Type"=> "application/json"})
+                    headers: { 'Content-Type' => 'application/json' })
       end
 
       it "requires user_id param" do
@@ -52,7 +52,7 @@ describe Zoom::Actions::Meeting do
           zoom_url("/users/#{args[:user_id]}/meetings")
         ).to_return(status: 404,
                     body: json_response('error', 'user_not_exist'),
-                    headers: {"Content-Type"=> "application/json"})
+                    headers: { 'Content-Type' => 'application/json' })
       end
 
       it 'raises an error' do

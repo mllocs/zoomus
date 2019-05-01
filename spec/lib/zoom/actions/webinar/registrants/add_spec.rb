@@ -17,7 +17,7 @@ RSpec.describe Zoom::Actions::Webinar do
           zoom_url("/webinars/#{args[:id]}/registrants")
         ).to_return(status: 201,
                     body: json_response('webinar', 'registrant', 'add'),
-                    headers: {"Content-Type"=> "application/json"})
+                    headers: { 'Content-Type' => 'application/json' })
       end
 
       it "requires a 'id' argument" do
@@ -53,7 +53,7 @@ RSpec.describe Zoom::Actions::Webinar do
           zoom_url("/webinars/#{args[:id]}/registrants")
         ).to_return(status: 404,
                     body: json_response('error', 'not_found'),
-                    headers: {"Content-Type"=> "application/json"})
+                    headers: { 'Content-Type' => 'application/json' })
       end
 
       it 'raises Zoom::Error exception' do
