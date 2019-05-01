@@ -17,3 +17,4 @@ tmp
 build_and_publish
 .rubocop*
 .DS_Store
+.ruby-version
