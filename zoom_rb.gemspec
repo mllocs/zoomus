@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+lib = File.expand_path("../lib", __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'zoom/version'
+
 Gem::Specification.new do |gem|
 
   gem.add_dependency 'httparty', '~> 0.13'
@@ -25,5 +29,5 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = 'zoom_rb'
   gem.require_paths = ['lib']
-  gem.version       = '0.8.8'
+  gem.version       = Zoom::VERSION
 end

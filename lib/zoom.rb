@@ -2,6 +2,7 @@
 
 $:.unshift File.dirname(__FILE__)
 
+require 'zoom/version'
 require 'zoom/constants'
 require 'zoom/params'
 require 'zoom/utils'
