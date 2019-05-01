@@ -102,7 +102,7 @@ module Zoom
       def past_webinar_list(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:id)
-        Utils.parse_response self.class.get("/past_webinars/#{params[:id]}/instances", query: { access_token: access_token })
+        Utils.parse_response self.class.get("/past_webinars/#{params[:id]}/instances", headers: request_headers)
       end
     end
   end
