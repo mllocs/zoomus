@@ -6,7 +6,7 @@ module Zoom
       def daily_report(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.permit(:year, :month)
-        Utils.parse_response self.class.get('/report/daily', query: params)
+        Utils.parse_response self.class.get('/report/daily', query: params, headers: request_headers)
       end
 
       def hosts_report(*args)
