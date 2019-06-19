@@ -24,8 +24,16 @@ def zoom_url(url)
   /https:\/\/api.zoom.us\/v2#{url}.*/
 end
 
-def zoom_client
+def jwt_client
   Zoom.new
+end
+
+def oauth_client
+  Zoom::Clients::OAuth.new(access_token: 'xxx', timeout: 15)
+end
+
+def zoom_client
+  jwt_client
 end
 
 def filter_key(hash, key)
