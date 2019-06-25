@@ -1,0 +1,18 @@
+{
+  "page_count": 1,
+  "page_number": 1,
+  "page_size": 10,
+  "total_records": 1,
+  "accounts": [
+    {
+      "id": "string [uuid]",
+      "account_name": "string",
+      "owner_email": "string",
+      "account_type": "string",
+      "seats": "integer",
+      "subscription_start_time": "string [date-time]",
+      "subscription_end_time": "string [date-time]",
+      "created_at": "string [date-time]"
+    }
+  ]
+}
