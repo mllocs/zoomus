@@ -6,7 +6,7 @@ describe Zoom::Actions::User do
   let(:zc) { zoom_client }
   let(:args) { { id: 'ufR9342pRyf8ePFN92dttQ' } }
 
-  describe '#user_get action' do
+  describe '#settings_get action' do
     context 'with a valid response' do
       before :each do
         stub_request(
