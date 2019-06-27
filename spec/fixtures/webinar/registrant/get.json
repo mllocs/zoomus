@@ -1,0 +1,25 @@
+{
+  "id": "FAKE",
+  "first_name": "Bobby",
+  "last_name": "Tables",
+  "email": "bobby_tables@example.org",
+  "address": "",
+  "city": "",
+  "country": "",
+  "zip": "",
+  "state": "",
+  "phone": "",
+  "industry": "",
+  "org": "",
+  "job_title": "",
+  "purchasing_time_frame": "",
+  "role_in_purchase_process": "",
+  "no_of_employees": "",
+  "comments": "",
+  "custom_questions": [
+
+  ],
+  "status": "approved",
+  "create_time": "2019-06-26T10:45:56Z",
+  "join_url": "https://zoom.us/w/FAKE"
+}

@@ -104,6 +104,12 @@ module Zoom
         params.require(:id)
         Utils.parse_response self.class.get("/past_webinars/#{params[:id]}/instances", headers: request_headers)
       end
+
+      def webinar_registrant_get(*args)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:webinar_id, :id).permit(:occurrence_id)
+        Utils.parse_response self.class.get("/webinars/#{params[:webinar_id]}/registrants/#{params[:id]}", query: params.except(:webinar_id, :id), headers: request_headers)
+      end
     end
   end
 end
