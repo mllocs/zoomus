@@ -1,0 +1,120 @@
+{
+  "schedule_meting": {
+    "host_video": false,
+    "participant_video": false,
+    "audio_type": "both",
+    "join_before_host": false,
+    "use_pmi_for_scheduled_meetings": false,
+    "use_pmi_for_instant_meetings": false,
+    "enforce_login": false,
+    "enforce_login_with_domains": false,
+    "enforce_login_domains": "example.com",
+    "not_store_meeting_topic": false,
+    "force_pmi_jbh_password": false
+  },
+  "in_meeting": {
+    "e2e_encryption": false,
+    "chat": false,
+    "private_chat": false,
+    "auto_saving_chat": false,
+    "entry_exit_chime": "host",
+    "record_play_own_voice": false,
+    "file_transfer": false,
+    "feedback": false,
+    "post_meeting_feedback": false,
+    "co_host": false,
+    "polling": false,
+    "attendee_on_hold": false,
+    "show_meeting_control_toolbar": false,
+    "allow_show_zoom_windows": false,
+    "annotation": false,
+    "whiteboard": false,
+    "webinar_question_answer": false,
+    "anonymous_question_answer": false,
+    "breakout_room": false,
+    "closed_caption": false,
+    "far_end_camera_control": false,
+    "group_hd": false,
+    "virtual_background": false,
+    "watermark": false,
+    "alert_guest_join": false,
+    "auto_answer": false,
+    "p2p_connetion": false,
+    "p2p_ports": false,
+    "ports_range": "55,56",
+    "sending_default_email_invites": false,
+    "use_html_format_email": false,
+    "dscp_marking": false,
+    "dscp_audio": 42,
+    "dscp_video": 43,
+    "stereo_audio": false,
+    "original_audio": false,
+    "screen_sharing": false,
+    "remote_control": false,
+    "attention_tracking": false
+  },
+  "email_notification": {
+    "cloud_recording_avaliable_reminder": false,
+    "jbh_reminder": false,
+    "cancel_meeting_reminder": false,
+    "low_host_count_reminder": false,
+    "alternative_host_reminder": false,
+    "schedule_for_reminder": false
+  },
+  "zoom_rooms": {
+    "upcoming_meeting_alert": false,
+    "start_airplay_manually": false,
+    "weekly_system_restart": false,
+    "list_meetings_with_calendar": false,
+    "zr_post_meeting_feedback": false,
+    "ultrasonic": false,
+    "force_private_meeting": false,
+    "hide_host_information": false,
+    "cmr_for_instant_meeting": false,
+    "auto_start_stop_scheduled_meetings": false
+  },
+  "security": {
+    "admin_change_name_pic": false,
+    "import_photos_from_devices": false,
+    "hide_billing_info": false
+  },
+  "recording": {
+    "local_recording": false,
+    "cloud_recording": false,
+    "record_speaker_view": false,
+    "record_gallery_view": false,
+    "record_audio_file": false,
+    "save_chat_text": false,
+    "show_timestamp": false,
+    "recording_audio_transcript": false,
+    "auto_recording": "local",
+    "cloud_recording_download": false,
+    "cloud_recording_download_host": false,
+    "account_user_access_recording": false,
+    "auto_delete_cmr": false,
+    "auto_delete_cmr_days": 60
+  },
+  "telephony": {
+    "third_party_audio": false,
+    "audio_conference_info": "Magic third party auto conference info"
+  },
+  "tsp": {
+    "call_out": false,
+    "call_out_countries": [
+      "US"
+    ],
+    "show_international_numbers_link": false,
+    "display_toll_free_numbers": false
+  },
+  "integration": {
+    "google_calendar": false,
+    "google_drive": false,
+    "dropbox": false,
+    "box": false,
+    "microsoft_one_drive": false,
+    "kubi": false
+  },
+  "feature": {
+    "meeting_capacity": 500
+  }
+}

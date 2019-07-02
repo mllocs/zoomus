@@ -4,9 +4,9 @@ module Zoom
   module Actions
     module Account
       def account_list(*args)
-        # TODO: implement accounts_list
-        # options = Utils.extract_options!(args)
-        raise Zoom::NotImplemented, 'accounts_list is not yet implemented'
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.permit(:page_size, :page_number)
+        Utils.parse_response self.class.get("/accounts", query: params, headers: request_headers)
       end
 
       def account_create(*args)
@@ -34,9 +34,9 @@ module Zoom
       end
 
       def account_settings_get(*args)
-        # TODO: implement account_settings_get
-        # options = Utils.extract_options!(args)
-        raise Zoom::NotImplemented, 'account_settings_get is not yet implemented'
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:id)
+        Utils.parse_response self.class.get("/accounts/#{params[:id]}/settings", query: params.except(:id), headers: request_headers)
       end
 
       def account_settings_update(*args)
