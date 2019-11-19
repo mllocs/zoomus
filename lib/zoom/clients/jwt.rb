@@ -6,7 +6,7 @@ module Zoom
     class JWT < Zoom::Client
 
       def initialize(config)
-        Utils.require_params(%i[api_key api_secret], config)
+        Zoom::Params.new(config).require(:api_key, :api_secret)
         config.each { |k, v| instance_variable_set("@#{k}", v) }
         self.class.default_timeout(@timeout)
       end

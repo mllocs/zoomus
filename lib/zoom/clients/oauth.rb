@@ -4,7 +4,7 @@ module Zoom
   module Clients
     class OAuth < Zoom::Client
       def initialize(config)
-        Utils.require_params(%i[access_token], config)
+        Zoom::Params.new(config).require(:access_token)
         config.each { |k, v| instance_variable_set("@#{k}", v) }
         self.class.default_timeout(@timeout)
       end

@@ -26,30 +26,6 @@ module Zoom
         raise_if_error!(http_response.parsed_response) || http_response.code
       end
 
-      def require_params(params, options)
-        params = [params] unless params.is_a? Array
-        params.each do |param|
-          raise argument_error(param.to_s) unless options[param]
-        end
-      end
-
-      def permit_params(params, options)
-        params = [params] unless params.is_a? Array
-        options.keys.each do |key|
-          raise exclude_argument_error(key.to_s) unless params.include?(key)
-        end
-      end
-
-      # Dynamically defines bang methods for Actions modules
-      # def define_bang_methods(klass)
-      #   klass.instance_methods.each do |m|
-      #     klass.send(:define_method, "#{m}!") do |*args|
-      #       response = send(m, *args)
-      #       Utils.raise_if_error!(response)
-      #     end
-      #   end
-      # end
-
       def extract_options!(array)
         array.last.is_a?(::Hash) ? array.pop : {}
       end

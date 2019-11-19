@@ -26,16 +26,6 @@ xdescribe Zoom::Utils do
     end
   end
 
-  xdescribe '#require_params' do
-    it 'raises ArgumentError if the param is not present' do
-      expect { Utils.require_params(:foo, { bar: 'bar' }) }.to raise_error(ArgumentError)
-    end
-
-    it 'does not raise ArgumentError if the param is present' do
-      expect { Utils.require_params(:foo, { foo: 'foo' }) }.to_not raise_error
-    end
-  end
-
   xdescribe '#extract_options!' do
     it 'converts array to hash options' do
       args = [{ foo: 'foo' }, { bar: 'bar' }, { zemba: 'zemba' }]
