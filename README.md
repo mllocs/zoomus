@@ -18,7 +18,7 @@ Or install it yourself as:
 
 ## Usage
 
-The Zoom API uses OAuth and JWT to [Authenticate](https://marketplace.zoom.us/docs/api-reference/Authentication) API request. By defaut, a JWT client will be used.
+The Zoom API uses OAuth or JWT to [Authenticate](https://marketplace.zoom.us/docs/api-reference/Authentication) API request. By defaut, a JWT client will be used.
 
 ```ruby
 require 'zoom'
@@ -29,14 +29,14 @@ Zoom.configure do |c|
 end
 
 zoom_client = Zoom.new
-
 ```
 
 To create an OAuth client, create the client directly
 
 ```ruby
 require 'zoom'
-zoom_client = Zoom::Clients::OAuth.new(:access_token => 'xxx', :timeout => 15)
+
+zoom_client = Zoom::Client::OAuth.new(access_token: 'xxx', timeout: 15)
 ```
 
 With the client, access the API

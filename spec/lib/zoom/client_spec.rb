@@ -7,7 +7,7 @@ describe Zoom::Client do
   describe 'default attributes' do
     it 'must include httparty methods' do
       expect(Zoom::Client).to include(HTTParty)
-      expect(Zoom::Clients::JWT).to include(HTTParty)
+      expect(Zoom::Client::JWT).to include(HTTParty)
     end
 
     it 'must have the base url set to Zoom API endpoint' do
@@ -20,7 +20,7 @@ describe Zoom::Client do
         config.api_secret = 'xxx'
       end
       Zoom.new
-      expect(Zoom::Clients::JWT.default_options[:timeout]).to eq(15)
+      expect(Zoom::Client::JWT.default_options[:timeout]).to eq(15)
     end
 
     it 'must get the timeout from the configuration' do
@@ -30,17 +30,17 @@ describe Zoom::Client do
         config.timeout = 20
       end
       Zoom.new
-      expect(Zoom::Clients::JWT.default_options[:timeout]).to eq(20)
+      expect(Zoom::Client::JWT.default_options[:timeout]).to eq(20)
     end
   end
 
   describe 'JWT client' do
     let(:client) {
-      Zoom::Clients::JWT.new(api_key: 'xxx', api_secret: 'xxx', timeout: 15)
+      Zoom::Client::JWT.new(api_key: 'xxx', api_secret: 'xxx', timeout: 15)
     }
     it 'requires api_key and api_secret for a new instance' do
-      expect { Zoom::Clients::JWT.new(api_key: 'xxx') }.to raise_error(ArgumentError)
-      expect { Zoom::Clients::JWT.new(api_key: 'xxx', api_secret: 'xxx') }.to raise_error(ArgumentError)
+      expect { Zoom::Client::JWT.new(api_key: 'xxx') }.to raise_error(Zoom::ParameterMissing)
+      expect { Zoom::Client::JWT.new(api_key: 'xxx', api_secret: 'xxx') }.not_to raise_error
     end
 
     it 'creates instance of Zoom::Client if api_key and api_secret is provided' do
@@ -55,14 +55,14 @@ describe Zoom::Client do
 
   end
 
-  describe "oauth client" do
+  describe 'OAuth client' do
     let(:access_token) {'xxx'}
     let(:client) {
-      Zoom::Clients::OAuth.new(access_token: access_token, timeout: 30)
+      Zoom::Client::OAuth.new(access_token: access_token, timeout: 30)
     }
     it 'requires an access token' do
-      expect { Zoom::Clients::JWT.new(timeout: 30) }.to raise_error(ArgumentError)
-      expect { Zoom::Clients::JWT.new(access_token: access_token) }.to raise_error(ArgumentError)
+      expect { Zoom::Client::OAuth.new(timeout: 30) }.to raise_error(Zoom::ParameterMissing)
+      expect { Zoom::Client::OAuth.new(access_token: access_token) }.not_to raise_error
     end
 
     it 'creates instance of Zoom::Client if api_key and api_secret is provided' do

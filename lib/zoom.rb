@@ -26,7 +26,7 @@ module Zoom
 
     def new
       @configuration ||= Configuration.new
-      Zoom::Clients::JWT.new(
+      Zoom::Client::JWT.new(
         api_key: @configuration.api_key,
         api_secret: @configuration.api_secret,
         timeout: @configuration.timeout

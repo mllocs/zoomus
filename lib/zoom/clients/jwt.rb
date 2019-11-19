@@ -2,13 +2,13 @@
 require 'jwt'
 
 module Zoom
-  module Clients
+  class Client
     class JWT < Zoom::Client
 
       def initialize(config)
         Zoom::Params.new(config).require(:api_key, :api_secret)
         config.each { |k, v| instance_variable_set("@#{k}", v) }
-        self.class.default_timeout(@timeout)
+        self.class.default_timeout(@timeout || 20)
       end
 
       def access_token

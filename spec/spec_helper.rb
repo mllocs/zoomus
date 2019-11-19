@@ -29,7 +29,7 @@ def jwt_client
 end
 
 def oauth_client
-  Zoom::Clients::OAuth.new(access_token: 'xxx', timeout: 15)
+  Zoom::Client::OAuth.new(access_token: 'xxx', timeout: 15)
 end
 
 def zoom_client
