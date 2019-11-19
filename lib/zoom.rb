@@ -26,7 +26,7 @@ module Zoom
 
     def new
       @configuration ||= Configuration.new
-      Zoom::Client.new(
+      Zoom::Clients::JWT.new(
         api_key: @configuration.api_key,
         api_secret: @configuration.api_secret,
         timeout: @configuration.timeout
@@ -40,10 +40,11 @@ module Zoom
   end
 
   class Configuration
-    attr_accessor :api_key, :api_secret, :timeout
+    attr_accessor :api_key, :api_secret, :timeout, :access_token
 
     def initialize
       @api_key = @api_secret = 'xxx'
+      @access_token = nil
       @timeout = 15
     end
   end

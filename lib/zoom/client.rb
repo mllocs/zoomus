@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 require 'httparty'
-require 'json'
-require 'jwt'
 
 module Zoom
   class Client
@@ -23,12 +21,6 @@ module Zoom
     headers 'Accept' => 'application/json'
     headers 'Content-Type' => 'application/json'
 
-    def initialize(config)
-      Utils.require_params(%i[api_key api_secret], config)
-      config.each { |k, v| instance_variable_set("@#{k}", v) }
-      self.class.default_timeout(@timeout)
-    end
-
     def request_headers
       {
         'Accept' => 'application/json',
@@ -36,9 +28,8 @@ module Zoom
         'Authorization' => "Bearer #{access_token}"
       }
     end
-
-    def access_token
-      JWT.encode({ iss: @api_key, exp: Time.now.to_i + @timeout }, @api_secret, 'HS256', { typ: 'JWT' })
-    end
   end
 end
+
+require 'zoom/clients/jwt'
+require 'zoom/clients/oauth'
