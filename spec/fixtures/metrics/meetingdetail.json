@@ -1,0 +1,20 @@
+{
+  "uuid": "carreter@-2c9b447f3",
+  "id": 33281536,
+  "topic": "My meeting",
+  "host": "cool host",
+  "email": "so@djkfsfj.gh",
+  "user_type": "Pro|Webinar100",
+  "start_time": "2007-06-16T16:55:42.078Z",
+  "end_time": "2007-06-16T16:59:42.078Z",
+  "duration": "30",
+  "participants": 4874645,
+  "has_pstn": false,
+  "has_voip": false,
+  "has_3rd_party_audio": false,
+  "has_video": false,
+  "has_screen_share": false,
+  "has_recording": false,
+  "has_sip": false,
+  "in_room_participants": 3
+}

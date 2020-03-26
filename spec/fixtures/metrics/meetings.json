@@ -2,10 +2,9 @@
     "from": "2016-09-26",
     "to": "2016-09-27",
     "page_count": 19,
-    "page_number": 1,
     "page_size": 1,
     "total_records": 1,
-    "type": "Live Meetings",
+    "next_page_token": "string",
     "meetings": [{
         "uuid": "t13b6hjVQXybvGKyeHC96w==",
         "id": 3035575664,
