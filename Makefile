@@ -2,4 +2,4 @@ help:
 	@echo "make console"
 
 console:
-	irb -rubygems -I lib -r zoom.rb
+	irb -r rubygems -I lib -r zoom.rb
