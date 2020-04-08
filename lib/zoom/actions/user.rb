@@ -45,10 +45,10 @@ module Zoom
       end
 
       def user_assistants_create(*args)
-        raise Zoom::NotImplemented, 'user_assistants_create is not yet implemented'
-        # TODO: validate body attributes
-        options = Utils.extract_options!(args)
-        Utils.parse_response self.class.post("/users/#{options.slice!(:id)}/assistants", body: options, headers: request_headers)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        require_param_keys = %i[user_id]
+        params.require(:user_id).permit(%i[assistants])
+        Utils.parse_response self.class.post("/users/#{params[:user_id]}/assistants", body: params.except(:user_id), headers: request_headers)
       end
 
       def user_assistants_delete_all(*args)
