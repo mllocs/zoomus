@@ -38,10 +38,9 @@ module Zoom
       end
 
       def user_assistants_list(*args)
-        raise Zoom::NotImplemented, 'user_assistants_list is not yet implemented'
-        # TODO: implement user_assistants_list
-        # options = Utils.extract_options!(args)
-        Utils.parse_response self.class.get("/users/#{options.slice!(:id)}/assistants", query: options, headers: request_headers)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:user_id)
+        Utils.parse_response(self.class.get("/users/#{params[:user_id]}/assistants", query: params.except(:user_id), headers: request_headers))
       end
 
       def user_assistants_create(*args)
