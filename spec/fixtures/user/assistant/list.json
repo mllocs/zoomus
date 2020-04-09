@@ -1,0 +1,8 @@
+{
+  "assistants": [
+    {
+      "id": "foobar",
+      "email": "foo@bar.com"
+    }
+  ]
+}
