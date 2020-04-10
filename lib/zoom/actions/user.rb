@@ -45,22 +45,20 @@ module Zoom
 
       def user_assistants_create(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
-        require_param_keys = %i[user_id]
         params.require(:user_id).permit(%i[assistants])
         Utils.parse_response self.class.post("/users/#{params[:user_id]}/assistants", body: params.except(:user_id), headers: request_headers)
       end
 
       def user_assistants_delete_all(*args)
-        raise Zoom::NotImplemented, 'user_assistants_delete_all is not yet implemented'
-        # TODO: implement user_assistants_delete_all
-        options = Utils.extract_options!(args)
-        Utils.parse_response self.class.delete("/users/#{options.slice!(:id)}/assistants", body: options, headers: request_headers)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:user_id)
+        Utils.parse_response(self.class.delete("/users/#{params[:user_id]}/assistants", query: params.except(:user_id), headers: request_headers))
       end
 
       def user_assistants_delete(*args)
-        # TODO: implement user_assistants_delete
-        # options = Utils.extract_options!(args)
-        raise Zoom::NotImplemented, 'user_assistants_delete is not yet implemented'
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(%i[user_id assistant_id])
+        Utils.parse_response(self.class.delete("/users/#{params[:user_id]}/assistants/#{params[:assistant_id]}", query: params.except(:user_id, :assistant_id), headers: request_headers))
       end
 
       def user_schedulers_list(*args)
