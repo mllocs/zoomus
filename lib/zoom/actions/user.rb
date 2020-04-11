@@ -62,21 +62,21 @@ module Zoom
       end
 
       def user_schedulers_list(*args)
-        # TODO: implement user_schedulers_list
-        # options = Utils.extract_options!(args)
-        raise Zoom::NotImplemented, 'user_schedulers_list is not yet implemented'
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:user_id)
+        Utils.parse_response(self.class.get("/users/#{params[:user_id]}/schedulers", query: params.except(:user_id), headers: request_headers))
       end
 
       def user_schedulers_delete_all(*args)
-        # TODO: implement user_schedulers_delete_all
-        # options = Utils.extract_options!(args)
-        raise Zoom::NotImplemented, 'user_schedulers_delete_all is not yet implemented'
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:user_id)
+        Utils.parse_response(self.class.delete("/users/#{params[:user_id]}/schedulers", query: params.except(:user_id), headers: request_headers))
       end
 
       def user_schedulers_delete(*args)
-        # TODO: implement user_schedulers_delete
-        # options = Utils.extract_options!(args)
-        raise Zoom::NotImplemented, 'user_schedulers_delete is not yet implemented'
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(%i[user_id scheduler_id])
+        Utils.parse_response(self.class.delete("/users/#{params[:user_id]}/schedulers/#{params[:scheduler_id]}", query: params.except(:user_id, :scheduler_id), headers: request_headers))
       end
 
       def user_upload_picture(*args)
