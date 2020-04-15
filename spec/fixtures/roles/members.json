@@ -1,0 +1,15 @@
+{
+  "members": [
+    {
+      "email": "role@email",
+      "first_name": "Jon",
+      "id": "Cl8O89SDR42-RL0t2ky1Rw",
+      "last_name": "Maus",
+      "type": 1
+    }
+  ],
+  "page_count": 1,
+  "page_number": 1,
+  "page_size": 30,
+  "total_records": 1
+}

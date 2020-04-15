@@ -1,0 +1,11 @@
+{
+  "description": "Members have access to basic Zoom video meeting functions but no account management privileges.",
+  "id": "2",
+  "name": "Member",
+  "privileges": [
+    "AccountProfile:Read",
+    "Meeting:Edit",
+    "Meeting:Join"
+  ],
+  "total_members": 2
+}

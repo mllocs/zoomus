@@ -14,6 +14,7 @@ module Zoom
     include Actions::Webinar
     include Actions::Report
     include Actions::Recording
+    include Actions::Roles
     include Actions::IM::Chat
     include Actions::IM::Group
 
