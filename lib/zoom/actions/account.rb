@@ -64,30 +64,6 @@ module Zoom
         # options = Utils.extract_options!(args)
         raise Zoom::NotImplemented, 'account_plans_list is not yet implemented'
       end
-
-      def some_method(*args)
-        # TODO: implement some_method
-        # options = Utils.extract_options!(args)
-        raise Zoom::NotImplemented, 'some_method is not yet implemented'
-      end
-
-      def some_method(*args)
-        # TODO: implement some_method
-        # options = Utils.extract_options!(args)
-        raise Zoom::NotImplemented, 'some_method is not yet implemented'
-      end
-
-      def some_method(*args)
-        # TODO: implement some_method
-        # options = Utils.extract_options!(args)
-        raise Zoom::NotImplemented, 'some_method is not yet implemented'
-      end
-
-      def some_method(*args)
-        # TODO: implement some_method
-        # options = Utils.extract_options!(args)
-        raise Zoom::NotImplemented, 'some_method is not yet implemented'
-      end
     end
   end
 end
