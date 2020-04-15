@@ -1,0 +1,12 @@
+{
+  "schedulers": [
+    {
+      "id": "foobar",
+      "email": "foo@bar.com"
+    },
+    {
+      "id": "barfoo",
+      "email": "bar@foo.com"
+    }
+  ]
+}
