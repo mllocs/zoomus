@@ -24,12 +24,17 @@ def zoom_url(url)
   /https:\/\/api.zoom.us\/v2#{url}.*/
 end
 
+#OAuth endpoints have a different base_uri
+def zoom_auth_url(url)
+  /https:\/\/zoom.us\/#{url}.*/
+end
+
 def jwt_client
   Zoom.new
 end
 
 def oauth_client
-  Zoom::Client::OAuth.new(access_token: 'xxx', timeout: 15)
+  Zoom::Client::OAuth.new(auth_token: 'xxx', auth_code: 'xxx', redirect_uri: 'xxx', timeout: 15)
 end
 
 def zoom_client

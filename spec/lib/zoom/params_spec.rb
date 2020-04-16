@@ -20,6 +20,22 @@ RSpec.describe Zoom::Params do
     end
   end
 
+  describe '#require_one_of' do
+    let(:params) { Zoom::Params.new(foo: :bar, baz: :bang) }
+
+    it 'does raise an error when required keys are missing' do
+      expect { params.require_one_of(:bar) }.to raise_error(Zoom::ParameterMissing, [:bar].to_s)
+    end
+
+    it 'does not raise an error when one of the required keys are missing' do
+      expect { params.require_one_of(:foo) }.not_to raise_error(Zoom::ParameterMissing)
+    end
+
+    it 'does not raise an error when one of the required keys are missing' do
+      expect { params.require_one_of(:foo, :bebop) }.not_to raise_error(Zoom::ParameterMissing)
+    end
+  end
+
   describe '#permit' do
     let(:params) { Zoom::Params.new(foo: true, bar: :baz ) }
 
