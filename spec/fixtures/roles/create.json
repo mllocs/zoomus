@@ -1,0 +1,9 @@
+{
+  "description": "A person with this role can view and manage groups.",
+  "id": "RHLWWwtVZRnuq7OctVApqlg",
+  "name": "Group Administrator",
+  "privileges": [
+    "User:Read"
+  ],
+  "total_members": 0
+}

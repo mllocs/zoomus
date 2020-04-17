@@ -1,0 +1,29 @@
+{
+  "roles": [
+    {
+      "description": "Account owner has full privileges to access and manage a Zoom account.",
+      "id": "0",
+      "name": "Owner",
+      "total_members": 1
+    },
+    {
+      "description": "Admins have wide range privileges to access and manage a Zoom account.",
+      "id": "1",
+      "name": "Admin",
+      "total_members": 0
+    },
+    {
+      "description": "Members have access to basic Zoom video meeting functions but no account management privileges.",
+      "id": "2",
+      "name": "Member",
+      "total_members": 1
+    },
+    {
+      "description": "A person with this role can view and manage groups.",
+      "id": "RHLWWwtVZRnuq7OctVApqlg",
+      "name": "Group Administrator",
+      "total_members": 0
+    }
+  ],
+  "total_records": 4
+}
