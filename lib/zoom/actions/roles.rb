@@ -10,20 +10,20 @@ module Zoom
 
       def roles_create(*args)
         options = Params.new(Utils.extract_options!(args))
-        options.require(%i[name]).permit(%i[description privileges])
-        Utils.parse_response self.class.post("/roles", body: options.to_json, headers: request_headers)
+        options.require(:name).permit(%i[description privileges])
+        Utils.parse_response self.class.post("/roles", body: options, headers: request_headers)
       end
 
       def roles_members(*args)
         options = Params.new(Utils.extract_options!(args))
-        options.require(%i[role_id])
+        options.require(:role_id)
         Utils.parse_response self.class.get("/roles/#{options[:role_id]}/members", headers: request_headers)
       end
 
       def roles_assign(*args)
         options = Params.new(Utils.extract_options!(args))
         options.require(%i[role_id members])
-        Utils.parse_response self.class.post("/roles/#{options[:role_id]}/members", body: options.except(:role_id).to_json, headers: request_headers)
+        Utils.parse_response self.class.post("/roles/#{options[:role_id]}/members", body: options.except(:role_id), headers: request_headers)
       end
 
       def roles_unassign(*args)
@@ -34,7 +34,7 @@ module Zoom
 
       def roles_get(*args)
         options = Params.new(Utils.extract_options!(args))
-        options.require(%i[role_id])
+        options.require(:role_id)
         Utils.parse_response self.class.get("/roles/#{options[:role_id]}", headers: request_headers)
       end
 
