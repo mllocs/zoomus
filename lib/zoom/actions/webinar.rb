@@ -49,31 +49,31 @@ module Zoom
 
       def webinar_status_update(*args)
         # TODO: implement webinar_panelists_list
-        # options = Utils.extract_options!(args)
+        # params = Zoom::Params.new(Utils.extract_options!(args))
         raise Zoom::NotImplemented, 'webinar_status_update is not yet implemented'
       end
 
       def webinar_panelists_list(*args)
         # TODO: implement webinar_panelists_list
-        # options = Utils.extract_options!(args)
+        # params = Zoom::Params.new(Utils.extract_options!(args))
         raise Zoom::NotImplemented, 'webinar_panelists_list is not yet implemented'
       end
 
       def webinar_panelist_add(*args)
         # TODO: implement webinar_panelist_add
-        # options = Utils.extract_options!(args)
+        # params = Zoom::Params.new(Utils.extract_options!(args))
         raise Zoom::NotImplemented, 'webinar_panelist_add is not yet implemented'
       end
 
       def webinar_panelists_delete_all(*args)
         # TODO: implement webinar_panelists_delete_all
-        # options = Utils.extract_options!(args)
+        # params = Zoom::Params.new(Utils.extract_options!(args))
         raise Zoom::NotImplemented, 'webinar_panelists_delete_all is not yet implemented'
       end
 
       def webinar_panelist_delete(*args)
         # TODO: implement webinar_panelist_delete
-        # options = Utils.extract_options!(args)
+        # params = Zoom::Params.new(Utils.extract_options!(args))
         raise Zoom::NotImplemented, 'webinar_panelist_delete is not yet implemented'
       end
 

@@ -4,21 +4,21 @@ require 'spec_helper'
 
 describe Zoom::Actions::Account do
   let(:zc) { zoom_client }
-  let(:args) { { id: 'ufR9342pRyf8ePFN92dttQ' } }
+  let(:args) { { account_id: 'ufR9342pRyf8ePFN92dttQ' } }
 
   describe '#settings_get action' do
     context 'with a valid response' do
       before :each do
         stub_request(
           :get,
-          zoom_url("/accounts/#{args[:id]}/settings")
+          zoom_url("/accounts/#{args[:account_id]}/settings")
           ).to_return(status: 200,
                       body: json_response('account', 'settings_get'),
                       headers: { 'Content-Type' => 'application/json' })
       end
 
       it 'requires id param' do
-        expect { zc.account_settings_get(filter_key(args, :id)) }.to raise_error(Zoom::ParameterMissing, '[:id]')
+        expect { zc.account_settings_get(filter_key(args, :account_id)) }.to raise_error(Zoom::ParameterMissing, '[:account_id]')
       end
 
       it 'returns a hash' do
@@ -36,7 +36,7 @@ describe Zoom::Actions::Account do
       before :each do
         stub_request(
           :get,
-          zoom_url("/accounts/#{args[:id]}/settings")
+          zoom_url("/accounts/#{args[:account_id]}/settings")
         ).to_return(status: 404,
                     body: json_response('error', 'validation'),
                     headers: { 'Content-Type' => 'application/json' })

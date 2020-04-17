@@ -3,7 +3,7 @@
 $:.unshift File.dirname(__FILE__)
 
 require 'zoom/version'
-require 'zoom/constants'
+require 'zoom/constants/constants'
 require 'zoom/params'
 require 'zoom/utils'
 require 'zoom/actions/account'

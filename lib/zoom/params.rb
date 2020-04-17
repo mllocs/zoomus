@@ -2,14 +2,10 @@
 
 module Zoom
   class Params < SimpleDelegator
-    # delegate :keys, :key?, :has_key?, :values, :has_value?, :value?, :empty?,
-    #          :include?, :as_json, :to_s, :each_key, to: :@parameters
-
     def initialize(parameters = {})
       @parameters = parameters
       super
     end
-
 
     def require(*keys)
       missing_keys = find_missing_keys(keys.flatten)
@@ -63,7 +59,7 @@ module Zoom
 
     def permit_value(key, values)
       value = @parameters[key]
-      if !values.include?(value)
+      unless values.include?(value)
         raise Zoom::ParameterValueNotPermitted, "#{key}: #{value}"
       end
     end

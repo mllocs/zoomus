@@ -15,7 +15,7 @@ module Zoom
         require_param_keys = %i[action email type]
         require_param_keys.append(:password) if params[:action] == 'autoCreate'
         params.require(require_param_keys)
-        params.permit_value(:action, Zoom::Constants::USER_CREATE_TYPES.keys)
+        params.permit_value(:action, Zoom::Constants::User::CREATE_TYPES.keys)
         Utils.parse_response self.class.post('/users', body: { action: params[:action], user_info: params.except(:action) }.to_json, headers: request_headers)
       end
 
@@ -45,7 +45,7 @@ module Zoom
 
       def user_assistants_create(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:user_id).permit(%i[assistants])
+        params.require(:user_id).permit(:assistants)
         Utils.parse_response self.class.post("/users/#{params[:user_id]}/assistants", body: params.except(:user_id), headers: request_headers)
       end
 
@@ -81,7 +81,7 @@ module Zoom
 
       def user_upload_picture(*args)
         # TODO: implement user_upload_picture
-        # options = Utils.extract_options!(args)
+        # params = Zoom::Params.new(Utils.extract_options!(args))
         raise Zoom::NotImplemented, 'user_upload_picture is not yet implemented'
       end
 
@@ -93,49 +93,49 @@ module Zoom
 
       def user_settings_update(*args)
         # TODO: implement user_settings_update
-        # options = Utils.extract_options!(args)
+        # params = Zoom::Params.new(Utils.extract_options!(args))
         raise Zoom::NotImplemented, 'user_settings_update is not yet implemented'
       end
 
       def user_status_update(*args)
         # TODO: implement user_status_update
-        # options = Utils.extract_options!(args)
+        # params = Zoom::Params.new(Utils.extract_options!(args))
         raise Zoom::NotImplemented, 'user_status_update is not yet implemented'
       end
 
       def user_password_update(*args)
         # TODO: implement user_password_update
-        # options = Utils.extract_options!(args)
+        # params = Zoom::Params.new(Utils.extract_options!(args))
         raise Zoom::NotImplemented, 'user_password_update is not yet implemented'
       end
 
       def user_permissions_get(*args)
         # TODO: implement user_permissions_get
-        # options = Utils.extract_options!(args)
+        # params = Zoom::Params.new(Utils.extract_options!(args))
         raise Zoom::NotImplemented, 'user_permissions_get is not yet implemented'
       end
 
       def user_token_get(*args)
         # TODO: implement user_token_get
-        # options = Utils.extract_options!(args)
+        # params = Zoom::Params.new(Utils.extract_options!(args))
         raise Zoom::NotImplemented, 'user_token_get is not yet implemented'
       end
 
       def user_token_delete(*args)
         # TODO: implement user_token_delete
-        # options = Utils.extract_options!(args)
+        # params = Zoom::Params.new(Utils.extract_options!(args))
         raise Zoom::NotImplemented, 'user_token_delete is not yet implemented'
       end
 
       def user_email_check(*args)
         # TODO: implement user_email_check
-        # options = Utils.extract_options!(args)
+        # params = Zoom::Params.new(Utils.extract_options!(args))
         raise Zoom::NotImplemented, 'user_email_check is not yet implemented'
       end
 
       def user_vanity_name_check(*args)
         # TODO: implement user_vanity_name_check
-        # options = Utils.extract_options!(args)
+        # params = Zoom::Params.new(Utils.extract_options!(args))
         raise Zoom::NotImplemented, 'user_vanity_name_check is not yet implemented'
       end
     end
