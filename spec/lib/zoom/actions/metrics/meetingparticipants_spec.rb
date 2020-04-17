@@ -6,25 +6,37 @@ describe Zoom::Actions::Metrics do
 
   let(:zc) { zoom_client }
   let(:args) { { meeting_id: 't13b6hjVQXybvGKyeHC96w==', type: 1 } }
-  let(:response) { zc.metrics_meetingdetail(args) }
+  let(:response) { zc.metrics_meetingparticipants(args) }
 
-  describe '#metrics_meetingdetail action' do
+  describe '#metrics_meetingparticipants action' do
     context 'with 200 response' do
       before :each do
         stub_request(
           :get,
-          zoom_url("/metrics/meetings/#{args[:meeting_id]}")
+          zoom_url("/metrics/meetings/#{args[:meeting_id]}/participants")
         ).to_return(status: 200,
-                    body: json_response('metrics','meetingdetail'),
+                    body: json_response('metrics','meetingparticipants'),
                     headers: { 'Content-Type' => 'application/json' })
       end
 
       it "requires a 'meeting_id' argument" do
-        expect { zc.metrics_meetingdetail(filter_key(args, :meeting_id)) }.to raise_error(Zoom::ParameterMissing)
+        expect { zc.metrics_meetingparticipants(filter_key(args, :meeting_id)) }.to raise_error(Zoom::ParameterMissing)
       end
 
       it 'returns a hash' do
         expect(response).to be_kind_of(Hash)
+      end
+
+      it "returns 'next_page_token'" do
+        expect(response['next_page_token']).to be_kind_of(String)
+      end
+
+      it "returns 'total_records'" do
+        expect(response['total_records']).to eq(2)
+      end
+
+      it "returns 'participants' Array" do
+        expect(response['participants']).to be_kind_of(Array)
       end
     end
 
@@ -32,9 +44,9 @@ describe Zoom::Actions::Metrics do
       before :each do
         stub_request(
           :get,
-          zoom_url("/metrics/meetings/#{args[:meeting_id]}")
+          zoom_url("/metrics/meetings/#{args[:meeting_id]}/participants")
         ).to_return(status: 300,
-                    body: '{ "code": 1001, "message": "The next page token is invalid or expired." }',
+                    body: '{ "code": 1001, "message": "Can not access webinar info. {meetingId} or the next page token is either invalid or expired." }',
                     headers: { 'Content-Type' => 'application/json' })
       end
 
@@ -47,9 +59,9 @@ describe Zoom::Actions::Metrics do
       before :each do
         stub_request(
           :get,
-          zoom_url("/metrics/meetings/#{args[:meeting_id]}")
+          zoom_url("/metrics/meetings/#{args[:meeting_id]}/participants")
         ).to_return(status: 404,
-                    body: '{ "code": 3001, "message": "Meeting ID is invalid or the meeting has not ended yet. This meeting’s details are not available." }',
+                    body: '{ "code": 3001, "message": "Meeting ID is invalid or not ended yet." }',
                     headers: { 'Content-Type' => 'application/json' })
       end
 

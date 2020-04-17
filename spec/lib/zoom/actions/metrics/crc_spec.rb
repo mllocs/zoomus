@@ -2,47 +2,32 @@
 
 require 'spec_helper'
 
-xdescribe Zoom::Actions::Metrics do
+describe Zoom::Actions::Metrics do
+  let(:zc) { zoom_client }
+  let(:args) { { from: '2013-04-05T15:50:47Z', to: '2013-04-09T19:00:00Z' } }
+  let(:response) { zc.metrics_crc(args) }
 
-  before :all do
-    @zc = zoom_client
-    @args = { from: '2013-04-05T15:50:47Z',
-              to: '2013-04-09T19:00:00Z' }
-  end
-
-  xdescribe '#metrics_crc action' do
+  describe '#metrics_crc get' do
     before :each do
       stub_request(
-        :post,
+        :get,
         zoom_url('/metrics/crc')
-      ).to_return(body: json_response('metrics_crc'))
+      ).to_return(status: 200,
+                  body: json_response('metrics','crc'),
+                  headers: { 'Content-Type' => 'application/json' })
     end
 
     it "requires a 'from' argument" do
-      expect { @zc.metrics_crc(filter_key(@args, :from)) }.to raise_error(ArgumentError)
+      expect { zc.metrics_crc(filter_key(args, :from)) }.to raise_error(Zoom::ParameterMissing)
     end
 
     it "requires a 'to' argument" do
-      expect { @zc.metrics_crc(filter_key(@args, :to)) }.to raise_error(ArgumentError)
+      expect { zc.metrics_crc(filter_key(args, :to)) }.to raise_error(Zoom::ParameterMissing)
     end
 
     it 'returns a hash' do
-      expect(@zc.metrics_crc(@args)).to be_kind_of(Hash)
+      expect(response).to be_kind_of(Hash)
     end
   end
 
-  xdescribe '#metrics_crc! action' do
-    before :each do
-      stub_request(
-        :post,
-        zoom_url('/metrics/crc')
-      ).to_return(body: json_response('error'))
-    end
-
-    it 'raises Zoom::Error exception' do
-      expect {
-        @zc.metrics_crc!(@args)
-      }.to raise_error(Zoom::Error)
-    end
-  end
 end
