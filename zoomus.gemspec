@@ -3,7 +3,7 @@
 Gem::Specification.new do |gem|
 
   gem.add_dependency 'httparty', '~> 0.13'
-  gem.add_dependency 'json', '~> 2.2.0'
+  gem.add_dependency 'json', '>= 2.3.0'
 
   gem.add_development_dependency 'byebug'
   gem.add_development_dependency 'rspec'
