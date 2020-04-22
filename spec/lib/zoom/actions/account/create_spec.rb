@@ -61,7 +61,7 @@ describe Zoom::Actions::Account do
       end
 
       it 'raises Zoom::Error exception' do
-        expect { zc.account_create }.to raise_error(Zoom::Error)
+        expect { zc.account_create(args) }.to raise_error(Zoom::Error)
       end
     end
   end
