@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe Zoom::Actions::Account do
   let(:zc) { zoom_client }
-  let(:args) { { account_id: 'ufR9342pRyf8ePFN92dttQ' } }
+  let(:args) { { account_id: '1' } }
 
   describe '#settings_get action' do
     context 'with a valid response' do
@@ -18,7 +18,7 @@ describe Zoom::Actions::Account do
       end
 
       it 'requires id param' do
-        expect { zc.account_settings_get(filter_key(args, :account_id)) }.to raise_error(Zoom::ParameterMissing, '[:account_id]')
+        expect { zc.account_settings_get }.to raise_error(Zoom::ParameterMissing, [:account_id].to_s)
       end
 
       it 'returns a hash' do
@@ -28,7 +28,7 @@ describe Zoom::Actions::Account do
       it 'returns same params' do
         res = zc.account_settings_get(args)
 
-        expect(res.keys).to match_array(["email_notification", "feature", "in_meeting", "integration", "recording", "schedule_meting", "security", "telephony", "tsp", "zoom_rooms"])
+        expect(res.keys).to match_array(%w[email_notification feature in_meeting integration recording schedule_meting security telephony tsp zoom_rooms])
       end
     end
 
