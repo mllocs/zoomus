@@ -4,38 +4,39 @@ require 'spec_helper'
 
 describe Zoom::Actions::Account do
   let(:zc) { zoom_client }
-  let(:args) { { account_id: '1' } }
+  let(:args) {
+    {
+      account_id: '1',
+      schedule_meeting: {
+        host_video: true
+      }
+    }
+  }
 
-  describe '#settings_get action' do
+  describe '#settings_update action' do
     context 'with a valid response' do
       before :each do
         stub_request(
-          :get,
+          :patch,
           zoom_url("/accounts/#{args[:account_id]}/settings")
-          ).to_return(status: 200,
-                      body: json_response('account', 'settings_get'),
+          ).to_return(status: 204,
+                      body: json_response('account', 'settings_update'),
                       headers: { 'Content-Type' => 'application/json' })
       end
 
       it 'requires id param' do
-        expect { zc.account_settings_get }.to raise_error(Zoom::ParameterMissing, [:account_id].to_s)
+        expect { zc.account_settings_update }.to raise_error(Zoom::ParameterMissing, [:account_id].to_s)
       end
 
       it 'returns a hash' do
-        expect(zc.account_settings_get(args)).to be_kind_of(Hash)
-      end
-
-      it 'returns same params' do
-        res = zc.account_settings_get(args)
-
-        expect(res.keys).to match_array(%w[email_notification feature in_meeting integration recording schedule_meeting security telephony tsp zoom_rooms])
+        expect(zc.account_settings_update(args)).to eql(204)
       end
     end
 
     context 'with a 4xx response' do
       before :each do
         stub_request(
-          :get,
+          :patch,
           zoom_url("/accounts/#{args[:account_id]}/settings")
         ).to_return(status: 404,
                     body: json_response('error', 'validation'),
@@ -43,7 +44,7 @@ describe Zoom::Actions::Account do
       end
 
       it 'raises Zoom::Error exception' do
-        expect { zc.account_settings_get(args) }.to raise_error(Zoom::Error)
+        expect { zc.account_settings_update(args) }.to raise_error(Zoom::Error)
       end
     end
   end

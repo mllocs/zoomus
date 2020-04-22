@@ -1,5 +1,5 @@
 {
-  "schedule_meting": {
+  "schedule_meeting": {
     "host_video": false,
     "participant_video": false,
     "audio_type": "both",

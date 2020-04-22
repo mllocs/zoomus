@@ -2,6 +2,8 @@ module Zoom
   module Constants
     module Account
       module Settings
+        PERMITTED_OPTIONS = %i[meeting_authentication recording_authentication]
+
         PERMITTED_KEYS = {
           schedule_meeting: %i[
             host_video

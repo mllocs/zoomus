@@ -59,7 +59,7 @@ module Zoom
 
     def permit_value(key, values)
       value = @parameters[key]
-      unless values.include?(value)
+      unless !value || values.include?(value)
         raise Zoom::ParameterValueNotPermitted, "#{key}: #{value}"
       end
     end

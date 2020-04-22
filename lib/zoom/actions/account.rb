@@ -42,6 +42,7 @@ module Zoom
       def account_settings_update(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:account_id).permit(:option, Zoom::Constants::Account::Settings::PERMITTED_KEYS)
+        params.permit_value(:option, Zoom::Constants::Account::Settings::PERMITTED_OPTIONS)
         Utils.parse_response self.class.patch("/accounts/#{params[:account_id]}/settings", query: params.slice(:option), body: params.except(%i[account_id option]), headers: request_headers)
       end
 
