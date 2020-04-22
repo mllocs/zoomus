@@ -28,7 +28,11 @@ describe Zoom::Actions::Account do
         expect { zc.account_settings_update }.to raise_error(Zoom::ParameterMissing, [:account_id].to_s)
       end
 
-      it 'returns a hash' do
+      it 'raises an error when passed an invalid param' do
+        expect { zc.account_settings_update(args.merge(foo: 'bar')) }.to raise_error(Zoom::ParameterNotPermitted, [:foo].to_s)
+      end
+
+      it 'returns a 204 successful response' do
         expect(zc.account_settings_update(args)).to eql(204)
       end
     end
