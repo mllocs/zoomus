@@ -1,0 +1,13 @@
+{
+  "id": "1",
+  "owner_id": "1",
+  "owner_email": "foo@bar.com",
+  "created_at": "string [date-time]",
+  "options": {
+    "share_rc": true,
+    "room_connectors": "string",
+    "share_mc": true,
+    "meeting_connectors": "string",
+    "pay_mode": "string"
+  }
+}
