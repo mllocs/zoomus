@@ -1,0 +1,7 @@
+{
+  "share_rc": true,
+  "room_connectors": "string",
+  "share_mc": true,
+  "meeting_connectors": "string",
+  "pay_mode": "master"
+}
