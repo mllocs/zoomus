@@ -12,7 +12,7 @@ describe Zoom::Actions::Account do
         stub_request(
           :get,
           zoom_url("/accounts/#{args[:account_id]}")
-        ).to_return(body: json_response('account', 'create'),
+        ).to_return(body: json_response('account', 'get'),
                     headers: { 'Content-Type' => 'application/json' })
       end
 
