@@ -1,0 +1,10 @@
+{
+  "code": 300,
+  "errors": [
+    {
+      "field": "stream_key",
+      "message": "Missing field."
+    }
+  ],
+  "message": "Validation Failed."
+}
