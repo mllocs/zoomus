@@ -42,7 +42,7 @@ module Zoom
       private
 
       def set_tokens(response)
-        unless response.key(:error)
+        if response.is_a?(Hash) && !response.key?(:error)
           @access_token = response["access_token"]
           @refresh_token = response["refesh_token"]
         end
