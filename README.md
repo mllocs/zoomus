@@ -51,7 +51,7 @@ zoom_client = Zoom::Client::OAuth.new(access_token: 'xxx', timeout: 15)
 ```
 
 You can also make a call to refresh with auth using an auth_token and a refresh_token
-```
+```ruby
 client = Zoom::Client::OAuth.new(auth_token: auth_token, refresh_token: refresh_token).auth
 
 zoom_client = Zoom::Client::OAuth.new(access_token: 'xxx', timeout: 15)
