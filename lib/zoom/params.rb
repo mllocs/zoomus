@@ -16,7 +16,10 @@ module Zoom
     def require_one_of(*keys)
       required_keys = keys
       keys = find_matching_keys(keys.flatten)
-      raise Zoom::ParameterMissing, required_keys unless keys.any?
+      unless keys.any?
+        message = required_keys.length > 1 ? "You are missing atleast one of #{required_keys}" : required_keys
+        raise Zoom::ParameterMissing, message
+      end
     end
 
     def permit(*filters)
