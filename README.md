@@ -31,15 +31,33 @@ end
 zoom_client = Zoom.new
 ```
 
-To create an OAuth client, create the client directly
+To create an OAuth flow you need to make a call to auth, then create the client directly from an access token.
+
+First you need to get an auth_code externally from:
+```
+https://zoom.us/oauth/authorize?response_type=code&client_id=7lstjKqdwjett_kwjwDSEQ&redirect_uri=https://yourapp.com
+```
+
+Which will result in a redirect to your app with code in the url params
+
+then use this code to get an access token and a refresh token, the auth token is base64(client_id:client_secret).
 
 ```ruby
 require 'zoom'
 
+client = Zoom::Client::OAuth.new(auth_token: auth_token, auth_code: auth_code, timeout: 15).auth
+
 zoom_client = Zoom::Client::OAuth.new(access_token: 'xxx', timeout: 15)
 ```
 
-With the client, access the API
+You can also make a call to refresh with auth using an auth_token and a refresh_token
+```
+client = Zoom::Client::OAuth.new(auth_token: auth_token, refresh_token: refresh_token).auth
+
+zoom_client = Zoom::Client::OAuth.new(access_token: 'xxx', timeout: 15)
+```
+
+With the zoom client, access the API
 
 ```ruby
 user_list = zoom_client.user_list
