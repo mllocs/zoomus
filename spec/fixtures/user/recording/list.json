@@ -1,0 +1,50 @@
+{
+    "from": "2015-04-01",
+    "to": "2015-05-01",
+    "page_count": 1,
+    "page_size": 30,
+    "total_records": 1,
+    "next_page_token": "",
+    "meetings": [
+        {
+        "uuid": "ucc69C82Q5mTNyCRWE29Aw==",
+        "meeting_number": 933560800,
+        "host_id": "kEFomHcIRgqxZT8D086O6A",
+        "account_id": "NyEqCEoYSNOr4jLMHoO2tA",
+        "topic": "vgfdsffdfdsf s3423432",
+        "start_time": "2015-04-13T01:06:04Z",
+        "timezone": "UTC",
+        "duration": 1,
+        "total_size": 686496,
+        "recording_count": 3,
+        "recording_files": [
+            {
+                "id": "654234c0-ca6e-4dfd-a09d-54f85951658f",
+                "meeting_id": "ucc69C82Q5mTNyCRWE29Aw==",
+                "recording_start": "2015-04-13T01:06:36Z",
+                "recording_end": "2015-04-13T01:06:47Z",
+                "file_type": "MP4",
+                "file_size": 438482,
+                "play_url": "https://rocky.zoom.us/recording/play/654234c0-ca6e-4dfd-a09d-54f85951658f",
+                "download_url": "https://rocky.zoom.us/rec/download/654234c0-ca6e-4dfd-a09d-54f85951658f"
+            }, {
+                "id": "51ff09f7-e8d8-4b29-9e61-fb8e0cbc7246",
+                "meeting_id": "ucc69C82Q5mTNyCRWE29Aw==",
+                "recording_start": "2015-04-13T01:06:55Z",
+                "recording_end": "2015-04-13T01:07:02Z",
+                "file_type": "MP4",
+                "file_size": 244958,
+                "play_url": "https://rocky.zoom.us/recording/play/51ff09f7-e8d8-4b29-9e61-fb8e0cbc7246",
+                "download_url": "https://rocky.zoom.us/rec/download/51ff09f7-e8d8-4b29-9e61-fb8e0cbc7246"
+            }, {
+                "id": "b601d00e-497a-450f-bb05-9896ce20c03e",
+                "meeting_id": "ucc69C82Q5mTNyCRWE29Aw==",
+                "recording_start": "2015-04-13T01:06:55Z",
+                "recording_end": "2015-04-13T01:07:02Z",
+                "file_type": "M4A",
+                "file_size": 3056,
+                "play_url": "https://rocky.zoom.us/recording/play/b601d00e-497a-450f-bb05-9896ce20c03e",
+                "download_url": "https://rocky.zoom.us/rec/download/b601d00e-497a-450f-bb05-9896ce20c03e"
+            }]
+    }]
+}

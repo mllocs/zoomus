@@ -138,6 +138,13 @@ module Zoom
         # params = Zoom::Params.new(Utils.extract_options!(args))
         raise Zoom::NotImplemented, 'user_vanity_name_check is not yet implemented'
       end
+
+      def user_recordings_list(*args)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:id).permit(%i[page_size next_page_token mc trash from to trash_type])
+        Utils.parse_response self.class.get("/users/#{params[:id]}/recordings", query: params.except(:id), headers: request_headers)
+      end
+
     end
   end
 end
