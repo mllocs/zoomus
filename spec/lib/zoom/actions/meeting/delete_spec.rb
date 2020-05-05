@@ -2,54 +2,37 @@
 
 require 'spec_helper'
 
-xdescribe Zoom::Actions::Meeting do
+describe Zoom::Actions::Meeting do
   let(:zc) { zoom_client }
-  let(:args) { { host_id: 'ufR93M2pRyy8ePFN92dttq', id: '252482092' } }
+  let(:args) { { meeting_id: '91538056781' } }
 
-  xdescribe '#meeting_delete action' do
+  describe '#meeting_delete action' do
     before :each do
       stub_request(
-        :post,
-        zoom_url('/meeting/delete')
-      ).to_return(body: json_response('meeting', 'delete'))
+        :delete,
+        zoom_url("/meetings/#{args[:meeting_id]}")
+      ).to_return(
+        status: 204,
+        headers: { 'Content-Type': 'application/json' }
+      )
     end
 
-    it "requires a 'host_id' argument" do
+    it "requires a 'meeting_id' argument" do
       expect {
-        zc.meeting_delete(filter_key(args, :host_id))
-      }.to raise_error(ArgumentError)
+        zc.meeting_delete(filter_key(args, :meeting_id))
+      }.to raise_error(Zoom::ParameterMissing)
     end
 
-    it "requires a 'id' argument" do
-      expect {
-        zc.meeting_delete(filter_key(args, :id))
-      }.to raise_error(ArgumentError)
-    end
-
-    it 'returns a hash' do
-      expect(zc.meeting_delete(args)).to be_kind_of(Hash)
-    end
-
-    it 'returns id and deleted at attributes' do
-      res = zc.meeting_delete(args)
-
-      expect(res['id']).to eq(args[:id])
-      expect(res['deleted_at']).to eq('2013-04-05T15:50:47Z')
+    it 'returns a status code' do
+      expect(zc.meeting_delete(args)).to eq 204
     end
   end
 
-  xdescribe '#meeting_delete! action' do
-    before :each do
-      stub_request(
-        :post,
-        zoom_url('/meeting/delete')
-      ).to_return(body: json_response('error'))
-    end
-
-    it 'raises Zoom::Error exception' do
+  describe '#meeting_delete! action' do
+    it 'raises NoMethodError exception' do
       expect {
         zc.meeting_delete!(args)
-      }.to raise_error(Zoom::Error)
+      }.to raise_error(NoMethodError)
     end
   end
 end
