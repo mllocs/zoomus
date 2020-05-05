@@ -13,6 +13,15 @@ module Zoom
       raise Zoom::ParameterMissing, missing_keys.to_s
     end
 
+    def require_one_of(*keys)
+      required_keys = keys
+      keys = find_matching_keys(keys.flatten)
+      unless keys.any?
+        message = required_keys.length > 1 ? "You are missing atleast one of #{required_keys}" : required_keys
+        raise Zoom::ParameterMissing, message
+      end
+    end
+
     def permit(*filters)
       permitted_keys = filters.flatten.each_with_object([]) do |filter, array|
                          case filter
@@ -49,6 +58,12 @@ module Zoom
         self.class.new(value).permit(filter[key])
       end
       filter.keys
+    end
+
+    def find_matching_keys(keys)
+      keys.flatten.each_with_object([]) do |key, array|
+        array << key if self[key]
+      end
     end
 
     def find_missing_keys(keys)
