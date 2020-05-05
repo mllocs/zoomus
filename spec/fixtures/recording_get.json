@@ -1,14 +1,16 @@
 {
 "uuid": "ucc69C82Q5mTNyCRWE29Aw==",
-"meeting_number": 933560800,
-"host_id": "kEFomHcIRgqxZT8D086O6A",
+"id": 933560800,
 "account_id": "NyEqCEoYSNOr4jLMHoO2tA",
-"topic": "vgfdsffdfdsf s3423432",
+"host_id": "kEFomHcIRgqxZT8D086O6A",
+"topic": "Meeting Topic Name",
+"type": 2,
 "start_time": "2015-04-13T01:06:04Z",
 "timezone": "UTC",
 "duration": 1,
 "total_size": 686496,
 "recording_count": 3,
+"share_url": "https://rocky.zoom.us/rec/share/yOhZBZD8r3FIX6_Drx6ARpYDDNz1aaa82nQe_6EEzUsi9ZSHG6zz31U44RKZyRLn",
 "recording_files": [{
     "id": "654234c0-ca6e-4dfd-a09d-54f85951658f",
     "meeting_id": "ucc69C82Q5mTNyCRWE29Aw==",
@@ -16,7 +18,10 @@
     "recording_end": "2015-04-13T01:06:47Z",
     "file_type": "MP4",
     "file_size": 438482,
-    "play_url": "https://rocky.zoom.us/recording/play/654234c0-ca6e-4dfd-a09d-54f85951658f"
+    "play_url": "https://rocky.zoom.us/recording/play/654234c0-ca6e-4dfd-a09d-54f85951658f",
+    "download_url": "https://rocky.zoom.us/rec/download/654234c0-ca6e-4dfd-a09d-54f85951658f-qZexUzhACIGZwGuYeYUZeSGfVPBqogCRBQNgzrURSbw",
+    "status": "completed",
+    "recording_type": "shared_screen_with_speaker_view"
 }, {
     "id": "51ff09f7-e8d8-4b29-9e61-fb8e0cbc7246",
     "meeting_id": "ucc69C82Q5mTNyCRWE29Aw==",
@@ -24,7 +29,10 @@
     "recording_end": "2015-04-13T01:07:02Z",
     "file_type": "MP4",
     "file_size": 244958,
-    "play_url": "https://rocky.zoom.us/recording/play/51ff09f7-e8d8-4b29-9e61-fb8e0cbc7246"
+    "play_url": "https://rocky.zoom.us/recording/play/51ff09f7-e8d8-4b29-9e61-fb8e0cbc7246",
+    "download_url": "https://rocky.zoom.us/rec/download/51ff09f7-e8d8-4b29-9e61-fb8e0cbc7246-qZexUzhACIGZwGuYeYUZeSGfVPBqogCRBQNgzrURSbw",
+    "status": "completed",
+    "recording_type": "shared_screen_with_speaker_view"
 }, {
     "id": "b601d00e-497a-450f-bb05-9896ce20c03e",
     "meeting_id": "ucc69C82Q5mTNyCRWE29Aw==",
@@ -32,6 +40,9 @@
     "recording_end": "2015-04-13T01:07:02Z",
     "file_type": "M4A",
     "file_size": 3056,
-    "play_url": "https://rocky.zoom.us/recording/play/b601d00e-497a-450f-bb05-9896ce20c03e"
+    "play_url": "https://rocky.zoom.us/recording/play/b601d00e-497a-450f-bb05-9896ce20c03e",
+    "download_url": "https://rocky.zoom.us/rec/download/b601d00e-497a-450f-bb05-9896ce20c03e-qZexUzhACIGZwGuYeYUZeSGfVPBqogCRBQNgzrURSbw",
+    "status": "completed",
+    "recording_type": "shared_screen_with_speaker_view"
 }]
 }

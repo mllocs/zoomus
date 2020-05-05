@@ -57,12 +57,29 @@ describe Zoom::Client do
 
   describe 'OAuth client' do
     let(:access_token) {'xxx'}
+    let(:refresh_token) {'xxx'}
+    let(:auth_token) {'xxx'}
     let(:client) {
       Zoom::Client::OAuth.new(access_token: access_token, timeout: 30)
     }
-    it 'requires an access token' do
+    it 'raises an error if there is no token' do
       expect { Zoom::Client::OAuth.new(timeout: 30) }.to raise_error(Zoom::ParameterMissing)
+    end
+
+    it 'raises an error if there is no complete auth token, auth code and redirect_uri' do
+      expect { Zoom::Client::OAuth.new(auth_token: 'xxx', timeout: 30) }.to raise_error(Zoom::ParameterMissing)
+    end
+
+    it 'raises an error if there is no complete auth token, auth code and redirect_uri' do
+      expect { Zoom::Client::OAuth.new(auth_token: 'xxx', auth_code: 'xxx', redirect_uri: 'xxx') }.not_to raise_error(Zoom::ParameterMissing)
+    end
+
+    it 'requires atleast an access token' do
       expect { Zoom::Client::OAuth.new(access_token: access_token) }.not_to raise_error
+    end
+
+    it 'requires atleast a refresh token' do
+      expect { Zoom::Client::OAuth.new(refresh_token: refresh_token) }.not_to raise_error
     end
 
     it 'creates instance of Zoom::Client if api_key and api_secret is provided' do
