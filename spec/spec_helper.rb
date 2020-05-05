@@ -20,6 +20,14 @@ def json_response(*path, endpoint)
   open(fixture(path, endpoint + '.json')).read
 end
 
+def request_headers
+  {
+    'Accept' => 'application/json',
+    'Content-Type' => 'application/json',
+    'Authorization' => /Bearer .+/
+  }
+end
+
 def zoom_url(url)
   /https:\/\/api.zoom.us\/v2#{url}.*/
 end

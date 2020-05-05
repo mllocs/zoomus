@@ -1,0 +1,12 @@
+{
+  "first_name": "Foo",
+  "last_name": "Bar",
+  "email": "foo@bar.com",
+  "phone_number": "string",
+  "address": "string",
+  "apt": "string",
+  "city": "string",
+  "state": "string",
+  "zip": "string",
+  "country": "string"
+}
