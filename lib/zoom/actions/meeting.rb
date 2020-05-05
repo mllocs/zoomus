@@ -87,8 +87,8 @@ module Zoom
 
       def livestream(*args)
         options = Zoom::Params.new(Utils.extract_options!(args))
-        options.require(%i[meeting_uuid stream_url stream_key]).permit(%i[page_url])
-        Utils.parse_response self.class.patch("/meetings/#{options[:meeting_uuid]}/livestream", headers: request_headers)
+        options.require(%i[meeting_id stream_url stream_key]).permit(%i[page_url])
+        Utils.parse_response self.class.patch("/meetings/#{options[:meeting_id]}/livestream", body: options.except(:meeting_id), headers: request_headers)
       end
     end
   end

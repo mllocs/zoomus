@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe Zoom::Actions::Meeting do
   let(:zc) { zoom_client }
-  let(:args) { { meeting_uuid: '3qn1231nd', stream_url: 'owuj2n323hdns', stream_key: 'w02KPjeena' } }
+  let(:args) { { meeting_id: '3qn1231nd', stream_url: 'owuj2n323hdns', stream_key: 'w02KPjeena' } }
   let(:response) { zc.livestream(args) }
 
   describe '#livestream action' do
@@ -12,15 +12,15 @@ describe Zoom::Actions::Meeting do
       before :each do
         stub_request(
           :patch,
-          zoom_url("/meetings/#{args[:meeting_uuid]}/livestream")
+          zoom_url("/meetings/#{args[:meeting_id]}/livestream")
         ).to_return(status: 204,
                     headers: { 'Content-Type' => 'application/json' })
       end
 
       it "requires meeting_id param" do
         expect {
-          zc.livestream(filter_key(args, :meeting_uuid))
-        }.to raise_error(Zoom::ParameterMissing, [:meeting_uuid].to_s)
+          zc.livestream(filter_key(args, :meeting_id))
+        }.to raise_error(Zoom::ParameterMissing, [:meeting_id].to_s)
       end
 
       it 'returns a hash' do
@@ -32,7 +32,7 @@ describe Zoom::Actions::Meeting do
       before :each do
         stub_request(
           :patch,
-          zoom_url("/meetings/#{args[:meeting_uuid]}/livestream")
+          zoom_url("/meetings/#{args[:meeting_id]}/livestream")
         ).to_return(status: 300,
                     body: json_response('meeting/live_stream/errors', 'missing_field'),
                     headers: { 'Content-Type' => 'application/json' })
@@ -47,7 +47,7 @@ describe Zoom::Actions::Meeting do
       before :each do
         stub_request(
           :patch,
-          zoom_url("/meetings/#{args[:meeting_uuid]}/livestream")
+          zoom_url("/meetings/#{args[:meeting_id]}/livestream")
         ).to_return(status: 404,
                     body: json_response('meeting/live_stream/errors', 'meeting_not_found'),
                     headers: { 'Content-Type' => 'application/json' })
