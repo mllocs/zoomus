@@ -59,7 +59,12 @@ module Zoom
           params.delete(filter)
         when Hash
           filter.each do |k, v|
-            params[k] = self.class.new(self[k]).filter_required(v)
+            nested_filter = self.class.new(self[k]).filter_required(v)
+            if nested_filter.empty?
+              params.delete(k)
+            else
+              params[k] = nested_filter
+            end
           end
         end
       end
@@ -69,6 +74,7 @@ module Zoom
       entries.flatten.each.with_object([]) do |entry, array|
         if entry.is_a?(Hash)
           entry.keys.each do |k|
+            array << k && next if self[k].nil?
             missing_entries = self.class.new(self[k]).find_missing_entries(*entry[k])
             array << { k => missing_entries } unless missing_entries.empty?
           end

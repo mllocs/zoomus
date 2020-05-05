@@ -18,6 +18,10 @@ describe Zoom::Actions::Account do
         state: 'WA',
         zip: '98660',
         country: 'US'
+      },
+      plan_base: {
+        type: 'monthly',
+        hosts: 10
       }
     }
   }
