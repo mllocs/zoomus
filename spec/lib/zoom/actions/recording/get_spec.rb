@@ -2,41 +2,40 @@
 
 require 'spec_helper'
 
-xdescribe Zoom::Actions::Recording do
+describe Zoom::Actions::Recording do
+  let(:zc) { zoom_client }
+  let(:args) { { user_id: 'kEFomHcIRgqxZT8D086O6A', meeting_id: 933560800 } }
 
-  before :all do
-    @zc = zoom_client
-    @args = {
-      meeting_id: 'ucc69C82Q5mTNyCRWE29Aw=='
-    }
-  end
-
-  xdescribe '#recording_get action' do
+  describe '#recording_get action' do
     before :each do
       stub_request(
-        :post,
-        zoom_url('/recording/get')
-      ).to_return(body: json_response('recording_get'))
+        :get,
+        zoom_url("/meetings/#{args[:meeting_id]}/recordings")
+      ).to_return(
+        status: 200,
+        body: json_response('recording_get'),
+        headers: { 'Content-Type' => 'application/json' }
+      )
     end
 
     it "requires a 'meeting_id' argument" do
       expect {
-        @zc.meeting_create(filter_key(@args, :meeting_id))
-      }.to raise_error(ArgumentError)
+        zc.recording_get(filter_key(args, :meeting_id))
+      }.to raise_error(Zoom::ParameterMissing)
     end
 
     it 'returns a hash' do
-      expect(@zc.recording_get(@args)).to be_kind_of(Hash)
+      expect(zc.recording_get(args)).to be_kind_of(Hash)
     end
 
     it 'returns id and attributes' do
-      res = @zc.recording_get(@args)
+      res = zc.recording_get(args)
 
-      expect(res['uuid']).to eq(@args[:meeting_id])
-      expect(res['meeting_number']).to eq(933560800)
+      expect(res['uuid']).to eq("ucc69C82Q5mTNyCRWE29Aw==")
+      expect(res['id']).to eq(args[:meeting_id])
       expect(res['host_id']).to eq('kEFomHcIRgqxZT8D086O6A')
       expect(res['account_id']).to eq('NyEqCEoYSNOr4jLMHoO2tA')
-      expect(res['topic']).to eq('vgfdsffdfdsf s3423432')
+      expect(res['topic']).to eq('Meeting Topic Name')
       expect(res['start_time']).to eq('2015-04-13T01:06:04Z')
       expect(res['timezone']).to eq('UTC')
       expect(res['duration']).to eq(1)
@@ -45,22 +44,15 @@ xdescribe Zoom::Actions::Recording do
     end
 
     it "returns 'recording_files' Array" do
-      expect(@zc.recording_get(@args)['recording_files']).to be_kind_of(Array)
+      expect(zc.recording_get(args)['recording_files']).to be_kind_of(Array)
     end
   end
 
-  xdescribe '#recording_get! action' do
-    before :each do
-      stub_request(
-        :post,
-        zoom_url('/recording/get')
-      ).to_return(body: json_response('error'))
-    end
-
-    it 'raises Zoom::Error exception' do
+  describe '#recording_get! action' do
+    it 'raises NoMethodError exception' do
       expect {
         @zc.recording_get!(@args)
-      }.to raise_error(Zoom::Error)
+      }.to raise_error(NoMethodError)
     end
   end
 end
