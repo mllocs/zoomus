@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe Zoom::Actions::Meeting do
   let(:zc) { zoom_client }
-  let(:args) { { user_id: 'ufR93M2pRyy8ePFN92dttq', type: 2, topic: 'Foo' } }
+  let(:args) { { topic: 'Zoom Meeting Topic', start_time: '2020-05-05T21:00:00Z', timezone: 'America/New_York', duration: 30, type: 2, user_id: 'r55v2FgSTVmDmVot18DX3A' } }
   let(:response) { zc.meeting_create(args) }
 
   describe '#meeting_create action' do
@@ -13,21 +13,17 @@ describe Zoom::Actions::Meeting do
         stub_request(
           :post,
           zoom_url("/users/#{args[:user_id]}/meetings")
-        ).to_return(status: 201,
-                    body: json_response('meeting','create'),
-                    headers: { 'Content-Type' => 'application/json' })
+        ).to_return(
+          status: 201,
+          body: json_response('meeting','create'),
+          headers: { 'Content-Type' => 'application/json' }
+        )
       end
 
       it "requires user_id param" do
         expect {
           zc.meeting_create(filter_key(args, :user_id))
         }.to raise_error(Zoom::ParameterMissing, [:user_id].to_s)
-      end
-
-      it "requires user_id param" do
-        expect {
-          zc.meeting_create(args)
-        }.not_to raise_error
       end
 
       it 'returns a hash' do
@@ -37,6 +33,8 @@ describe Zoom::Actions::Meeting do
       it 'returns the set params' do
         expect(response['type']).to eq(args[:type])
         expect(response['topic']).to eq(args[:topic])
+        expect(response['start_time']).to eq(args[:start_time])
+        expect(response['duration']).to eq(args[:duration])
       end
 
       it "returns 'start_url' and 'join_url'" do
@@ -50,9 +48,11 @@ describe Zoom::Actions::Meeting do
         stub_request(
           :post,
           zoom_url("/users/#{args[:user_id]}/meetings")
-        ).to_return(status: 404,
-                    body: json_response('error', 'user_not_exist'),
-                    headers: { 'Content-Type' => 'application/json' })
+        ).to_return(
+          status: 404,
+          body: json_response('error', 'user_not_exist'),
+          headers: { 'Content-Type' => 'application/json' }
+        )
       end
 
       it 'raises an error' do

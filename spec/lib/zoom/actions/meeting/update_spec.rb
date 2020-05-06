@@ -2,52 +2,58 @@
 
 require 'spec_helper'
 
-xdescribe Zoom::Actions::Meeting do
+describe Zoom::Actions::Meeting do
   let(:zc) { zoom_client }
-  let(:args) { { host_id: 'ufR93M2pRyy8ePFN92dttq', id: '252482092', type: '2' } }
+  let(:args) { { meeting_id: 91538056781, topic: 'Updated Topic' } }
 
-  xdescribe '#meeting_update action' do
-    before :each do
-      stub_request(
-        :post,
-        zoom_url('/meeting/update')
-      ).to_return(body: json_response('meeting', 'update'))
+  describe '#meeting_update action' do
+    context 'with 204 response' do
+      before :each do
+        stub_request(
+          :patch,
+          zoom_url("/meetings/#{args[:meeting_id]}")
+        ).to_return(
+          status: 204,
+          headers: { 'Content-Type' => 'application/json' }
+        )
+      end
+
+      it "requires a 'meeting_id' argument" do
+        expect {
+          zc.meeting_update(filter_key(args, :meeting_id))
+        }.to raise_error(Zoom::ParameterMissing, [:meeting_id].to_s)
+      end
+
+      it 'returns a status code' do
+        expect(zc.meeting_update(args)).to eq 204
+      end
     end
 
-    it "requires a 'host_id' argument" do
-      expect { zc.meeting_update(filter_key(args, :host_id)) }.to raise_error(ArgumentError)
-    end
+    context 'with 404 response' do
+      before :each do
+        stub_request(
+          :patch,
+          zoom_url("/meetings/invalid-meeting-id")
+        ).to_return(
+          status: 404,
+          body: json_response('error', 'meeting_not_exist'),
+          headers: { 'Content-Type' => 'application/json' }
+        )
+      end
 
-    it "requires a 'id' argument" do
-      expect { zc.meeting_update(filter_key(args, :id)) }.to raise_error(ArgumentError)
-    end
-
-    it "requires a 'type' argument" do
-      expect { zc.meeting_update(filter_key(args, :type)) }.to raise_error(ArgumentError)
-    end
-
-    it 'returns a hash' do
-      expect(zc.meeting_update(args)).to be_kind_of(Hash)
-    end
-
-    it 'returns id and updated_at attributes' do
-      res = zc.meeting_update(args)
-
-      expect(res['id']).to eq(args[:id])
-      expect(res['updated_at']).to eq('2013-02-25T15:52:38Z')
+      it 'raises an error' do
+        expect {
+          zc.meeting_update(args.merge(meeting_id: 'invalid-meeting-id'))
+        }.to raise_error(Zoom::Error, { base: "Invalid meeting id." }.to_s)
+      end
     end
   end
 
-  xdescribe '#meeting_update! action' do
-    before :each do
-      stub_request(
-        :post,
-        zoom_url('/meeting/update')
-      ).to_return(body: json_response('error'))
-    end
-
-    it 'raises Zoom::Error exception' do
-      expect { zc.meeting_update!(args) }.to raise_error(Zoom::Error)
+  describe '#meeting_update! action' do
+    it 'raises NoMethodError exception' do
+      expect {
+        zc.meeting_update!(args)
+      }.to raise_error(NoMethodError)
     end
   end
 end

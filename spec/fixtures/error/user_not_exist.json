@@ -1,4 +1,4 @@
 {
   "code": 1001,
-  "message": "User not exist: foo"
+  "message": "User does not exist: foo"
 }
