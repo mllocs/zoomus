@@ -1,0 +1,30 @@
+{
+  "plan_base": {
+    "type": "string",
+    "hosts": 10
+  },
+  "plan_zoom_rooms": {
+    "type": "string",
+    "hosts": 10
+  },
+  "plan_room_connector": {
+    "type": "string",
+    "hosts": 10
+  },
+  "plan_large_meeting": [{
+    "type": "string",
+    "hosts": 10
+  }],
+  "plan_webinar": [{
+    "type": "string",
+    "hosts": 10
+  }],
+  "plan_recording": "string",
+  "plan_audio": {
+    "type": "string",
+    "tollfree_countries": "string",
+    "premium_countries": "string",
+    "callout_countries": "string",
+    "ddi_numbers": 10
+  }
+}

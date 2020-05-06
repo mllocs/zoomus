@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'json', '>= 1.8'
   gem.add_dependency 'jwt'
 
-  gem.add_development_dependency 'pry', '~> 0'
+  gem.add_development_dependency 'pry-byebug'
   gem.add_development_dependency 'hint-rubocop_style', '~> 0'
   gem.add_development_dependency 'rspec', '~> 3.8'
   gem.add_development_dependency 'rspec_junit_formatter', '~> 0.4.1'
