@@ -21,6 +21,7 @@ describe Zoom::Client do
       end
       Zoom.new
       expect(Zoom::Client::JWT.default_options[:timeout]).to eq(15)
+      Zoom.configuration = nil
     end
 
     it 'must get the timeout from the configuration' do
@@ -31,6 +32,7 @@ describe Zoom::Client do
       end
       Zoom.new
       expect(Zoom::Client::JWT.default_options[:timeout]).to eq(20)
+      Zoom.configuration = nil
     end
   end
 
