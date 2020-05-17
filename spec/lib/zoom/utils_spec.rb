@@ -2,21 +2,26 @@
 
 require 'spec_helper'
 
-xdescribe Zoom::Utils do
+describe Zoom::Utils do
 
   before(:all) do
     class Utils < Zoom::Utils; end
   end
 
-  xdescribe '#argument_error' do
+  describe '#argument_error' do
     it 'raises ArgumentError' do
       expect(Utils.argument_error('foo')).to be_instance_of(ArgumentError)
     end
   end
 
-  xdescribe '#raise_if_error!' do
-    it 'raises Zoom::Error if error is present' do
-      response = { 'error' => { 'message' => 'lol error' } }
+  describe '#raise_if_error!' do
+    it 'raises Zoom::AuthenticationError if error is present and code = 124' do
+      response = { 'code' => 124, 'message' => 'Invalid access token.' }
+      expect { Utils.raise_if_error!(response) }.to raise_error(Zoom::AuthenticationError)
+    end
+
+    it 'raises Zoom::Error if error is present and code >= 300' do
+      response = { 'code' => 400, 'message' => 'lol error' }
       expect { Utils.raise_if_error!(response) }.to raise_error(Zoom::Error)
     end
 
@@ -26,14 +31,14 @@ xdescribe Zoom::Utils do
     end
   end
 
-  xdescribe '#extract_options!' do
+  describe '#extract_options!' do
     it 'converts array to hash options' do
       args = [{ foo: 'foo' }, { bar: 'bar' }, { zemba: 'zemba' }]
       expect(Utils.extract_options!(args)).to be_kind_of(Hash)
     end
   end
 
-  xdescribe '#process_datetime_params' do
+  describe '#process_datetime_params' do
     it 'converts the Time objects to formatted strings' do
       args = {
         foo: 'foo',
