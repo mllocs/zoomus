@@ -12,7 +12,7 @@ module Zoom
       end
 
       def raise_if_error!(response)
-        return response unless response.key?('code')
+        return response unless response&.key?('code')
 
         code = response['code']
 
