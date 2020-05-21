@@ -91,5 +91,25 @@ describe Zoom::Client do
     it 'has the bearer token in the auth header' do
       expect(client.request_headers['Authorization']).to eq("Bearer #{access_token}")
     end
+
+    describe 'set_tokens' do
+      let(:zc) { oauth_client }
+      let(:args) { { auth_code: 'xxx', redirect_uri: 'http://localhost:3000' } }
+
+      before :each do
+        stub_request(
+          :post,
+          zoom_auth_url('oauth/token')
+        ).to_return(body: json_response('token', 'access_token'),
+                    headers: { 'Content-Type' => 'application/json' })
+      end
+
+      it 'sets the refresh_token and access_token' do
+        expected_values = JSON.parse(json_response('token', 'access_token'))
+        zc.auth
+        expect(zc.access_token).to eq(expected_values['access_token'])
+        expect(zc.refresh_token).to eq(expected_values['refresh_token'])
+      end
+    end
   end
 end
