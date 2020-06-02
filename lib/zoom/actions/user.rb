@@ -129,9 +129,9 @@ module Zoom
 
       def user_email_check(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
-        require_param_keys = %i[email]
-        params.require(require_param_keys)
-        Utils.parse_response(self.class.get("/users/email", query: params, headers: request_headers))
+        params.permit(:email)
+        params.require(:email)
+        Utils.parse_response(self.class.get('/users/email', query: params, headers: request_headers))
       end
 
       def user_vanity_name_check(*args)
