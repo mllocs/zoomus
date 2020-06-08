@@ -3,7 +3,7 @@
 module Zoom
   class Client
     class OAuth < Zoom::Client
-      attr_reader :auth_token, :access_token, :refresh_token
+      attr_reader :auth_token, :access_token, :refresh_token, :expires_in, :expires_at
 
       # Auth_token is sent in the header
       # (auth_code, auth_token, redirect_uri) -> oauth API
@@ -45,6 +45,8 @@ module Zoom
         if response.is_a?(Hash) && !response.key?(:error)
           @access_token = response["access_token"]
           @refresh_token = response["refresh_token"]
+          @expires_in = response["expires_in"]
+          @expires_at = @expires_in ? (Time.now + @expires_in).to_i : nil
         end
       end
     end
