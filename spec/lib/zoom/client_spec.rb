@@ -104,11 +104,13 @@ describe Zoom::Client do
                     headers: { 'Content-Type' => 'application/json' })
       end
 
-      it 'sets the refresh_token and access_token' do
+      it 'sets the refresh_token, access_token, expires_in and expires_at' do
         expected_values = JSON.parse(json_response('token', 'access_token'))
         zc.auth
         expect(zc.access_token).to eq(expected_values['access_token'])
         expect(zc.refresh_token).to eq(expected_values['refresh_token'])
+        expect(zc.expires_in).to eq(expected_values['expires_in'])
+        expect(zc.expires_at).to eq((Time.now + expected_values['expires_in']).to_i)
       end
     end
   end
