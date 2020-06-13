@@ -20,7 +20,7 @@ describe Zoom::Actions::User do
         expect(zc.user_email_check(args)).to be_kind_of(Hash)
       end
 
-      it "returns 'existed_email" do
+      it "returns 'existed_email'" do
         expect(zc.user_email_check(args)['existed_email']).to be_truthy
       end
 
