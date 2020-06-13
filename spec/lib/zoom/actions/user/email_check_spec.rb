@@ -6,7 +6,7 @@ describe Zoom::Actions::User do
   let(:zc) { zoom_client }
   let(:args) { { email: 'test@example.com' } }
 
-  describe '#user_list action' do
+  describe '#user_email_check action' do
     context 'with a valid response' do
       before :each do
         stub_request(
