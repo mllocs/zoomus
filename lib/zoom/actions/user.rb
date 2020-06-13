@@ -129,8 +129,7 @@ module Zoom
 
       def user_email_check(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
-        params.permit(:email)
-        params.require(:email)
+        params.require(:email).permit(:email)
         Utils.parse_response(self.class.get('/users/email', query: params, headers: request_headers))
       end
 
