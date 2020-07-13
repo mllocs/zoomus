@@ -14,4 +14,5 @@ module Zoom
   class ParameterMissing < StandardError; end
   class ParameterNotPermitted < StandardError; end
   class ParameterValueNotPermitted < StandardError; end
+  class AuthenticationError < StandardError; end
 end

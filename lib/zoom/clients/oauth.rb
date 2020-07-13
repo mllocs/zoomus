@@ -3,7 +3,7 @@
 module Zoom
   class Client
     class OAuth < Zoom::Client
-      attr_reader :auth_token, :access_token, :refresh_token
+      attr_reader :auth_token, :access_token, :refresh_token, :expires_in, :expires_at
 
       # Auth_token is sent in the header
       # (auth_code, auth_token, redirect_uri) -> oauth API
@@ -15,7 +15,7 @@ module Zoom
       def initialize(config)
         Zoom::Params.new(config).permit(:auth_token, :auth_code, :redirect_uri, :access_token, :refresh_token, :timeout)
         Zoom::Params.new(config).require_one_of(:access_token, :refresh_token, :auth_token)
-        if (config.keys & [:auth_token, :auth_code, :redirect_uri]).any?
+        if (config.keys & [:auth_code, :redirect_uri]).any?
           Zoom::Params.new(config).require(:auth_token, :auth_code, :redirect_uri)
         end
 
@@ -44,7 +44,9 @@ module Zoom
       def set_tokens(response)
         if response.is_a?(Hash) && !response.key?(:error)
           @access_token = response["access_token"]
-          @refresh_token = response["refesh_token"]
+          @refresh_token = response["refresh_token"]
+          @expires_in = response["expires_in"]
+          @expires_at = @expires_in ? (Time.now + @expires_in).to_i : nil
         end
       end
     end

@@ -12,14 +12,19 @@ module Zoom
       end
 
       def raise_if_error!(response)
-        if response&.[]('code') && response['code'] >= 300
-          error_hash = { base: response['message'] }
-          error_hash[response['message']] = response['errors'] if response['errors']
+        return response unless response&.key?('code')
 
-          raise Error.new(error_hash, error_hash)
-        else
-          response
-        end
+        code = response['code']
+
+        raise AuthenticationError, build_error(response) if code == 124
+        error_hash = build_error(response)
+        raise Error.new(error_hash, error_hash) if code >= 300
+      end
+
+      def build_error(response)
+        error_hash = { base: response['message']}
+        error_hash[response['message']] = response['errors'] if response['errors']
+        error_hash
       end
 
       def parse_response(http_response)

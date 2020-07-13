@@ -21,6 +21,7 @@ describe Zoom::Client do
       end
       Zoom.new
       expect(Zoom::Client::JWT.default_options[:timeout]).to eq(15)
+      Zoom.configuration = nil
     end
 
     it 'must get the timeout from the configuration' do
@@ -31,6 +32,7 @@ describe Zoom::Client do
       end
       Zoom.new
       expect(Zoom::Client::JWT.default_options[:timeout]).to eq(20)
+      Zoom.configuration = nil
     end
   end
 
@@ -67,10 +69,6 @@ describe Zoom::Client do
     end
 
     it 'raises an error if there is no complete auth token, auth code and redirect_uri' do
-      expect { Zoom::Client::OAuth.new(auth_token: 'xxx', timeout: 30) }.to raise_error(Zoom::ParameterMissing)
-    end
-
-    it 'raises an error if there is no complete auth token, auth code and redirect_uri' do
       expect { Zoom::Client::OAuth.new(auth_token: 'xxx', auth_code: 'xxx', redirect_uri: 'xxx') }.not_to raise_error(Zoom::ParameterMissing)
     end
 
@@ -88,6 +86,28 @@ describe Zoom::Client do
 
     it 'has the bearer token in the auth header' do
       expect(client.request_headers['Authorization']).to eq("Bearer #{access_token}")
+    end
+
+    describe 'set_tokens' do
+      let(:zc) { oauth_client }
+      let(:args) { { auth_code: 'xxx', redirect_uri: 'http://localhost:3000' } }
+
+      before :each do
+        stub_request(
+          :post,
+          zoom_auth_url('oauth/token')
+        ).to_return(body: json_response('token', 'access_token'),
+                    headers: { 'Content-Type' => 'application/json' })
+      end
+
+      it 'sets the refresh_token, access_token, expires_in and expires_at' do
+        expected_values = JSON.parse(json_response('token', 'access_token'))
+        zc.auth
+        expect(zc.access_token).to eq(expected_values['access_token'])
+        expect(zc.refresh_token).to eq(expected_values['refresh_token'])
+        expect(zc.expires_in).to eq(expected_values['expires_in'])
+        expect(zc.expires_at).to eq((Time.now + expected_values['expires_in']).to_i)
+      end
     end
   end
 end
