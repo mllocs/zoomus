@@ -13,10 +13,10 @@ module Zoom
 
       def raise_if_error!(response)
         if response&.[]('code') && response['code'] >= 300
-          error_hash = { base: response['message']}
-          raise Error, error_hash unless response['errors']
-          error_hash[response['message']] = response['errors']
-          raise Error, error_hash
+          error_hash = { base: response['message'] }
+          error_hash[response['message']] = response['errors'] if response['errors']
+
+          raise Error.new(error_hash, error_hash)
         else
           response
         end
