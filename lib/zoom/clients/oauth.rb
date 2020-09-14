@@ -3,7 +3,7 @@
 module Zoom
   class Client
     class OAuth < Zoom::Client
-      attr_reader :auth_token, :access_token, :refresh_token, :expires_in, :expires_at
+      attr_reader :access_token, :refresh_token, :expires_in, :expires_at
 
       # Auth_token is sent in the header
       # (auth_code, auth_token, redirect_uri) -> oauth API
@@ -13,10 +13,10 @@ module Zoom
       # Returns (access_token, refresh_token)
       #
       def initialize(config)
-        Zoom::Params.new(config).permit(:auth_token, :auth_code, :redirect_uri, :access_token, :refresh_token, :timeout)
-        Zoom::Params.new(config).require_one_of(:access_token, :refresh_token, :auth_token)
+        Zoom::Params.new(config).permit( :auth_code, :redirect_uri, :access_token, :refresh_token, :timeout)
+        Zoom::Params.new(config).require_one_of(:access_token, :refresh_token)
         if (config.keys & [:auth_code, :redirect_uri]).any?
-          Zoom::Params.new(config).require(:auth_token, :auth_code, :redirect_uri)
+          Zoom::Params.new(config).require( :auth_code, :redirect_uri)
         end
 
         config.each { |k, v| instance_variable_set("@#{k}", v) }
