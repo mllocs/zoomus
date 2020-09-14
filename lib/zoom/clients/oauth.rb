@@ -14,7 +14,6 @@ module Zoom
       #
       def initialize(config)
         Zoom::Params.new(config).permit( :auth_code, :redirect_uri, :access_token, :refresh_token, :timeout)
-        Zoom::Params.new(config).require_one_of(:access_token, :refresh_token)
         if (config.keys & [:auth_code, :redirect_uri]).any?
           Zoom::Params.new(config).require( :auth_code, :redirect_uri)
         end
