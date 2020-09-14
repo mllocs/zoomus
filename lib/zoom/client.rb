@@ -16,6 +16,7 @@ module Zoom
     include Actions::Report
     include Actions::Recording
     include Actions::Roles
+    include Actions::Phone
     include Actions::IM::Chat
     include Actions::IM::Group
 
@@ -40,6 +41,10 @@ module Zoom
       {
         'Authorization' => "Bearer #{access_token}"
       }.merge(headers)
+    end
+
+    def auth_token
+      Base64.encode64("#{ENV['ZOOM_APP_CLIENT_ID']}:#{ENV['ZOOM_APP_SECRET']}").delete("\n")
     end
   end
 end

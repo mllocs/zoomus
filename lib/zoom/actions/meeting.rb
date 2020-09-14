@@ -97,6 +97,13 @@ module Zoom
         options.require(%i[meeting_id stream_url stream_key]).permit(%i[page_url])
         Utils.parse_response self.class.patch("/meetings/#{options[:meeting_id]}/livestream", body: options.except(:meeting_id), headers: request_headers)
       end
+
+      # Get a meeting on Zoom via meeting ID, return the meeting info.
+      def meeting_get_invitation(*args)
+        options = Zoom::Params.new(Utils.extract_options!(args))
+        options.require(%i[meeting_id])
+        Utils.parse_response self.class.get("/meetings/#{options[:meeting_id]}/invitation", headers: request_headers)
+      end
     end
   end
 end
