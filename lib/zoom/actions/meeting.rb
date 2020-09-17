@@ -100,7 +100,7 @@ module Zoom
 
       def meeting_invitation(*args)
         options = Zoom::Params.new(Utils.extract_options!(args))
-        options.require(%i[meeting_id])
+        options.require(:meeting_id)
 
         Utils.parse_response(
           self.class.get("/meetings/#{options[:meeting_id]}/invitation",
