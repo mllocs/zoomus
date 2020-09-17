@@ -17,7 +17,8 @@ module Zoom
         code = response['code']
 
         raise AuthenticationError, build_error(response) if code == 124
-        raise Error, build_error(response) if code >= 300
+        error_hash = build_error(response)
+        raise Error.new(error_hash, error_hash) if code >= 300
       end
 
       def build_error(response)

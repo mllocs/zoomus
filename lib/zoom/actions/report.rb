@@ -22,15 +22,15 @@ module Zoom
       end
 
       def meeting_details_report(*args)
-        # TODO: implement meeting_details_report
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'meeting_details_report is not yet implemented'
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:id)
+        Utils.parse_response self.class.get("/report/meetings/#{params[:id]}", query: params.except(:id), headers: request_headers)
       end
 
       def meeting_participants_report(*args)
-        # TODO: implement meeting_participants_report
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'meeting_participants_report is not yet implemented'
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:id).permit(%i[page_size next_page_token])
+        Utils.parse_response self.class.get("/report/meetings/#{params[:id]}/participants", query: params.except(:id), headers: request_headers)
       end
 
       def meeting_polls_report(*args)
