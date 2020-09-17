@@ -16,7 +16,7 @@ module Zoom
                          authentication_domains registrants_confirmation_email question_answer].freeze
       def webinar_list(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:host_id).permit(:page_size, :page_number)
+        params.require(:host_id).permit(%[page_size page_number])
         Utils.parse_response self.class.get("/users/#{params[:host_id]}/webinars", query: params, headers: request_headers)
       end
 
@@ -90,7 +90,7 @@ module Zoom
 
       def webinar_registrant_add(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:id, :email, :first_name, :last_name)
+        params.require(%i[id email first_name last_name])
               .permit(%i[occurrence_ids address city country zip state phone
                          industry org job_title purchasing_time_frame role_in_purchase_process
                          no_of_employees comments custom_questions])
@@ -99,7 +99,7 @@ module Zoom
 
       def webinar_registrants_status_update(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:id, :action)
+        params.require(%i[id action])
               .permit(:occurrence_id, registrants: [])
         Utils.parse_response self.class.put("/webinars/#{params[:id]}/registrants/status", body: params.except(:id, :occurrence_ids).to_json, query: params.slice(:occurrence_ids), headers: request_headers)
       end
@@ -112,7 +112,7 @@ module Zoom
 
       def webinar_registrant_get(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:webinar_id, :id).permit(:occurrence_id)
+        params.require(%i[webinar_id id]).permit(:occurrence_id)
         Utils.parse_response self.class.get("/webinars/#{params[:webinar_id]}/registrants/#{params[:id]}", query: params.except(:webinar_id, :id), headers: request_headers)
       end
     end
