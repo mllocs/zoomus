@@ -33,7 +33,7 @@ describe Zoom::Actions::Billing do
         stub_request(
           :post,
           zoom_url("/accounts/#{args[:account_id]}/plans")
-        ).to_return(body: json_response('account', 'plans_subscribe'),
+        ).to_return(body: json_response('billing', 'plans_subscribe'),
                     headers: { 'Content-Type' => 'application/json' })
       end
 
