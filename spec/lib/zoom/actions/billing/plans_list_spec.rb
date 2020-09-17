@@ -2,31 +2,31 @@
 
 require 'spec_helper'
 
-describe Zoom::Actions::Account do
+describe Zoom::Actions::Billing do
   let(:zc) { zoom_client }
   let(:args) { { account_id: '1' } }
 
-  describe '#account_plans_list action' do
+  describe '#billing_plans_list action' do
     context 'with a valid response' do
       before :each do
         stub_request(
           :get,
           zoom_url("/accounts/#{args[:account_id]}/plans")
-        ).to_return(body: json_response('account', 'plans_list'),
+        ).to_return(body: json_response('billing', 'plans_list'),
                     headers: { 'Content-Type' => 'application/json' })
       end
 
       it 'makes the request' do
-        zc.account_plans_list(args)
+        zc.billing_plans_list(args)
         expect(WebMock).to have_requested(:get, zoom_url("/accounts/#{args[:account_id]}/plans")).with(headers: request_headers)
       end
 
       it 'returns a hash' do
-        expect(zc.account_plans_list(args)).to be_kind_of(Hash)
+        expect(zc.billing_plans_list(args)).to be_kind_of(Hash)
       end
 
       it 'raises an error when missing a required param' do
-        expect { zc.account_plans_list }.to raise_error(Zoom::ParameterMissing, [:account_id].to_s)
+        expect { zc.billing_plans_list }.to raise_error(Zoom::ParameterMissing, [:account_id].to_s)
       end
     end
 
@@ -41,7 +41,7 @@ describe Zoom::Actions::Account do
       end
 
       it 'raises Zoom::Error exception' do
-        expect { zc.account_plans_list(args) }.to raise_error(Zoom::Error)
+        expect { zc.billing_plans_list(args) }.to raise_error(Zoom::Error)
       end
     end
   end

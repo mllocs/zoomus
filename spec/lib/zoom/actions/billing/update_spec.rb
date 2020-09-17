@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Zoom::Actions::Account do
+describe Zoom::Actions::Billing do
   let(:zc) { zoom_client }
   let(:required_args) { { account_id: '1' } }
   let(:permitted_args) {
@@ -28,21 +28,21 @@ describe Zoom::Actions::Account do
           :patch,
           zoom_url("/accounts/#{args[:account_id]}/billing")
           ).to_return(status: 204,
-                      body: json_response('account', 'billing_update'),
+                      body: json_response('billing', 'update'),
                       headers: { 'Content-Type' => 'application/json' })
       end
 
       it 'makes the request' do
-        zc.account_billing_update(args)
+        zc.billing_update(args)
         expect(WebMock).to have_requested(:patch, zoom_url("/accounts/#{args[:account_id]}/billing")).with(body: permitted_args.to_json, headers: request_headers)
       end
 
       it 'requires id param' do
-        expect { zc.account_billing_update }.to raise_error(Zoom::ParameterMissing, [:account_id].to_s)
+        expect { zc.billing_update }.to raise_error(Zoom::ParameterMissing, [:account_id].to_s)
       end
 
       it 'returns a success response' do
-        expect(zc.account_billing_update(args)).to eql(204)
+        expect(zc.billing_update(args)).to eql(204)
       end
     end
 
@@ -57,7 +57,7 @@ describe Zoom::Actions::Account do
       end
 
       it 'raises Zoom::Error exception' do
-        expect { zc.account_billing_update(args) }.to raise_error(Zoom::Error)
+        expect { zc.billing_update(args) }.to raise_error(Zoom::Error)
       end
     end
   end
