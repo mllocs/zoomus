@@ -2,25 +2,25 @@
 
 require 'spec_helper'
 
-describe Zoom::Actions::Metrics do
+describe Zoom::Actions::Dashboard do
 
   let(:zc) { zoom_client }
   let(:args) { { meeting_id: 't13b6hjVQXybvGKyeHC96w==', type: 1 } }
-  let(:response) { zc.metrics_meetingparticipants(args) }
+  let(:response) { zc.dashboard_meeting_participants(args) }
 
-  describe '#metrics_meetingparticipants action' do
+  describe '#dashboard_meeting_participants action' do
     context 'with 200 response' do
       before :each do
         stub_request(
           :get,
           zoom_url("/metrics/meetings/#{args[:meeting_id]}/participants")
         ).to_return(status: 200,
-                    body: json_response('metrics','meetingparticipants'),
+                    body: json_response('dashboard','meeting', 'participants'),
                     headers: { 'Content-Type' => 'application/json' })
       end
 
       it "requires a 'meeting_id' argument" do
-        expect { zc.metrics_meetingparticipants(filter_key(args, :meeting_id)) }.to raise_error(Zoom::ParameterMissing)
+        expect { zc.dashboard_meeting_participants(filter_key(args, :meeting_id)) }.to raise_error(Zoom::ParameterMissing)
       end
 
       it 'returns a hash' do
