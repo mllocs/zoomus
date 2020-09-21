@@ -2,7 +2,7 @@
 
 module Zoom
   module Actions
-    module Metrics
+    module Dashboard
       def metrics_crc(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(%i[from to])

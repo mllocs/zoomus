@@ -11,7 +11,7 @@ module Zoom
     include Actions::M323Device
     include Actions::User
     include Actions::Meeting
-    include Actions::Metrics
+    include Actions::Dashboard
     include Actions::Webinar
     include Actions::Report
     include Actions::Recording
