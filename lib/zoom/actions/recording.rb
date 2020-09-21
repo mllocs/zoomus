@@ -10,13 +10,13 @@ module Zoom
         Utils.parse_response self.class.get("/users/#{options[:user_id]}/recordings", query: options.except(:user_id), headers: request_headers)
       end
 
-      def recording_get(*args)
+      def meeting_recording_get(*args)
         options = Zoom::Params.new(Utils.extract_options!(args))
         options.require(:meeting_id)
         Utils.parse_response self.class.get("/meetings/#{options[:meeting_id]}/recordings", query: options.except(:meeting_id), headers: request_headers)
       end
 
-      def recording_delete(*args)
+      def meeting_recording_file_delete(*args)
         options = Zoom::Params.new(Utils.extract_options!(args))
         options.require(%i[meeting_id recording_id])
         Utils.parse_response self.class.delete("/meetings/#{options[:meeting_id]}/recordings/#{options[:recording_id]}",  query: options.except(:meeting_id, :recording_id), headers: request_headers)
