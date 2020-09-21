@@ -6,9 +6,9 @@ describe Zoom::Actions::Dashboard do
 
   let(:zc) { zoom_client }
   let(:args) { { meeting_id: 't13b6hjVQXybvGKyeHC96w==', type: 1 } }
-  let(:response) { zc.dashboard_meeting_detail(args) }
+  let(:response) { zc.dashboard_meeting_details(args) }
 
-  describe '#dashboard_meeting_detail action' do
+  describe '#dashboard_meeting_details action' do
     context 'with 200 response' do
       before :each do
         stub_request(
@@ -20,7 +20,7 @@ describe Zoom::Actions::Dashboard do
       end
 
       it "requires a 'meeting_id' argument" do
-        expect { zc.dashboard_meeting_detail(filter_key(args, :meeting_id)) }.to raise_error(Zoom::ParameterMissing)
+        expect { zc.dashboard_meeting_details(filter_key(args, :meeting_id)) }.to raise_error(Zoom::ParameterMissing)
       end
 
       it 'returns a hash' do
