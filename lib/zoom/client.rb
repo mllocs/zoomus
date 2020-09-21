@@ -5,8 +5,8 @@ require 'httparty'
 module Zoom
   class Client
     include HTTParty
-    include Actions::Token
     include Actions::Account
+    include Actions::Billing
     include Actions::Group
     include Actions::M323Device
     include Actions::User
@@ -16,6 +16,7 @@ module Zoom
     include Actions::Report
     include Actions::Recording
     include Actions::Roles
+    include Actions::Token
     include Actions::IM::Chat
     include Actions::IM::Group
 
