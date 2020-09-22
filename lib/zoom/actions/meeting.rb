@@ -29,7 +29,7 @@ module Zoom
       def meeting_update(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:meeting_id)
-        Utils.process_datetime_params!(:start_time, options)
+        Utils.process_datetime_params!(:start_time, params)
         # TODO Handle `topic` attr, Max of 300 characters.
         # TODO Handle `timezone` attr, refer to the id value in timezone list JSON file. like "America/Los_Angeles"
         # TODO Verify `password` attr, may only contain the following characters: a-z A-Z 0-9 @ - _
