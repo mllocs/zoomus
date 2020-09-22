@@ -27,22 +27,22 @@ module Zoom
 
       # Update meeting info on Zoom via meeting ID.
       def meeting_update(*args)
-        options = Zoom::Params.new(Utils.extract_options!(args))
-        options.require(:meeting_id)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:meeting_id)
         Utils.process_datetime_params!(:start_time, options)
         # TODO Handle `topic` attr, Max of 300 characters.
         # TODO Handle `timezone` attr, refer to the id value in timezone list JSON file. like "America/Los_Angeles"
         # TODO Verify `password` attr, may only contain the following characters: a-z A-Z 0-9 @ - _
         # TODO Handle `option_audio` attr, Can be "both", "telephony", "voip".
         # TODO Handle `option_auto_record_type`, Can be "local", “cloud” or "none".
-        Utils.parse_response self.class.patch("/meetings/#{options[:meeting_id]}", body: options.except(:meeting_id).to_json, headers: request_headers)
+        Utils.parse_response self.class.patch("/meetings/#{params[:meeting_id]}", body: params.except(:meeting_id).to_json, headers: request_headers)
       end
 
       # Delete a meeting on Zoom, return the deleted meeting ID.
       def meeting_delete(*args)
-        options = Zoom::Params.new(Utils.extract_options!(args))
-        options.require(:meeting_id)
-        Utils.parse_response self.class.delete("/meetings/#{options[:meeting_id]}", query: options.except(:meeting_id), headers: request_headers)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:meeting_id)
+        Utils.parse_response self.class.delete("/meetings/#{params[:meeting_id]}", query: params.except(:meeting_id), headers: request_headers)
       end
 
       # Update a meeting's status
@@ -61,36 +61,36 @@ module Zoom
 
       # Register for a meeting.
       def meeting_registrant_questions(*args)
-        options = Zoom::Params.new(Utils.extract_options!(args))
-        options.require(:meeting_id)
-        Utils.parse_response self.class.patch("/meetings/#{options[:meeting_id]}/registrants/questions", body: options.except(:meeting_id).to_json, headers: request_headers)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:meeting_id)
+        Utils.parse_response self.class.patch("/meetings/#{params[:meeting_id]}/registrants/questions", body: params.except(:meeting_id).to_json, headers: request_headers)
       end
 
       # Retrieve ended meeting details
       def past_meeting_details(*args)
-        options = Zoom::Params.new(Utils.extract_options!(args))
-        options.require(:meeting_uuid)
-        Utils.parse_response self.class.get("/past_meetings/#{options[:meeting_uuid]}", headers: request_headers)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:meeting_uuid)
+        Utils.parse_response self.class.get("/past_meetings/#{params[:meeting_uuid]}", headers: request_headers)
       end
 
       # Retrieve ended meeting participants
       def past_meeting_participants(*args)
-        options = Zoom::Params.new(Utils.extract_options!(args))
-        options.require(:meeting_uuid)
-        Utils.parse_response self.class.get("/past_meetings/#{options[:meeting_uuid]}/participants", headers: request_headers)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:meeting_uuid)
+        Utils.parse_response self.class.get("/past_meetings/#{params[:meeting_uuid]}/participants", headers: request_headers)
       end
 
       def livestream(*args)
-        options = Zoom::Params.new(Utils.extract_options!(args))
-        options.require(%i[meeting_id stream_url stream_key]).permit(:page_url)
-        Utils.parse_response self.class.patch("/meetings/#{options[:meeting_id]}/livestream", body: options.except(:meeting_id).to_json, headers: request_headers)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(%i[meeting_id stream_url stream_key]).permit(:page_url)
+        Utils.parse_response self.class.patch("/meetings/#{params[:meeting_id]}/livestream", body: params.except(:meeting_id).to_json, headers: request_headers)
       end
 
       # Get a meeting on Zoom via meeting ID, return the meeting info.
       def meeting_invitation(*args)
-        options = Zoom::Params.new(Utils.extract_options!(args))
-        options.require(:meeting_id)
-        Utils.parse_response self.class.get("/meetings/#{options[:meeting_id]}/invitation", headers: request_headers)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:meeting_id)
+        Utils.parse_response self.class.get("/meetings/#{params[:meeting_id]}/invitation", headers: request_headers)
       end
     end
   end
