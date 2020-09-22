@@ -128,9 +128,9 @@ module Zoom
       end
 
       def user_email_check(*args)
-        # TODO: implement user_email_check
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'user_email_check is not yet implemented'
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:email).permit(:email)
+        Utils.parse_response(self.class.get('/users/email', query: params, headers: request_headers))
       end
 
       def user_vanity_name_check(*args)
