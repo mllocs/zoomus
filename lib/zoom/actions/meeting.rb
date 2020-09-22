@@ -52,18 +52,6 @@ module Zoom
         Utils.parse_response self.class.put("/meetings/#{options[:meeting_id]}/status", body: options.except(:meeting_id).to_json, headers: request_headers)
       end
 
-      # End a meeting on Zoom, return the deleted meeting ID.
-      def meeting_end(*args)
-        options = Utils.extract_options!(args)
-        meeting_update_status(options.merge(action: 'end'))
-      end
-
-      # Lists the live meetings on Zoom.
-      def meeting_live(*args)
-        options = Utils.extract_options!(args)
-        meeting_list(options.merge(type: 'live'))
-      end
-
       # Register for a meeting.
       def meeting_add_registrant(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
