@@ -69,7 +69,7 @@ describe Zoom::Client do
     end
 
     it 'raises an error if there is no complete auth token, auth code and redirect_uri' do
-      expect { Zoom::Client::OAuth.new(auth_token: 'xxx', auth_code: 'xxx', redirect_uri: 'xxx') }.not_to raise_error(Zoom::ParameterMissing)
+      expect { Zoom::Client::OAuth.new(auth_token: 'xxx', auth_code: 'xxx', redirect_uri: 'xxx') }.not_to raise_error
     end
 
     it 'requires atleast an access token' do
