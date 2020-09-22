@@ -65,10 +65,10 @@ module Zoom
       end
 
       # Register for a meeting.
-      def meeting_register(*args)
-        options = Zoom::Params.new(Utils.extract_options!(args))
-        options.require(%i[meeting_id email first_name last_name])
-        Utils.parse_response self.class.post("/meetings/#{options[:meeting_id]}/registrants", body: options.except(:meeting_id).to_json, headers: request_headers)
+      def meeting_add_registrant(*args)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(%i[meeting_id email first_name]).permit(%i[last_name address city country zip state phone industry org job_title purchasing_time_frame role_in_purchase_process no_of_employees comments custom_questions language occurrence_ids])
+        Utils.parse_response self.class.post("/meetings/#{params[:meeting_id]}/registrants", query: params.slice(:occurrence_ids), body: params.except(:meeting_id).to_json, headers: request_headers)
       end
 
       # Register for a meeting.
