@@ -5,24 +5,24 @@ module Zoom
     module Meeting
       # List all the scheduled meetings on Zoom.
       def meeting_list(*args)
-        options = Zoom::Params.new(Utils.extract_options!(args))
-        options.require(:user_id)
-        Utils.parse_response self.class.get("/users/#{options[:user_id]}/meetings", query: options.except(:user_id), headers: request_headers)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:user_id).permit(%i[type page_size next_page_token page_number])
+        Utils.parse_response self.class.get("/users/#{params[:user_id]}/meetings", query: params.except(:user_id), headers: request_headers)
       end
 
       # Create a meeting on Zoom, return the created meeting URL
       def meeting_create(*args)
-        options = Zoom::Params.new(Utils.extract_options!(args))
-        options.require(:user_id)
-        Utils.process_datetime_params!(:start_time, options)
-        Utils.parse_response self.class.post("/users/#{options[:user_id]}/meetings", body: options.except(:user_id).to_json, headers: request_headers)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:user_id).permit(%i[topic type start_time duration schedule_for timezone password agenda tracking_fields recurrence settings])
+        Utils.process_datetime_params!(:start_time, params)
+        Utils.parse_response self.class.post("/users/#{params[:user_id]}/meetings", body: params.except(:user_id).to_json, headers: request_headers)
       end
 
       # Get a meeting on Zoom via meeting ID, return the meeting info.
       def meeting_get(*args)
-        options = Zoom::Params.new(Utils.extract_options!(args))
-        options.require(:meeting_id)
-        Utils.parse_response self.class.get("/meetings/#{options[:meeting_id]}", headers: request_headers)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:meeting_id).permit(%i[occurrence_id show_previous_occurrences])
+        Utils.parse_response self.class.get("/meetings/#{params[:meeting_id]}", query: params.except(:meeting_id), headers: request_headers)
       end
 
       # Update meeting info on Zoom via meeting ID.
@@ -47,9 +47,9 @@ module Zoom
 
       # Update a meeting's status
       def meeting_update_status(*args)
-        options = Zoom::Params.new(Utils.extract_options!(args))
-        options.require(:meeting_id)
-        Utils.parse_response self.class.put("/meetings/#{options[:meeting_id]}/status", body: options.except(:meeting_id).to_json, headers: request_headers)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:meeting_id).permit(:action)
+        Utils.parse_response self.class.put("/meetings/#{params[:meeting_id]}/status", body: params.except(:meeting_id).to_json, headers: request_headers)
       end
 
       # Register for a meeting.
