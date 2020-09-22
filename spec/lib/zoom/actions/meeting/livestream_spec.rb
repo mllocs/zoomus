@@ -34,7 +34,7 @@ describe Zoom::Actions::Meeting do
           :patch,
           zoom_url("/meetings/#{args[:meeting_id]}/livestream")
         ).to_return(status: 300,
-                    body: json_response('meeting/live_stream/errors', 'missing_field'),
+                    body: json_response('meeting', 'live_stream', 'errors', 'missing_field'),
                     headers: { 'Content-Type' => 'application/json' })
       end
 
@@ -49,7 +49,7 @@ describe Zoom::Actions::Meeting do
           :patch,
           zoom_url("/meetings/#{args[:meeting_id]}/livestream")
         ).to_return(status: 404,
-                    body: json_response('meeting/live_stream/errors', 'meeting_not_found'),
+                    body: json_response('meeting', 'live_stream', 'errors', 'meeting_not_found'),
                     headers: { 'Content-Type' => 'application/json' })
       end
 
