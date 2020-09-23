@@ -3,9 +3,8 @@
 module Zoom
   module Actions
     module Roles
-      def roles_list(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        Utils.parse_response self.class.get("/roles", query: params, headers: request_headers)
+      def roles_list(*_args)
+        Utils.parse_response self.class.get("/roles", headers: request_headers)
       end
 
       def roles_create(*args)
@@ -36,16 +35,6 @@ module Zoom
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:role_id)
         Utils.parse_response self.class.get("/roles/#{params[:role_id]}", headers: request_headers)
-      end
-
-      def roles_update(*args)
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'roles_update is not yet implemented'
-      end
-
-      def roles_delete(*args)
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'roles_delete is not yet implemented'
       end
     end
   end
