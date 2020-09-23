@@ -3,7 +3,7 @@
 module Zoom
   module Actions
     module Roles
-      def roles_list(_args)
+      def roles_list(*_args)
         Utils.parse_response self.class.get("/roles", headers: request_headers)
       end
 
