@@ -79,64 +79,16 @@ module Zoom
         Utils.parse_response(self.class.delete("/users/#{params[:user_id]}/schedulers/#{params[:scheduler_id]}", query: params.except(:user_id, :scheduler_id), headers: request_headers))
       end
 
-      def user_upload_picture(*args)
-        # TODO: implement user_upload_picture
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'user_upload_picture is not yet implemented'
-      end
-
       def user_settings_get(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:id).permit(:login_type)
         Utils.parse_response self.class.get("/users/#{params[:id]}/settings", query: params.except(:id), headers: request_headers)
       end
 
-      def user_settings_update(*args)
-        # TODO: implement user_settings_update
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'user_settings_update is not yet implemented'
-      end
-
-      def user_status_update(*args)
-        # TODO: implement user_status_update
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'user_status_update is not yet implemented'
-      end
-
-      def user_password_update(*args)
-        # TODO: implement user_password_update
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'user_password_update is not yet implemented'
-      end
-
-      def user_permissions_get(*args)
-        # TODO: implement user_permissions_get
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'user_permissions_get is not yet implemented'
-      end
-
-      def user_token_get(*args)
-        # TODO: implement user_token_get
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'user_token_get is not yet implemented'
-      end
-
-      def user_token_delete(*args)
-        # TODO: implement user_token_delete
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'user_token_delete is not yet implemented'
-      end
-
       def user_email_check(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:email).permit(:email)
-        Utils.parse_response(self.class.get('/users/email', query: params, headers: request_headers))
-      end
-
-      def user_vanity_name_check(*args)
-        # TODO: implement user_vanity_name_check
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'user_vanity_name_check is not yet implemented'
+        params.require(:email)
+        Utils.parse_response(self.class.get('/users/email', query: params.slice(:email), headers: request_headers))
       end
 
       def user_recordings_list(*args)
@@ -144,7 +96,6 @@ module Zoom
         params.require(:id).permit(%i[page_size next_page_token mc trash from to trash_type])
         Utils.parse_response self.class.get("/users/#{params[:id]}/recordings", query: params.except(:id), headers: request_headers)
       end
-
     end
   end
 end
