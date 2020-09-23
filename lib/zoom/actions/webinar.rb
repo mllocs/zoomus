@@ -26,8 +26,8 @@ module Zoom
                                         :timezone, :password, :agenda,
                                         recurrence: RECURRENCE_KEYS,
                                         settings: SETTINGS_KEYS)
-        # process recurrence keys based on constants
-        # process settings keys based on constants
+        # TODO: process recurrence keys based on constants
+        # TODO: process settings keys based on constants
         Utils.parse_response self.class.post("/users/#{params[:host_id]}/webinars", body: params.except(:host_id).to_json, headers: request_headers)
       end
 
@@ -52,36 +52,6 @@ module Zoom
         Utils.parse_response self.class.delete("/webinars/#{params[:id]}", query: params.except(:id), headers: request_headers)
       end
 
-      def webinar_status_update(*args)
-        # TODO: implement webinar_panelists_list
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'webinar_status_update is not yet implemented'
-      end
-
-      def webinar_panelists_list(*args)
-        # TODO: implement webinar_panelists_list
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'webinar_panelists_list is not yet implemented'
-      end
-
-      def webinar_panelist_add(*args)
-        # TODO: implement webinar_panelist_add
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'webinar_panelist_add is not yet implemented'
-      end
-
-      def webinar_panelists_delete_all(*args)
-        # TODO: implement webinar_panelists_delete_all
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'webinar_panelists_delete_all is not yet implemented'
-      end
-
-      def webinar_panelist_delete(*args)
-        # TODO: implement webinar_panelist_delete
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'webinar_panelist_delete is not yet implemented'
-      end
-
       def webinar_registrants_list(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:id).permit(%i[occurrence_id status page_size page_number])
@@ -101,7 +71,7 @@ module Zoom
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(%i[id action])
               .permit(:occurrence_id, registrants: [])
-        Utils.parse_response self.class.put("/webinars/#{params[:id]}/registrants/status", body: params.except(:id, :occurrence_ids).to_json, query: params.slice(:occurrence_ids), headers: request_headers)
+        Utils.parse_response self.class.put("/webinars/#{params[:id]}/registrants/status", body: params.except(:id, :occurrence_id).to_json, query: params.slice(:occurrence_id), headers: request_headers)
       end
 
       def past_webinar_list(*args)
