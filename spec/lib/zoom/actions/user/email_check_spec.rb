@@ -23,10 +23,6 @@ describe Zoom::Actions::User do
       it "returns 'existed_email'" do
         expect(zc.user_email_check(args)['existed_email']).to be_truthy
       end
-
-      it 'raises an error when passed an invalid option' do
-        expect { zc.user_email_check(foo: 'true', email: 'test@test.com') }.to raise_error(Zoom::ParameterNotPermitted, [:foo].to_s)
-      end
     end
 
     context 'with a 4xx response' do

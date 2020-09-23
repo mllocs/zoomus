@@ -88,7 +88,7 @@ module Zoom
       def user_email_check(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:email)
-        Utils.parse_response(self.class.get('/users/email', query: params, headers: request_headers))
+        Utils.parse_response(self.class.get('/users/email', query: params.slice(:email), headers: request_headers))
       end
 
       def user_recordings_list(*args)
