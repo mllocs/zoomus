@@ -3,9 +3,8 @@
 module Zoom
   module Actions
     module Roles
-      def roles_list(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        Utils.parse_response self.class.get("/roles", query: params, headers: request_headers)
+      def roles_list(_args)
+        Utils.parse_response self.class.get("/roles", headers: request_headers)
       end
 
       def roles_create(*args)
