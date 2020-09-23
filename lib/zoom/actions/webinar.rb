@@ -71,7 +71,7 @@ module Zoom
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(%i[id action])
               .permit(:occurrence_id, registrants: [])
-        Utils.parse_response self.class.put("/webinars/#{params[:id]}/registrants/status", body: params.except(:id, :occurrence_ids).to_json, query: params.slice(:occurrence_ids), headers: request_headers)
+        Utils.parse_response self.class.put("/webinars/#{params[:id]}/registrants/status", body: params.except(:id, :occurrence_id).to_json, query: params.slice(:occurrence_id), headers: request_headers)
       end
 
       def past_webinar_list(*args)
