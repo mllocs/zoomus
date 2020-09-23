@@ -16,7 +16,7 @@ module Zoom
                          authentication_domains registrants_confirmation_email question_answer].freeze
       def webinar_list(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:host_id).permit(%[page_size page_number])
+        params.require(:host_id).permit(%i[page_size page_number])
         Utils.parse_response self.class.get("/users/#{params[:host_id]}/webinars", query: params, headers: request_headers)
       end
 
