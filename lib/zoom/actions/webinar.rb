@@ -26,8 +26,8 @@ module Zoom
                                         :timezone, :password, :agenda,
                                         recurrence: RECURRENCE_KEYS,
                                         settings: SETTINGS_KEYS)
-        # process recurrence keys based on constants
-        # process settings keys based on constants
+        # TODO: process recurrence keys based on constants
+        # TODO: process settings keys based on constants
         Utils.parse_response self.class.post("/users/#{params[:host_id]}/webinars", body: params.except(:host_id).to_json, headers: request_headers)
       end
 
@@ -50,36 +50,6 @@ module Zoom
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:id).permit(:occurrence_id)
         Utils.parse_response self.class.delete("/webinars/#{params[:id]}", query: params.except(:id), headers: request_headers)
-      end
-
-      def webinar_status_update(*args)
-        # TODO: implement webinar_panelists_list
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'webinar_status_update is not yet implemented'
-      end
-
-      def webinar_panelists_list(*args)
-        # TODO: implement webinar_panelists_list
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'webinar_panelists_list is not yet implemented'
-      end
-
-      def webinar_panelist_add(*args)
-        # TODO: implement webinar_panelist_add
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'webinar_panelist_add is not yet implemented'
-      end
-
-      def webinar_panelists_delete_all(*args)
-        # TODO: implement webinar_panelists_delete_all
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'webinar_panelists_delete_all is not yet implemented'
-      end
-
-      def webinar_panelist_delete(*args)
-        # TODO: implement webinar_panelist_delete
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'webinar_panelist_delete is not yet implemented'
       end
 
       def webinar_registrants_list(*args)
