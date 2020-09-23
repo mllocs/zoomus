@@ -36,16 +36,6 @@ module Zoom
         params.require(:role_id)
         Utils.parse_response self.class.get("/roles/#{params[:role_id]}", headers: request_headers)
       end
-
-      def roles_update(*args)
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'roles_update is not yet implemented'
-      end
-
-      def roles_delete(*args)
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'roles_delete is not yet implemented'
-      end
     end
   end
 end
