@@ -46,6 +46,12 @@ module Zoom
         Utils.parse_response self.class.patch("/accounts/#{params[:account_id]}/settings", query: params.slice(:option), body: params.except(%i[account_id option]).to_json, headers: request_headers)
       end
 
+      def account_managed_domains(*args)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:account_id)
+        Utils.parse_response self.class.get("/accounts/#{params[:account_id]}/managed_domains", headers: request_headers)
+      end
+
       def account_get_locked_settings(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:account_id)
