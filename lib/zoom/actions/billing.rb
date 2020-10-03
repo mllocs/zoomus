@@ -21,6 +21,12 @@ module Zoom
         Utils.parse_response self.class.get("/accounts/#{params[:account_id]}/plans", headers: request_headers)
       end
 
+      def billing_plans_usage(*args)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:account_id)
+        Utils.parse_response self.class.get("/accounts/#{params[:account_id]}/plans/usage", headers: request_headers)
+      end
+
       def billing_plans_subscribe(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         # TODO: Move to constants and do some data validation
