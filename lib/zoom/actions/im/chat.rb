@@ -4,6 +4,12 @@ module Zoom
   module Actions
     module IM
       module Chat
+        def get_chat_channels(*args)
+          params = Zoom::Params.new(Utils.extract_options!(args))
+          params.require(:channel_id)
+          Utils.parse_response self.class.get("/chat/channels/#{params[:channel_id]}", headers: request_headers)
+        end
+
         # Get chat messages for a specified period.
         def chat_get(*args)
           options = Utils.extract_options!(args)
