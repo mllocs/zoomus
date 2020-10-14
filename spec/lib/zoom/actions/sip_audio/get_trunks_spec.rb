@@ -13,7 +13,7 @@ describe Zoom::Actions::SipAudio do
           :get,
           zoom_url("/accounts/#{args[:account_id]}/sip_trunk/trunks")
           ).to_return(status: 200,
-                      body: json_response('account', 'sip_trunks_get'),
+                      body: json_response('sip_audio', 'sip_trunks_get'),
                       headers: { 'Content-Type' => 'application/json' })
       end
 
