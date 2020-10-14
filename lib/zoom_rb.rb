@@ -21,6 +21,7 @@ require 'zoom/actions/webinar'
 require 'zoom/actions/phone'
 require 'zoom/actions/im/chat'
 require 'zoom/actions/im/group'
+require 'zoom/actions/sip_audio'
 require 'zoom/client'
 require 'zoom/error'
 

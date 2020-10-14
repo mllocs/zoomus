@@ -15,6 +15,7 @@ module Zoom
     include Actions::Recording
     include Actions::Report
     include Actions::Roles
+    include Actions::SipAudio
     include Actions::Token
     include Actions::User
     include Actions::Webinar
