@@ -10,6 +10,12 @@ module Zoom
           Utils.parse_response self.class.get("/chat/channels/#{params[:channel_id]}", headers: request_headers)
         end
 
+        def get_chat_user_channels(*args)
+          params = Zoom::Params.new(Utils.extract_options!(args))
+          params.require(:user_id).permit(%i[next_page_token page_size])
+          Utils.parse_response self.class.get("/chat/users/#{params[:user_id]}/channels", query: params.except(:user_id), headers: request_headers)
+        end
+
         # Get chat messages for a specified period.
         def chat_get(*args)
           options = Utils.extract_options!(args)
