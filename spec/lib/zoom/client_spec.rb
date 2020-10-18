@@ -93,6 +93,12 @@ describe Zoom::Client do
       let(:args) { { auth_code: 'xxx', redirect_uri: 'http://localhost:3000' } }
 
       before :each do
+        Zoom.configure do |config|
+          config.api_key = 'xxx'
+          config.api_secret = 'xxx'
+          config.timeout = 20
+        end
+
         stub_request(
           :post,
           zoom_auth_url('oauth/token')
@@ -107,6 +113,10 @@ describe Zoom::Client do
         expect(zc.refresh_token).to eq(expected_values['refresh_token'])
         expect(zc.expires_in).to eq(expected_values['expires_in'])
         expect(zc.expires_at).to eq((Time.now + expected_values['expires_in']).to_i)
+      end
+
+      it 'has the basic auth authorization header' do
+        expect(zc.oauth_request_headers['Authorization']).to eq("Basic eHh4Onh4eA==")
       end
     end
   end
