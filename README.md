@@ -47,7 +47,7 @@ require 'zoom_rb'
 
 auth = Zoom::Client::OAuth.new(auth_code: auth_code, redirect_uri: redirect_uri, timeout: 15).auth
 
-zoom_client = Zoom::Client::OAuth.new(access_token: 'xxx', timeout: 15)
+zoom_client = Zoom::Client::OAuth.new(access_token: auth['access_token'], timeout: 15)
 ```
 
 You can also make a call to refresh with auth using an auth_token and a refresh_token
