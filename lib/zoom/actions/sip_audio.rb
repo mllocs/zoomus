@@ -32,6 +32,13 @@ module Zoom
         params.require(:account_id, :country_id)
         Utils.parse_response self.class.delete("/accounts/#{params[:account_id]}/sip_trunk/callout_countries/#{params[:country_id]}", headers: request_headers)
       end
+
+      def sip_trunks_internal_numbers_list(*args)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:account_id).permit(%i[page_size next_page_token])
+        response = self.class.get("/accounts/#{params[:account_id]}/sip_trunk/internal_numbers", query: params, headers: request_headers)
+        Utils.parse_response(response)
+      end
     end
   end
 end
