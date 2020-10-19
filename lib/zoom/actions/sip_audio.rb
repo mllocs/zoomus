@@ -46,6 +46,12 @@ module Zoom
         response = self.class.get("/accounts/#{params[:account_id]}/sip_trunk/callout_countries", headers: request_headers)
         Utils.parse_response(response)
       end
+
+      def sip_trunks_numbers_list(*args)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        response = self.class.get("/sip_trunk/numbers", headers: request_headers)
+        Utils.parse_response(response)
+      end
     end
   end
 end
