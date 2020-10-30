@@ -21,6 +21,11 @@ describe Zoom::Actions::User do
         expect { zc.user_get(filter_key(args, :id)) }.to raise_error(Zoom::ParameterMissing, '[:id]')
       end
 
+      it 'allows login type' do
+        args[:login_type] = '100'
+        expect { zc.user_get(args) }.not_to raise_error
+      end
+
       it 'returns a hash' do
         expect(zc.user_get(args)).to be_kind_of(Hash)
       end
