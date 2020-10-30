@@ -23,7 +23,7 @@ module Zoom
 
       def sip_trunks_internal_numbers_delete(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:account_id, :number_id)
+        params.require(%i[account_id number_id])
         Utils.parse_response self.class.delete("/accounts/#{params[:account_id]}/sip_trunk/internal_numbers/#{params[:number_id]}", headers: request_headers)
       end
     end
