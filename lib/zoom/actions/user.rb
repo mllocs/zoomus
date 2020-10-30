@@ -112,7 +112,7 @@ module Zoom
       def user_vanity_name(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:vanity_name)
-        Utils.parse_response self.class.get("/users/vanity_name", query: params, headers: request_headers)
+        Utils.parse_response self.class.get("/users/vanity_name", query: params.slice(:vanity_name), headers: request_headers)
       end
     end
   end
