@@ -108,6 +108,12 @@ module Zoom
         params.require(:user_id)
         Utils.parse_response self.class.get("/users/#{params[:user_id]}/permissions", headers: request_headers)
       end
+
+      def user_vanity_name(*args)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:vanity_name)
+        Utils.parse_response self.class.get("/users/vanity_name", query: params, headers: request_headers)
+      end
     end
   end
 end
