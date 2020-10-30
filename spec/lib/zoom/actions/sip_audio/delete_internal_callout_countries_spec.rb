@@ -18,7 +18,7 @@ describe Zoom::Actions::SipAudio do
       end
 
       it 'requires the account_id params and country_id params' do
-        expect { zc.sip_trunks_internal_callout_country_delete }.to raise_error(Zoom::ParameterMissing, /[:account_id, :country_id]/ )
+        expect { zc.sip_trunks_internal_callout_country_delete }.to raise_error(Zoom::ParameterMissing, [:account_id, :country_id].to_s )
       end
 
       it 'returns the http status code as a number' do

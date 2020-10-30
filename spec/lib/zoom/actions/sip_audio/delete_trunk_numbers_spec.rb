@@ -18,7 +18,7 @@ describe Zoom::Actions::SipAudio do
       end
 
       it 'requires the account_id params' do
-        expect { zc.sip_trunk_numbers_delete }.to raise_error(Zoom::ParameterMissing, /[:account_id]/)
+        expect { zc.sip_trunk_numbers_delete }.to raise_error(Zoom::ParameterMissing, [:account_id].to_s)
       end
 
       it 'returns the http status code as a number' do
