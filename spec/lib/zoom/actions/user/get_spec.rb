@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe Zoom::Actions::User do
   let(:zc) { zoom_client }
-  let(:args) { { id: 'ufR9342pRyf8ePFN92dttQ' } }
+  let(:args) { { id: 'z8dsdsdsdsdCfp8uQ' } }
 
   describe '#user_get action' do
     context 'with a valid response' do
@@ -38,6 +38,10 @@ describe Zoom::Actions::User do
         expect(res).to have_key('last_name')
         expect(res).to have_key('email')
         expect(res).to have_key('type')
+        expect(res['custom_attributes']).to be_an(Array)
+        expect(res['custom_attributes']).to all(be_a(Hash))
+        expect(res['group_ids']).to be_an(Array)
+        expect(res['im_group_ids']).to be_an(Array)
       end
     end
 
