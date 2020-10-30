@@ -46,7 +46,7 @@ module Zoom
     end
 
     def auth_token
-      Base64.encode64("#{ENV['ZOOM_APP_CLIENT_ID']}:#{ENV['ZOOM_APP_SECRET']}").delete("\n")
+      Base64.encode64("#{Zoom.configuration.api_key}:#{Zoom.configuration.api_secret}").delete("\n")
     end
   end
 end
