@@ -86,6 +86,12 @@ module Zoom
         Utils.parse_response self.class.get("/webinars/#{params[:webinar_id]}/registrants/#{params[:id]}", query: params.except(:webinar_id, :id), headers: request_headers)
       end
 
+      def webinar_poll_get(*args)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(%i[webinar_id poll_id])
+        Utils.parse_response self.class.get("/webinars/#{params[:webinar_id]}/polls/#{params[:poll_id]}", headers: request_headers)
+      end
+
       def webinar_panelist_list(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:webinar_id)
