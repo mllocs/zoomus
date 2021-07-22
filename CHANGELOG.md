@@ -2,14 +2,14 @@
 
 This is the first CHANGELOG entry.
 
-New features:
+### New features:
 * A lot of new endpoints
 
-Fixes:
+### Fixes:
 * Update README to say `require 'zoom'`
 * Fix a typo in the README
 
-Misc:
+### Misc:
 * Update gems
 * Update bundler to 2.2
 * Update Ruby to 2.7
