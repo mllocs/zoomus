@@ -3,7 +3,7 @@
 module Zoom
   module Actions
     module Account
-      extend Zoom::ActionDefinitions
+      extend Zoom::Actions
 
       def self.included(base)
         define_action(

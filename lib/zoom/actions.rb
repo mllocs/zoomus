@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Zoom
-  module ActionDefinitions
+  module Actions
     def self.parse_url(url, params)
       parsed_url = url.dup
       url.scan(/:\w+/).each do |match|
@@ -22,7 +22,7 @@ module Zoom
       when :post, :patch
         request_options[:body] = required_params.to_json
       end
-      parsed_url = Zoom::ActionDefinitions.parse_url(url, params)
+      parsed_url = Zoom::Actions.parse_url(url, params)
       obj.class.public_send(method, parsed_url, **request_options)
     end
 
@@ -34,7 +34,7 @@ module Zoom
         params = Zoom::Params.new(Utils.extract_options!(args))
         required_params = required.empty? ? params : params.require(required)
         required_params.permit(permitted) unless permitted.empty?
-        response = Zoom::ActionDefinitions.make_request(self, method, url, params, required_params)
+        response = Zoom::Actions.make_request(self, method, url, params, required_params)
         Utils.parse_response(response)
       end
     end
