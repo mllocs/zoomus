@@ -26,7 +26,7 @@ module Zoom
       obj.class.public_send(method, parsed_url, **request_options)
     end
 
-    def define_action(name, method, url, required: [], permitted: [])
+    def define_action(name:, method:, url:, required: [], permitted: [])
       required  = [required]  if required.is_a?(Symbol)
       permitted = [permitted] if permitted.is_a?(Symbol)
 
