@@ -22,7 +22,7 @@ module Zoom
       when :post, :patch
         request_options[:body] = required_params.to_json
       end
-      parsed_url = Zoom::Actions.parse_url(url, params)
+      parsed_url = parse_url(url, params)
       obj.class.public_send(method, parsed_url, **request_options)
     end
 
