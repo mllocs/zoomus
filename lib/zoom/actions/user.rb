@@ -127,6 +127,12 @@ module Zoom
         Utils.parse_response self.class.patch("/users/#{params[:id]}/password", body: params.except(:id), headers: request_headers)
       end
 
+      def user_email_update(*args)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:id).permit(%i[email])
+        Utils.parse_response self.class.patch("/users/#{params[:id]}/email", body: params.except(:id), headers: request_headers)
+      end
+
     end
   end
 end
