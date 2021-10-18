@@ -13,7 +13,7 @@ module Zoom
       # Create a meeting on Zoom, return the created meeting URL
       def meeting_create(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:user_id).permit(%i[topic type start_time duration schedule_for timezone password agenda tracking_fields recurrence settings])
+        params.require(:user_id).permit(%i[topic type start_time duration schedule_for timezone password agenda tracking_fields recurrence settings template_id])
         Utils.process_datetime_params!(:start_time, params)
         Utils.parse_response self.class.post("/users/#{params[:user_id]}/meetings", body: params.except(:user_id).to_json, headers: request_headers)
       end
