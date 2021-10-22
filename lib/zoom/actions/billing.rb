@@ -6,22 +6,22 @@ module Zoom
       extend Zoom::Actions
 
       define_action(
-        name:   'billing_get',
+        name: 'billing_get',
         method: :get,
-        url:    '/accounts/:account_id/billing'
+        url: '/accounts/:account_id/billing'
       )
 
       define_action(
-        name:       'billing_update',
-        method:     :patch,
-        url:        '/accounts/:account_id/billing',
+        name: 'billing_update',
+        method: :patch,
+        url: '/accounts/:account_id/billing',
         permitted:  %i[first_name last_name email phone_number address apt city state zip country]
       )
 
       define_action(
-        name:   'billing_plans_list',
+        name: 'billing_plans_list',
         method: :get,
-        url:    '/accounts/:account_id/plans'
+        url: '/accounts/:account_id/plans'
       )
 
       define_action(
@@ -41,7 +41,7 @@ module Zoom
         permitted: [
           :plan_recording,
           {
-            contact: [:apt],
+            contact: %i[apt],
             plan_zoom_rooms: %i[type hosts],
             plan_room_connector: %i[type hosts],
             plan_large_meeting: %i[type hosts],

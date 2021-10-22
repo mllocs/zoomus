@@ -10,7 +10,6 @@ module Zoom
       def recording_list(*args)
         options = Zoom::Params.new(Utils.extract_options!(args))
         options.require(:user_id)
-        Utils.process_datetime_params!(%i[from to], options)
         Utils.parse_response self.class.get("/users/#{options[:user_id]}/recordings", query: options.except(:user_id), headers: request_headers)
       end
 
