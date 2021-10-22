@@ -5,17 +5,9 @@ module Zoom
     module Groups
       extend Zoom::Actions
 
-      define_action(
-        name: 'groups_list',
-        method: :get,
-        url: '/groups'
-      )
+      get 'groups_list', '/groups'
 
-      define_action(
-        name: 'groups_get',
-        method: :get,
-        url: '/groups/:group_id'
-      )
+      get 'groups_get', '/groups/:group_id'
     end
   end
 end

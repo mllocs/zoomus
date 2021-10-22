@@ -5,23 +5,11 @@ module Zoom
     module Phone
       extend Zoom::Actions
 
-      define_action(
-        name: 'call_logs',
-        method: :get,
-        url: '/phone/users/:user_id/call_logs'
-      )
+      get 'call_logs', '/phone/users/:user_id/call_logs'
 
-      define_action(
-        name: 'phone_users_list',
-        method: :get,
-        url: '/phone/users'
-      )
+      get 'phone_users_list', '/phone/users'
 
-      define_action(
-        name: 'call_recordings',
-        method: :get,
-        url: '/phone/users/:user_id/recordings'
-      )
+      get 'call_recordings', '/phone/users/:user_id/recordings'
     end
   end
 end

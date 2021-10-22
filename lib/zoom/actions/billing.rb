@@ -5,40 +5,21 @@ module Zoom
     module Billing
       extend Zoom::Actions
 
-      define_action(
-        name: 'billing_get',
-        method: :get,
-        url: '/accounts/:account_id/billing'
-      )
+      get 'billing_get', '/accounts/:account_id/billing'
 
-      define_action(
-        name: 'billing_update',
-        method: :patch,
-        url: '/accounts/:account_id/billing',
-        permitted:  %i[first_name last_name email phone_number address apt city state zip country]
-      )
+      patch 'billing_update', '/accounts/:account_id/billing',
+        permit:  %i[first_name last_name email phone_number address apt city state zip country]
 
-      define_action(
-        name: 'billing_plans_list',
-        method: :get,
-        url: '/accounts/:account_id/plans'
-      )
+      get 'billing_plans_list', '/accounts/:account_id/plans'
 
-      define_action(
-        name: 'billing_plans_usage',
-        method: :get,
-        url: '/accounts/:account_id/plans/usage'
-      )
+      get 'billing_plans_usage', '/accounts/:account_id/plans/usage'
 
-      define_action(
-        name: 'billing_plans_subscribe',
-        method: :post,
-        url: '/accounts/:account_id/plans',
-        required: {
+      post 'billing_plans_subscribe', '/accounts/:account_id/plans',
+        require: {
           contact: %i[first_name last_name email phone_number address city state zip country],
           plan_base: %i[type hosts]
         },
-        permitted: [
+        permit: [
           :plan_recording,
           {
             contact: %i[apt],
@@ -55,7 +36,6 @@ module Zoom
             }
           }
         ]
-      )
     end
   end
 end

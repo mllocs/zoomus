@@ -28,31 +28,22 @@ module Zoom
       obj.class.public_send(method, parsed_url, **request_options)
     end
 
-    def define_action(name:, method:, url:, required: [], permitted: [])
-      required  = [required]  if required.is_a?(Symbol)
-      permitted = [permitted] if permitted.is_a?(Symbol)
-
-      define_method(name) do |*args|
-        url_keys = Zoom::Actions.extract_url_keys(url)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        parsed_url = Zoom::Actions.parse_url(url, url_keys, params)
-        params = params.require(url_keys) unless url_keys.empty?
-        params_without_required = required.empty? ? params : params.require(required)
-        params_without_required.permit(permitted) unless permitted.empty?
-        response = Zoom::Actions.make_request(self, method, parsed_url, params)
-        Utils.parse_response(response)
-      end
-    end
-
     [:get, :post, :patch, :put, :delete].each do |method|
-      define_method("#{method}_action") do |name, url, validations={}|
-        define_action(
-          name: name,
-          method: method,
-          url: url,
-          required: validations[:require] || [],
-          permitted: validations[:permit] || []
-        )
+      define_method(method) do |name, url, validations={}|
+        required, permitted = validations.values_at :require, :permit
+        required = Array(required) unless required.is_a?(Hash)
+        permitted = Array(permitted) unless permitted.is_a?(Hash)
+
+        define_method(name) do |*args|
+          url_keys = Zoom::Actions.extract_url_keys(url)
+          params = Zoom::Params.new(Utils.extract_options!(args))
+          parsed_url = Zoom::Actions.parse_url(url, url_keys, params)
+          params = params.require(url_keys) unless url_keys.empty?
+          params_without_required = required.empty? ? params : params.require(required)
+          params_without_required.permit(permitted) unless permitted.empty?
+          response = Zoom::Actions.make_request(self, method, parsed_url, params)
+          Utils.parse_response(response)
+        end
       end
     end
   end
