@@ -3,29 +3,32 @@
 module Zoom
   module Actions
     module Billing
-      def billing_get(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:account_id)
-        Utils.parse_response self.class.get("/accounts/#{params[:account_id]}/billing", headers: request_headers)
-      end
+      extend Zoom::Actions
 
-      def billing_update(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:account_id).permit(%i[first_name last_name email phone_number address apt city state zip country])
-        Utils.parse_response self.class.patch("/accounts/#{params[:account_id]}/billing", body: params.except(:account_id).to_json, headers: request_headers)
-      end
+      define_action(
+        name:   'billing_get',
+        method: :get,
+        url:    '/accounts/:account_id/billing'
+      )
 
-      def billing_plans_list(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:account_id)
-        Utils.parse_response self.class.get("/accounts/#{params[:account_id]}/plans", headers: request_headers)
-      end
+      define_action(
+        name:       'billing_update',
+        method:     :patch,
+        url:        '/accounts/:account_id/billing',
+        permitted:  %i[first_name last_name email phone_number address apt city state zip country]
+      )
 
-      def billing_plans_usage(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:account_id)
-        Utils.parse_response self.class.get("/accounts/#{params[:account_id]}/plans/usage", headers: request_headers)
-      end
+      define_action(
+        name:   'billing_plans_list',
+        method: :get,
+        url:    '/accounts/:account_id/plans'
+      )
+
+      define_action(
+        name: 'billing_plans_usage',
+        method: :get,
+        url: '/accounts/:account_id/plans/usage'
+      )
 
       def billing_plans_subscribe(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
