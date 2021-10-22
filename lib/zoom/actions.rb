@@ -43,5 +43,17 @@ module Zoom
         Utils.parse_response(response)
       end
     end
+
+    [:get, :post, :patch, :put, :delete].each do |method|
+      define_method("#{method}_action") do |name, url, validations={}|
+        define_action(
+          name: name,
+          method: method,
+          url: url,
+          required: validations[:require] || [],
+          permitted: validations[:permit] || []
+        )
+      end
+    end
   end
 end
