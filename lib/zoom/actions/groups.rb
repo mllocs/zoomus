@@ -3,15 +3,19 @@
 module Zoom
   module Actions
     module Groups
-      def groups_list(*_args)
-        Utils.parse_response self.class.get('/groups', headers: request_headers)
-      end
+      extend Zoom::Actions
 
-      def groups_get(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:group_id)
-        Utils.parse_response self.class.get("/groups/#{params[:group_id]}", headers: request_headers)
-      end
+      define_action(
+        name: 'groups_list',
+        method: :get,
+        url: '/groups'
+      )
+
+      define_action(
+        name: 'groups_get',
+        method: :get,
+        url: '/groups/:group_id'
+      )
     end
   end
 end
