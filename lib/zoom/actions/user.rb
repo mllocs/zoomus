@@ -3,12 +3,10 @@
 module Zoom
   module Actions
     module User
-      def user_list(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.permit(%i[status page_size role_id page_number include_fields next_page_token])
-        response = self.class.get('/users', query: params, headers: request_headers)
-        Utils.parse_response(response)
-      end
+      extend Zoom::Actions
+
+      get 'user_list', '/users',
+        permit: %i[status page_size role_id page_number include_fields next_page_token]
 
       def user_create(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
@@ -19,114 +17,52 @@ module Zoom
         Utils.parse_response self.class.post('/users', body: { action: params[:action], user_info: params.except(:action) }.to_json, headers: request_headers)
       end
 
-      def user_get(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:id).permit(:login_type)
-        Utils.parse_response self.class.get("/users/#{params[:id]}", query: params.except(:id), headers: request_headers)
-      end
+      get 'user_get', '/users/:id',
+        permit: :login_type
 
-      def user_update(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:id).permit(%i[first_name last_name type pmi timezone dept vanity_name host_key cms_user_id])
-        Utils.parse_response self.class.patch("/users/#{params[:id]}", body: params.except(:id), headers: request_headers)
-      end
+      patch 'user_update', '/users/:id',
+        permit: %i[first_name last_name type pmi timezone dept vanity_name host_key cms_user_id]
 
-      def user_delete(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:id).permit(%i[action transfer_email transfer_meeting transfer_webinar transfer_recording])
-        Utils.parse_response self.class.delete("/users/#{params[:id]}", query: params.except(:id), headers: request_headers)
-      end
+      delete 'user_delete', '/users/:id',
+        permit: %i[action transfer_email transfer_meeting transfer_webinar transfer_recording]
 
-      def user_assistants_list(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:user_id)
-        Utils.parse_response(self.class.get("/users/#{params[:user_id]}/assistants", query: params.except(:user_id), headers: request_headers))
-      end
+      get 'user_assistants_list', '/users/:user_id/assistants'
 
-      def user_assistants_create(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:user_id).permit(:assistants)
-        Utils.parse_response self.class.post("/users/#{params[:user_id]}/assistants", body: params.except(:user_id).to_json, headers: request_headers)
-      end
+      post 'user_assistants_create', '/users/:user_id/assistants',
+        permit: :assistants
 
-      def user_assistants_delete_all(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:user_id)
-        Utils.parse_response(self.class.delete("/users/#{params[:user_id]}/assistants", query: params.except(:user_id), headers: request_headers))
-      end
+      delete 'user_assistants_delete_all', '/users/:user_id/assistants'
 
-      def user_assistants_delete(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(%i[user_id assistant_id])
-        Utils.parse_response(self.class.delete("/users/#{params[:user_id]}/assistants/#{params[:assistant_id]}", query: params.except(:user_id, :assistant_id), headers: request_headers))
-      end
+      delete 'user_assistants_delete', '/users/:user_id/assistants/:assistant_id'
 
-      def user_schedulers_list(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:user_id)
-        Utils.parse_response(self.class.get("/users/#{params[:user_id]}/schedulers", query: params.except(:user_id), headers: request_headers))
-      end
+      get 'user_schedulers_list', '/users/:user_id/schedulers'
 
-      def user_schedulers_delete_all(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:user_id)
-        Utils.parse_response(self.class.delete("/users/#{params[:user_id]}/schedulers", query: params.except(:user_id), headers: request_headers))
-      end
+      delete 'user_schedulers_delete_all', '/users/:user_id/schedulers'
 
-      def user_schedulers_delete(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(%i[user_id scheduler_id])
-        Utils.parse_response(self.class.delete("/users/#{params[:user_id]}/schedulers/#{params[:scheduler_id]}", query: params.except(:user_id, :scheduler_id), headers: request_headers))
-      end
+      delete 'user_schedulers_delete', '/users/:user_id/schedulers/:scheduler_id'
 
-      def user_settings_get(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:id).permit(:login_type)
-        Utils.parse_response self.class.get("/users/#{params[:id]}/settings", query: params.except(:id), headers: request_headers)
-      end
+      get 'user_settings_get', '/users/:id/settings',
+        permit: :login_type
 
-      def user_settings_update(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:id).permit(%i[schedule_meeting in_meeting email_notification recording telephony feature tsp])
-        Utils.parse_response self.class.patch("/users/#{params[:id]}/settings", body: params.except(:id).to_json, headers: request_headers)
-      end
+      patch 'user_settings_update', '/users/:id/settings',
+        permit: %i[schedule_meeting in_meeting email_notification recording telephony feature tsp]
 
-      def user_email_check(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:email)
-        Utils.parse_response(self.class.get('/users/email', query: params.slice(:email), headers: request_headers))
-      end
+      get 'user_email_check', '/users/email',
+        require: :email
 
-      def user_recordings_list(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:id).permit(%i[page_size next_page_token mc trash from to trash_type])
-        Utils.parse_response self.class.get("/users/#{params[:id]}/recordings", query: params.except(:id), headers: request_headers)
-      end
+      get 'user_recordings_list', '/users/:id/recordings',
+        permit: %i[page_size next_page_token mc trash from to trash_type]
 
-      def user_token(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:user_id).permit(%i[type ttl])
-        Utils.parse_response self.class.get("/users/#{params[:user_id]}/token", query: params.except(:user_id), headers: request_headers)
-      end
+      get 'user_token', '/users/:user_id/token',
+        permit: %i[type ttl]
 
-      def user_permissions(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:user_id)
-        Utils.parse_response self.class.get("/users/#{params[:user_id]}/permissions", headers: request_headers)
-      end
+      get 'user_permissions', '/users/:user_id/permissions'
 
-      def user_vanity_name(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:vanity_name)
-        Utils.parse_response self.class.get("/users/vanity_name", query: params.slice(:vanity_name), headers: request_headers)
-      end
+      get 'user_vanity_name', '/users/vanity_name',
+        require: :vanity_name
 
-      def user_password_update(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:id).permit(%i[password])
-        Utils.parse_response self.class.patch("/users/#{params[:id]}/password", body: params.except(:id), headers: request_headers)
-      end
-
+      patch 'user_password_update', '/users/:id/password',
+        permit: :password
     end
   end
 end
