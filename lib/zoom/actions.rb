@@ -2,17 +2,20 @@
 
 module Zoom
   module Actions
-    def self.parse_url(url, params)
+    def self.extract_url_param_keys(url)
+      url.scan(/:\w+/).map { |match| match[1..].to_sym }
+    end
+
+    def self.parse_url(url, url_param_keys, params)
       parsed_url = url.dup
-      url.scan(/:\w+/).each do |match|
-        key         = match[1..].to_sym
+      url_param_keys.each do |key|
         value       = params[key].to_s
-        parsed_url  = parsed_url.gsub(match, value)
+        parsed_url  = parsed_url.gsub(":#{key}", value)
       end
       parsed_url
     end
 
-    def self.make_request(obj, method, url, params, required_params)
+    def self.make_request(obj, method, url, url_param_keys, params, required_params)
       request_options = {
         headers: obj.request_headers
       }
@@ -22,7 +25,7 @@ module Zoom
       when :post, :patch
         request_options[:body] = required_params.to_json
       end
-      parsed_url = parse_url(url, params)
+      parsed_url = parse_url(url, url_param_keys, params)
       obj.class.public_send(method, parsed_url, **request_options)
     end
 
@@ -32,9 +35,12 @@ module Zoom
 
       define_method(name) do |*args|
         params = Zoom::Params.new(Utils.extract_options!(args))
-        required_params = required.empty? ? params : params.require(required)
+        url_param_keys = Zoom::Actions.extract_url_param_keys(url)
+        required_params = params
+        required_params = url_param_keys.empty? ? required_params : required_params.require(url_param_keys)
+        required_params = required.empty? ? required_params : required_params.require(required)
         required_params.permit(permitted) unless permitted.empty?
-        response = Zoom::Actions.make_request(self, method, url, params, required_params)
+        response = Zoom::Actions.make_request(self, method, url, url_param_keys, params, required_params)
         Utils.parse_response(response)
       end
     end
