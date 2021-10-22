@@ -15,10 +15,9 @@ module Zoom
       parsed_url
     end
 
-    def self.make_request(obj, method, parsed_url, filtered_params)
-      request_options = {
-        headers: obj.request_headers
-      }
+    def self.make_request(obj, method, parsed_url, filtered_params, base_uri)
+      request_options = { headers: obj.request_headers }
+      request_options[:base_uri] = base_uri if base_uri
       case method
       when :get
         request_options[:query] = filtered_params
@@ -29,8 +28,8 @@ module Zoom
     end
 
     [:get, :post, :patch, :put, :delete].each do |method|
-      define_method(method) do |name, url, validations={}|
-        required, permitted = validations.values_at :require, :permit
+      define_method(method) do |name, url, options={}|
+        required, permitted, base_uri = options.values_at :require, :permit, :base_uri
         required = Array(required) unless required.is_a?(Hash)
         permitted = Array(permitted) unless permitted.is_a?(Hash)
 
@@ -41,7 +40,7 @@ module Zoom
           params = params.require(url_keys) unless url_keys.empty?
           params_without_required = required.empty? ? params : params.require(required)
           params_without_required.permit(permitted) unless permitted.empty?
-          response = Zoom::Actions.make_request(self, method, parsed_url, params)
+          response = Zoom::Actions.make_request(self, method, parsed_url, params, base_uri)
           Utils.parse_response(response)
         end
       end
