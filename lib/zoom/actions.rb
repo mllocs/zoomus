@@ -15,14 +15,14 @@ module Zoom
       parsed_url
     end
 
-    def self.make_request(obj, method, parsed_url, filtered_params, base_uri)
+    def self.make_request(obj, method, parsed_url, params, base_uri)
       request_options = { headers: obj.request_headers }
       request_options[:base_uri] = base_uri if base_uri
       case method
       when :get
-        request_options[:query] = filtered_params
+        request_options[:query] = params
       when :post, :patch
-        request_options[:body] = filtered_params.to_json
+        request_options[:body] = params.to_json
       end
       obj.class.public_send(method, parsed_url, **request_options)
     end
