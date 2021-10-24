@@ -7,6 +7,12 @@ module Zoom
         Utils.parse_response self.class.get('/groups', headers: request_headers)
       end
 
+      def group_create(*args)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.permit(%i[name])
+        Utils.parse_response self.class.post("/groups", body: params, headers: request_headers)
+      end
+
       def groups_get(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:group_id)
