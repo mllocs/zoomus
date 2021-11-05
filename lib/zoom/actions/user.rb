@@ -8,14 +8,14 @@ module Zoom
       get 'user_list', '/users',
         permit: %i[status page_size role_id page_number include_fields next_page_token]
 
-      def user_create(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        require_param_keys = %i[action email type]
-        require_param_keys.append(:password) if params[:action] == 'autoCreate'
-        params.require(require_param_keys)
-        params.permit_value(:action, Zoom::Constants::User::CREATE_TYPES.keys)
-        Utils.parse_response self.class.post('/users', body: { action: params[:action], user_info: params.except(:action) }.to_json, headers: request_headers)
-      end
+      post 'user_create', '/users',
+        require: [
+          :action,
+          user_info: %i[email type]
+        ],
+        permit: {
+          user_info: %i[first_name last_name password]
+        }
 
       get 'user_get', '/users/:id',
         permit: :login_type
