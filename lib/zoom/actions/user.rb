@@ -63,6 +63,12 @@ module Zoom
 
       patch 'user_password_update', '/users/:id/password',
         permit: :password
+
+      patch 'user_email_update', '/users/:id/email',
+        permit: :email
+
+      patch 'user_status_update', '/users/:id/status',
+        permit: :status
     end
   end
 end
