@@ -3,42 +3,41 @@
 require 'spec_helper'
 
 describe Zoom::Actions do
+  let(:client) { Zoom::Client::OAuth.new(access_token: 'xxx', timeout: 15) }
+  let(:path) { '/:id/foo/:bar' }
+  let(:path_keys) { [:id, :bar] }
+  let(:params) { { id: 100, bar: 'baz' } }
+  let(:base_uri) { 'https://example.com' }
+  let(:parsed_path) { '/100/foo/baz' }
+
   describe 'self.extract_path_keys' do
     subject { described_class.extract_path_keys(path) }
-
-    let(:path) { '/:id/foo/:bar' }
     
-    it { is_expected.to contain_exactly(:id, :bar) }
+    it { is_expected.to match_array(path_keys) }
   end
 
   describe 'self.parse_path' do
     subject { described_class.parse_path(path, path_keys, params) }
 
-    let(:path) { '/:id/foo/:bar' }
-    let(:path_keys) { [:id, :bar] }
-    let(:params) { { id: 100, bar: 'baz' } }
-
-    it { is_expected.to eq('/100/foo/baz') }
+    it { is_expected.to eq(parsed_path) }
   end
 
   describe 'self.make_request' do
     subject { described_class.make_request(client, method, parsed_path, params, base_uri) }
 
-    let(:client) { Zoom::Client::OAuth.new(access_token: 'xxx', timeout: 15) }
-    let(:parsed_path) { '/100/foo/baz' }
-    let(:params) { { id: 100, bar: 'baz' } }
-    let(:base_uri) { 'https://example.com' }
+    let(:request_options) {
+      {
+        headers: client.request_headers,
+        base_uri: base_uri
+      }
+    }
 
     context 'when get' do
       let(:method) { :get }
 
       it 'calls get method on client with get request_options' do
-        request_options = {
-          headers: client.request_headers,
-          query: params,
-          base_uri: base_uri
-        }
-        expect(client.class).to receive(method).with(parsed_path, request_options)
+        request_options[:query] = params
+        expect(client.class).to receive(method).with(parsed_path, **request_options)
         subject
       end
     end
@@ -47,12 +46,8 @@ describe Zoom::Actions do
       let(:method) { :post }
 
       it 'calls post method on client with post request_options' do
-        request_options = {
-          headers: client.request_headers,
-          body: params.to_json,
-          base_uri: base_uri
-        }
-        expect(client.class).to receive(method).with(parsed_path, request_options)
+        request_options[:body] = params.to_json
+        expect(client.class).to receive(method).with(parsed_path, **request_options)
         subject
       end
     end
@@ -61,11 +56,7 @@ describe Zoom::Actions do
       let(:method) { :put }
 
       it 'calls put method on client with put request_options' do
-        request_options = {
-          headers: client.request_headers,
-          body: params.to_json,
-          base_uri: base_uri
-        }
+        request_options[:body] = params.to_json
         expect(client.class).to receive(method).with(parsed_path, **request_options)
         subject
       end
@@ -75,11 +66,7 @@ describe Zoom::Actions do
       let(:method) { :patch }
 
       it 'calls patch method on client with patch request_options' do
-        request_options = {
-          headers: client.request_headers,
-          body: params.to_json,
-          base_uri: base_uri
-        }
+        request_options[:body] = params.to_json
         expect(client.class).to receive(method).with(parsed_path, **request_options)
         subject
       end
@@ -89,10 +76,6 @@ describe Zoom::Actions do
       let(:method) { :delete }
 
       it 'calls delete method on client with delete request_options' do
-        request_options = {
-          headers: client.request_headers,
-          base_uri: base_uri
-        }
         expect(client.class).to receive(method).with(parsed_path, **request_options)
         subject
       end
