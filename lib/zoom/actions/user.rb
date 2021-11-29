@@ -81,7 +81,7 @@ module Zoom
 
       def user_settings_get(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:id).permit(:login_type)
+        params.require(:id).permit(:login_type, :option)
         Utils.parse_response self.class.get("/users/#{params[:id]}/settings", query: params.except(:id), headers: request_headers)
       end
 
