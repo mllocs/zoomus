@@ -9,7 +9,7 @@ module Zoom
     def self.parse_path(path, path_keys, params)
       parsed_path = path.dup
       path_keys.each do |key|
-        value       = params[key].to_s
+        value        = params[key].to_s
         parsed_path  = parsed_path.sub(":#{key}", value)
       end
       parsed_path
