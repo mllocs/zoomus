@@ -42,7 +42,7 @@ module Zoom
       delete 'user_schedulers_delete', '/users/:user_id/schedulers/:scheduler_id'
 
       get 'user_settings_get', '/users/:id/settings',
-        permit: :login_type
+        permit: [:login_type, :option, :custom_query_fields]
 
       patch 'user_settings_update', '/users/:id/settings',
         permit: %i[schedule_meeting in_meeting email_notification recording telephony feature tsp]
