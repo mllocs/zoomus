@@ -33,6 +33,8 @@ The 1.0 release and a major refactor of all endpoint definitions.
 
 ### New features
 * Greatly simplified new syntax when adding endpoints. This reduces repetition and makes it easier.
+* On `user_settings_get`, permit `option` and `custom_query_fields`.
+* Add `group_create` and `group_update`.
 
 # 0.11.0
 
