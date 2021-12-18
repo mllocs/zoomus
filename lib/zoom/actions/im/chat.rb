@@ -4,35 +4,22 @@ module Zoom
   module Actions
     module IM
       module Chat
-        def get_chat_channels(*args)
-          params = Zoom::Params.new(Utils.extract_options!(args))
-          params.require(:channel_id)
-          Utils.parse_response self.class.get("/chat/channels/#{params[:channel_id]}", headers: request_headers)
-        end
+        extend Zoom::Actions
 
-        def get_chat_user_channels(*args)
-          params = Zoom::Params.new(Utils.extract_options!(args))
-          params.require(:user_id).permit(%i[next_page_token page_size])
-          Utils.parse_response self.class.get("/chat/users/#{params[:user_id]}/channels", query: params.except(:user_id), headers: request_headers)
-        end
+        get 'get_chat_channels', '/chat/channels/:channel_id'
+
+        get 'get_chat_user_channels', '/chat/users/:user_id/channels',
+          permit: %i[next_page_token page_size]
 
         # Get chat messages for a specified period.
-        def chat_get(*args)
-          options = Utils.extract_options!(args)
-          Zoom::Params.new(options).require(:access_token, :session_id, :from, :to)
-          # TODO: handle date format for `from` and `to` params
-          # TODO: implement `next_page_token`, will be returned whenever the set of available chat history list exceeds 100. The expiration period is 30 minutes.
-          Utils.parse_response self.class.post('/chat/get', query: options)
-        end
+        # TODO: implement `next_page_token`, will be returned whenever the set of available chat history list exceeds 100. The expiration period is 30 minutes.
+        get 'chat_get', '/chat/get',
+          require: [ :access_token, :session_id, :from, :to ]
 
         # Get chat history list for a specified time period.
-        def chat_list(*args)
-          options = Utils.extract_options!(args)
-          Zoom::Params.new(options).require(:access_token, :from, :to)
-          # TODO: handle date format for `from` and `to` params
-          # TODO: implement `next_page_token`, will be returned whenever the set of available chat history list exceeds 100. The expiration period is 30 minutes.
-          Utils.parse_response self.class.post('/chat/list', query: options)
-        end
+        # TODO: implement `next_page_token`, will be returned whenever the set of available chat history list exceeds 100. The expiration period is 30 minutes.
+        get 'chat_list', '/chat/list',
+          require: [ :access_token, :from, :to ]
       end
     end
   end

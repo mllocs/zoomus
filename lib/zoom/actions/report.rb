@@ -3,28 +3,18 @@
 module Zoom
   module Actions
     module Report
-      def daily_report(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.permit(%i[year month])
-        Utils.parse_response self.class.get('/report/daily', query: params, headers: request_headers)
-      end
-      def meeting_details_report(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:id)
-        Utils.parse_response self.class.get("/report/meetings/#{params[:id]}", query: params.except(:id), headers: request_headers)
-      end
+      extend Zoom::Actions
 
-      def meeting_participants_report(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:id).permit(%i[page_size next_page_token])
-        Utils.parse_response self.class.get("/report/meetings/#{params[:id]}/participants", query: params.except(:id), headers: request_headers)
-      end
+      get 'daily_report', '/report/daily',
+        permit: %i[year month]
 
-      def webinar_participants_report(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:id).permit(%i[page_size next_page_token])
-        Utils.parse_response self.class.get("/report/webinars/#{params[:id]}/participants", query: params.except(:id), headers: request_headers)
-      end
+      get 'meeting_details_report', '/report/meetings/:id'
+
+      get 'meeting_participants_report', '/report/meetings/:id/participants',
+        permit: %i[page_size next_page_token]
+
+      get 'webinar_participants_report', '/report/webinars/:id/participants',
+        permit: %i[page_size next_page_token]
     end
   end
 end

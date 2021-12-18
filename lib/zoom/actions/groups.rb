@@ -3,27 +3,17 @@
 module Zoom
   module Actions
     module Groups
-      def groups_list(*_args)
-        Utils.parse_response self.class.get('/groups', headers: request_headers)
-      end
+      extend Zoom::Actions
 
-      def group_create(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.permit(%i[name])
-        Utils.parse_response self.class.post("/groups", body: params, headers: request_headers)
-      end
+      get 'groups_list', '/groups'
 
-      def group_update(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:group_id).permit(%i[name])
-        Utils.parse_response self.class.patch("/groups/#{params[:group_id]}", body: params.except(:group_id).to_json, headers: request_headers)
-      end
+      get 'groups_get', '/groups/:group_id'
 
-      def groups_get(*args)
-        params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:group_id)
-        Utils.parse_response self.class.get("/groups/#{params[:group_id]}", headers: request_headers)
-      end
+      post 'group_create', '/groups',
+        permit: :name
+
+      patch 'group_update', '/groups/:group_id',
+        permit: :name
     end
   end
 end
