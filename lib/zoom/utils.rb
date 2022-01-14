@@ -39,7 +39,7 @@ module Zoom
 
       def convert_param_names!(params)
         params[:code] = params.delete :auth_code if params[:auth_code]
-        params[:token] = params.delete :auth_code if params[:access_token]
+        params[:token] = params.delete :access_token if params[:access_token]
         params
       end
 
