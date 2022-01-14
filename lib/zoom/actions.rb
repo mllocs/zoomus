@@ -41,13 +41,13 @@ module Zoom
           params_without_required = required.empty? ? params : params.require(required)
           params_without_required.permit(permitted) unless permitted.empty?
           response = Zoom::Actions.make_request(self, method, parsed_path, params, base_uri,
-                                                url_encoded: Zoom::Actions.url_encoded_actions.include?(name))
+                                                url_encoded: Zoom::Actions.form_url_encoded_actions.include?(name))
           Utils.parse_response(response)
         end
       end
     end
 
-    def self.url_encoded_actions
+    def self.form_url_encoded_actions
       %w[access_tokens refresh_tokens revoke_tokens]
     end
   end

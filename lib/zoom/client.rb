@@ -33,7 +33,7 @@ module Zoom
       }
     end
 
-    def x_www_form_url_encoded_headers
+    def form_url_encoded_headers
       headers.merge({ 'Content-Type' => 'application/x-www-form-urlencoded' })
     end
 
@@ -54,7 +54,7 @@ module Zoom
     end
 
     def url_encoded_request_headers
-      bearer_authorization_header.merge(x_www_form_url_encoded_headers)
+      bearer_authorization_header.merge(form_url_encoded_headers)
     end
 
     def auth_token
