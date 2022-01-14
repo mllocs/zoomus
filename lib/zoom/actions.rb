@@ -15,8 +15,8 @@ module Zoom
       parsed_path
     end
 
-    def self.make_request(client, method, parsed_path, params, base_uri)
-      request_options = { headers: client.request_headers }
+    def self.make_request(client, method, parsed_path, params, base_uri, url_encoded: false)
+      request_options = { headers: url_encoded ? client.url_encoded_request_headers : client.request_headers }
       request_options[:base_uri] = base_uri if base_uri
       case method
       when :get
@@ -40,10 +40,15 @@ module Zoom
           params = params.require(path_keys) unless path_keys.empty?
           params_without_required = required.empty? ? params : params.require(required)
           params_without_required.permit(permitted) unless permitted.empty?
-          response = Zoom::Actions.make_request(self, method, parsed_path, params, base_uri)
+          response = Zoom::Actions.make_request(self, method, parsed_path, params, base_uri,
+                                                url_encoded: Zoom::Actions.url_encoded_actions.include?(name))
           Utils.parse_response(response)
         end
       end
+    end
+
+    def self.url_encoded_actions
+      %w[access_tokens refresh_tokens revoke_tokens]
     end
   end
 end

@@ -29,8 +29,12 @@ module Zoom
     def headers
       {
         'Accept' => 'application/json',
-        'Content-Type' => 'application/json',
+        'Content-Type' => 'application/json'
       }
+    end
+
+    def x_www_form_url_encoded_headers
+      headers.merge({ 'Content-Type' => 'application/x-www-form-urlencoded' })
     end
 
     def oauth_request_headers
@@ -39,10 +43,18 @@ module Zoom
       }.merge(headers)
     end
 
-    def request_headers
+    def bearer_authorization_header
       {
         'Authorization' => "Bearer #{access_token}"
-      }.merge(headers)
+      }
+    end
+
+    def request_headers
+      bearer_authorization_header.merge(headers)
+    end
+
+    def url_encoded_request_headers
+      bearer_authorization_header.merge(x_www_form_url_encoded_headers)
     end
 
     def auth_token
