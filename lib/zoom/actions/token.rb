@@ -6,12 +6,14 @@ module Zoom
       extend Zoom::Actions
 
       post 'access_tokens',
-        '/oauth/token?grant_type=authorization_code&code=:auth_code&redirect_uri=:redirect_uri',
-        base_uri: 'https://zoom.us/'
+        '/oauth/token?grant_type=authorization_code',
+        base_uri: 'https://zoom.us/',
+        require: %i[code redirect_uri]
 
       post 'refresh_tokens',
-        '/oauth/token?grant_type=refresh_token&refresh_token=:refresh_token',
-        base_uri: 'https://zoom.us/'
+        '/oauth/token?grant_type=refresh_token',
+        base_uri: 'https://zoom.us/',
+        require: :refresh_token
 
       post 'data_compliance', '/oauth/data/compliance',
         base_uri: 'https://zoom.us/',
@@ -19,8 +21,9 @@ module Zoom
           client_id user_id account_id deauthorization_event_received compliance_completed
         ]
 
-      post 'revoke_tokens', '/oauth/revoke?token=:access_token',
-        base_uri: 'https://zoom.us/'
+      post 'revoke_tokens', '/oauth/revoke',
+        base_uri: 'https://zoom.us/',
+        require: :token
     end
   end
 end

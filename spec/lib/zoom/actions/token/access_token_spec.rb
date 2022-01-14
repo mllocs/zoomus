@@ -16,7 +16,7 @@ describe Zoom::Actions::Token do
     end
 
     it "requires an error when args missing" do
-      expect { zc.access_tokens }.to raise_error(Zoom::ParameterMissing, [:auth_code, :redirect_uri].to_s)
+      expect { zc.access_tokens }.to raise_error(Zoom::ParameterMissing, [:code, :redirect_uri].to_s)
     end
 
     it 'returns a hash' do
