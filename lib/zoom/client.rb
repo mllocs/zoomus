@@ -53,7 +53,7 @@ module Zoom
       bearer_authorization_header.merge(headers)
     end
 
-    def url_encoded_request_headers
+    def form_url_encoded_request_headers
       bearer_authorization_header.merge(form_url_encoded_headers)
     end
 

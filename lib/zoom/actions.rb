@@ -16,7 +16,7 @@ module Zoom
     end
 
     def self.make_request(client, method, parsed_path, params, base_uri, url_encoded: false)
-      request_options = { headers: url_encoded ? client.url_encoded_request_headers : client.request_headers }
+      request_options = { headers: url_encoded ? client.form_url_encoded_request_headers : client.request_headers }
       request_options[:base_uri] = base_uri if base_uri
       case method
       when :get
