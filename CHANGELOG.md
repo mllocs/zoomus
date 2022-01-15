@@ -1,3 +1,8 @@
+# 1.0.1
+
+### Fixes:
+* Fix OAuth requests in Zoom::Actions::Token.
+
 # 1.0.0
 
 The 1.0 release and a major refactor of all endpoint definitions.
