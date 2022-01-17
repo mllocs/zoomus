@@ -7,12 +7,27 @@ describe Zoom::Actions::Token do
   let(:args) { { refresh_token: 'xxx' } }
 
   describe '#refresh_tokens action' do
+    let(:path) { '/oauth/token?grant_type=refresh_token' }
+
+    let(:params) do
+      {
+        base_uri: "https://zoom.us/",
+        body: '{"refresh_token":"xxx"}',
+        headers: {
+          "Accept" => "application/json",
+          "Authorization" => "Bearer ",
+          "Content-Type" => "application/x-www-form-urlencoded"
+        }
+      }
+    end
+
     before :each do
-      stub_request(
-        :post,
-        zoom_auth_url('oauth/token')
-      ).to_return(body: json_response('token', 'refresh_token'),
-                    headers: { 'Content-Type' => 'application/json' })
+      allow(Zoom::Utils).to receive(:parse_response).and_return(code: 200)
+      allow(Zoom::Client::OAuth).to(
+        receive(:post).with(path, params)
+          .and_return(body: json_response('token', 'access_token'),
+                        headers: { 'Content-Type' => 'application/json' })
+      )
     end
 
     it "raises an error when args missing" do
@@ -21,6 +36,11 @@ describe Zoom::Actions::Token do
 
     it 'returns a hash' do
       expect(zc.refresh_tokens(args)).to be_kind_of(Hash)
+    end
+
+    it 'passes args in the body and sends x-www-form-urlencoded header' do
+      zc.refresh_tokens(args)
+      expect(Zoom::Client::OAuth).to have_received(:post).with(path, params)
     end
   end
 end

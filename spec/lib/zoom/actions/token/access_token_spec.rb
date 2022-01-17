@@ -7,12 +7,27 @@ describe Zoom::Actions::Token do
   let(:args) { { auth_code: 'xxx', redirect_uri: 'http://localhost:3000' } }
 
   describe '#access_tokens action' do
+    let(:path) { '/oauth/token?grant_type=authorization_code' }
+
+    let(:params) do
+      {
+        base_uri: "https://zoom.us/",
+        body: '{"redirect_uri":"http://localhost:3000","code":"xxx"}',
+        headers: {
+          "Accept" => "application/json",
+          "Authorization" => "Bearer ",
+          "Content-Type" => "application/x-www-form-urlencoded"
+        }
+      }
+    end
+
     before :each do
-      stub_request(
-        :post,
-        zoom_auth_url('oauth/token')
-      ).to_return(body: json_response('token', 'access_token'),
-                    headers: { 'Content-Type' => 'application/json' })
+      allow(Zoom::Utils).to receive(:parse_response).and_return(code: 200)
+      allow(Zoom::Client::OAuth).to(
+        receive(:post).with(path, params)
+          .and_return(body: json_response('token', 'access_token'),
+                        headers: { 'Content-Type' => 'application/json' })
+      )
     end
 
     it "raises an error when args missing" do
@@ -23,17 +38,9 @@ describe Zoom::Actions::Token do
       expect(zc.access_tokens(args)).to be_kind_of(Hash)
     end
 
-    it 'passes args in the body' do
-      # allow(Zoom::Actions).to receive(:post).with(
-      #   '/oauth/token?grant_type=authorization_code',
-      #   { code: 'xxx', redirect_uri: 'http://localhost:3000' }
-      # )
-      # zc.access_tokens(args)
-      expect(Zoom::Actions).to receive(:post).with(
-        '/oauth/token?grant_type=authorization_code',
-        { body: { code: 'xxx', redirect_uri: 'http://localhost:3000' } }
-      )
+    it 'passes args in the body and sends x-www-form-urlencoded header' do
       zc.access_tokens(args)
+      expect(Zoom::Client::OAuth).to have_received(:post).with(path, params)
     end
   end
 end
