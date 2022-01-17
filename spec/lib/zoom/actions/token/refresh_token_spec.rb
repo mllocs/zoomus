@@ -15,7 +15,7 @@ describe Zoom::Actions::Token do
                     headers: { 'Content-Type' => 'application/json' })
     end
 
-    it "requires an error when args missing" do
+    it "raises an error when args missing" do
       expect { zc.refresh_tokens }.to raise_error(Zoom::ParameterMissing, [:refresh_token].to_s)
     end
 

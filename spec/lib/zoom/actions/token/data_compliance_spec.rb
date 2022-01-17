@@ -30,7 +30,7 @@ describe Zoom::Actions::Token do
                     headers: { 'Content-Type' => 'application/json' })
     end
 
-    it "requires an error when args missing" do
+    it "raises an error when args missing" do
       expect { zc.data_compliance }.to raise_error(Zoom::ParameterMissing, [:client_id, :user_id, :account_id, :deauthorization_event_received, :compliance_completed].to_s)
     end
 

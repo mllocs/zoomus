@@ -34,13 +34,6 @@ module Zoom
       def extract_options!(array)
         params = array.last.is_a?(::Hash) ? array.pop : {}
         process_datetime_params!(params)
-        convert_param_names!(params)
-      end
-
-      def convert_param_names!(params)
-        params[:code] = params.delete :auth_code if params[:auth_code]
-        params[:token] = params.delete :access_token if params[:access_token]
-        params
       end
 
       def validate_password(password)

@@ -29,12 +29,12 @@ module Zoom
     def headers
       {
         'Accept' => 'application/json',
-        'Content-Type' => 'application/json'
+        'Content-Type' => 'application/json',
       }
     end
 
     def form_url_encoded_headers
-      headers.merge({ 'Content-Type' => 'application/x-www-form-urlencoded' })
+      headers.merge('Content-Type' => 'application/x-www-form-urlencoded')
     end
 
     def oauth_request_headers

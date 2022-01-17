@@ -15,12 +15,25 @@ describe Zoom::Actions::Token do
                     headers: { 'Content-Type' => 'application/json' })
     end
 
-    it "requires an error when args missing" do
+    it "raises an error when args missing" do
       expect { zc.access_tokens }.to raise_error(Zoom::ParameterMissing, [:code, :redirect_uri].to_s)
     end
 
     it 'returns a hash' do
       expect(zc.access_tokens(args)).to be_kind_of(Hash)
+    end
+
+    it 'passes args in the body' do
+      # allow(Zoom::Actions).to receive(:post).with(
+      #   '/oauth/token?grant_type=authorization_code',
+      #   { code: 'xxx', redirect_uri: 'http://localhost:3000' }
+      # )
+      # zc.access_tokens(args)
+      expect(Zoom::Actions).to receive(:post).with(
+        '/oauth/token?grant_type=authorization_code',
+        { body: { code: 'xxx', redirect_uri: 'http://localhost:3000' } }
+      )
+      zc.access_tokens(args)
     end
   end
 end

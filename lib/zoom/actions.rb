@@ -35,20 +35,18 @@ module Zoom
 
         define_method(name) do |*args|
           path_keys = Zoom::Actions.extract_path_keys(path)
-          params = Zoom::Params.new(Utils.extract_options!(args))
+          params = Utils.extract_options!(args)
+          params = Zoom::Actions::Token.convert_param_names!(params)
+          params = Zoom::Params.new(params)
           parsed_path = Zoom::Actions.parse_path(path, path_keys, params)
           params = params.require(path_keys) unless path_keys.empty?
           params_without_required = required.empty? ? params : params.require(required)
           params_without_required.permit(permitted) unless permitted.empty?
           response = Zoom::Actions.make_request(self, method, parsed_path, params, base_uri,
-                                                url_encoded: Zoom::Actions.form_url_encoded_actions.include?(name))
+                                                url_encoded: Zoom::Actions::Token.form_url_encoded_actions.include?(name))
           Utils.parse_response(response)
         end
       end
-    end
-
-    def self.form_url_encoded_actions
-      %w[access_tokens refresh_tokens revoke_tokens]
     end
   end
 end
