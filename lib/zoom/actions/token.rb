@@ -8,12 +8,15 @@ module Zoom
       post 'access_tokens',
         '/oauth/token?grant_type=authorization_code',
         base_uri: 'https://zoom.us/',
-        require: %i[code redirect_uri]
+        require: %i[code redirect_uri],
+        args_to_params: { auth_code: :code },
+        headers: { 'Content-Type' => 'application/x-www-form-urlencoded' }
 
       post 'refresh_tokens',
         '/oauth/token?grant_type=refresh_token',
         base_uri: 'https://zoom.us/',
-        require: :refresh_token
+        require: :refresh_token,
+        headers: { 'Content-Type' => 'application/x-www-form-urlencoded' }
 
       post 'data_compliance', '/oauth/data/compliance',
         base_uri: 'https://zoom.us/',
@@ -23,17 +26,9 @@ module Zoom
 
       post 'revoke_tokens', '/oauth/revoke',
         base_uri: 'https://zoom.us/',
-        require: :token
-
-      def self.convert_param_names!(params)
-        params[:code] = params.delete :auth_code if params[:auth_code]
-        params[:token] = params.delete :access_token if params[:access_token]
-        params
-      end
-
-      def self.form_url_encoded_actions
-        %w[access_tokens refresh_tokens revoke_tokens]
-      end
+        require: :token,
+        args_to_params: { access_token: :token },
+        headers: { 'Content-Type' => 'application/x-www-form-urlencoded' }
     end
   end
 end

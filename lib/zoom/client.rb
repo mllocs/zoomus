@@ -33,10 +33,6 @@ module Zoom
       }
     end
 
-    def form_url_encoded_headers
-      headers.merge('Content-Type' => 'application/x-www-form-urlencoded')
-    end
-
     def oauth_request_headers
       {
         'Authorization' => "Basic #{auth_token}"
@@ -51,10 +47,6 @@ module Zoom
 
     def request_headers
       bearer_authorization_header.merge(headers)
-    end
-
-    def form_url_encoded_request_headers
-      bearer_authorization_header.merge(form_url_encoded_headers)
     end
 
     def auth_token

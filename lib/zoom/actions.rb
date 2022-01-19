@@ -15,8 +15,8 @@ module Zoom
       parsed_path
     end
 
-    def self.make_request(client, method, parsed_path, params, base_uri, url_encoded: false)
-      request_options = { headers: url_encoded ? client.form_url_encoded_request_headers : client.request_headers }
+    def self.make_request(client, method, parsed_path, params, base_uri, headers = nil)
+      request_options = { headers: client.request_headers.merge(headers || {}) }
       request_options[:base_uri] = base_uri if base_uri
       case method
       when :get
@@ -29,21 +29,21 @@ module Zoom
 
     [:get, :post, :patch, :put, :delete].each do |method|
       define_method(method) do |name, path, options={}|
-        required, permitted, base_uri = options.values_at :require, :permit, :base_uri
+        required, permitted, base_uri, args_to_params, headers =
+          options.values_at :require, :permit, :base_uri, :args_to_params, :headers
         required = Array(required) unless required.is_a?(Hash)
         permitted = Array(permitted) unless permitted.is_a?(Hash)
 
         define_method(name) do |*args|
           path_keys = Zoom::Actions.extract_path_keys(path)
           params = Utils.extract_options!(args)
-          params = Zoom::Actions::Token.convert_param_names!(params)
+          args_to_params&.each { |key, value| params[value] = params.delete key if params[key] }
           params = Zoom::Params.new(params)
           parsed_path = Zoom::Actions.parse_path(path, path_keys, params)
           params = params.require(path_keys) unless path_keys.empty?
           params_without_required = required.empty? ? params : params.require(required)
           params_without_required.permit(permitted) unless permitted.empty?
-          response = Zoom::Actions.make_request(self, method, parsed_path, params, base_uri,
-                                                url_encoded: Zoom::Actions::Token.form_url_encoded_actions.include?(name))
+          response = Zoom::Actions.make_request(self, method, parsed_path, params, base_uri, headers)
           Utils.parse_response(response)
         end
       end
