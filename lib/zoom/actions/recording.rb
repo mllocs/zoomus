@@ -11,7 +11,7 @@ module Zoom
 
       get 'recording_list', '/users/:user_id/recordings'
 
-      get 'meeting_recording_get', '/meetings/:meeting_id/recordings/settings'
+      get 'meeting_recording_get', '/meetings/:meeting_id/recordings'
 
       get 'meeting_recording_settings_get', '/meetings/:meeting_id/recordings/settings'
 
