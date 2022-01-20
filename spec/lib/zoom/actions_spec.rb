@@ -7,7 +7,7 @@ describe Zoom::Actions do
   let(:path) { '/:id/foo/:bar' }
   let(:path_keys) { [:id, :bar] }
   let(:params) { { id: 100, bar: 'baz' } }
-  let(:base_uri) { 'https://example.com' }
+  let(:oauth) { false }
   let(:parsed_path) { '/100/foo/baz' }
 
   describe 'self.extract_path_keys' do
@@ -26,16 +26,18 @@ describe Zoom::Actions do
     subject do
       described_class.make_request({
         client: client, method: method, parsed_path: parsed_path,
-        params: params, base_uri: base_uri
+        params: params, request_options: request_options
       })
     end
 
-    let(:request_options) {
-      {
-        headers: client.request_headers,
-        base_uri: base_uri
-      }
-    }
+    let(:request_options) { Zoom::Actions.determine_request_options(client, oauth) }
+
+    before :each do
+      Zoom.configure do |config|
+        config.api_key = 'xxx'
+        config.api_secret = 'xxx'
+      end
+    end
 
     context 'when get' do
       let(:method) { :get }
@@ -81,6 +83,32 @@ describe Zoom::Actions do
       let(:method) { :delete }
 
       it 'calls delete method on client with delete request_options' do
+        expect(client.class).to receive(method).with(parsed_path, **request_options)
+        subject
+      end
+    end
+
+    context 'when oauth' do
+      let(:method) { :get }
+      let(:oauth) { true }
+
+      it 'passes oauth request options' do
+        request_options[:query] = params
+        expect(request_options[:headers]).to eq(client.oauth_request_headers)
+        expect(request_options[:base_uri]).to eq('https://zoom.us/')
+        expect(client.class).to receive(method).with(parsed_path, **request_options)
+        subject
+      end
+    end
+
+    context 'when not oauth' do
+      let(:method) { :get }
+      let(:oauth) { false }
+
+      it 'passes standard request options' do
+        request_options[:query] = params
+        expect(request_options[:headers]).to eq(client.request_headers)
+        expect(request_options[:base_uri]).to be_nil
         expect(client.class).to receive(method).with(parsed_path, **request_options)
         subject
       end

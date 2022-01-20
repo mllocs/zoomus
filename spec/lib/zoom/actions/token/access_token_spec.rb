@@ -11,17 +11,22 @@ describe Zoom::Actions::Token do
 
     let(:params) do
       {
-        base_uri: "https://zoom.us/",
+        base_uri: 'https://zoom.us/',
         body: '{"redirect_uri":"http://localhost:3000","code":"xxx"}',
         headers: {
-          "Accept" => "application/json",
-          "Authorization" => "Bearer ",
-          "Content-Type" => "application/x-www-form-urlencoded"
+          'Accept'=>'application/json',
+          'Authorization'=>'Basic eHh4Onh4eA==',
+          'Content-Type'=>'application/x-www-form-urlencoded'
         }
       }
     end
 
     before :each do
+      Zoom.configure do |config|
+        config.api_key = 'xxx'
+        config.api_secret = 'xxx'
+      end
+
       allow(Zoom::Utils).to receive(:parse_response).and_return(code: 200)
       allow(Zoom::Client::OAuth).to(
         receive(:post).with(path, params)
