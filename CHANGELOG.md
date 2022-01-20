@@ -1,3 +1,8 @@
+# 1.0.2
+
+### Fixes:
+* Fix meeting_recording_get endpoint.
+
 # 1.0.1
 
 ### Fixes:
