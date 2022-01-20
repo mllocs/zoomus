@@ -2,6 +2,8 @@
 
 module Zoom
   module Actions
+    FORM_URLENCODED_HEADER = { 'Content-Type' => 'application/x-www-form-urlencoded' }.freeze
+
     def self.extract_path_keys(path)
       path.scan(/:\w+/).map { |match| match[1..].to_sym }
     end
@@ -15,7 +17,9 @@ module Zoom
       parsed_path
     end
 
-    def self.make_request(client, method, parsed_path, params, base_uri, headers = nil)
+    def self.make_request(args)
+      client, method, parsed_path, params, base_uri, headers =
+        args.values_at :client, :method, :parsed_path, :params, :base_uri, :headers
       request_options = { headers: client.request_headers.merge(headers || {}) }
       request_options[:base_uri] = base_uri if base_uri
       case method
@@ -43,7 +47,10 @@ module Zoom
           params = params.require(path_keys) unless path_keys.empty?
           params_without_required = required.empty? ? params : params.require(required)
           params_without_required.permit(permitted) unless permitted.empty?
-          response = Zoom::Actions.make_request(self, method, parsed_path, params, base_uri, headers)
+          response = Zoom::Actions.make_request({
+            client: self,  method: method,  parsed_path: parsed_path,
+            params: params, base_uri: base_uri,  headers: headers
+          })
           Utils.parse_response(response)
         end
       end

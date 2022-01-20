@@ -12,7 +12,7 @@ describe Zoom::Actions do
 
   describe 'self.extract_path_keys' do
     subject { described_class.extract_path_keys(path) }
-    
+
     it { is_expected.to match_array(path_keys) }
   end
 
@@ -23,7 +23,12 @@ describe Zoom::Actions do
   end
 
   describe 'self.make_request' do
-    subject { described_class.make_request(client, method, parsed_path, params, base_uri) }
+    subject do
+      described_class.make_request({
+        client: client, method: method, parsed_path: parsed_path,
+        params: params, base_uri: base_uri
+      })
+    end
 
     let(:request_options) {
       {
