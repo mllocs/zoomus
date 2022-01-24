@@ -6,15 +6,15 @@ module Zoom
       extend Zoom::Actions
 
       post 'access_tokens',
-        '/oauth/token?grant_type=authorization_code',
+        '/oauth/token',
         oauth: true,
-        require: %i[code redirect_uri],
+        require: %i[grant_type code redirect_uri],
         args_to_params: { auth_code: :code }
 
       post 'refresh_tokens',
-        '/oauth/token?grant_type=refresh_token',
+        '/oauth/token',
         oauth: true,
-        require: :refresh_token
+        require: %i[grant_type refresh_token]
 
       post 'data_compliance', '/oauth/data/compliance',
         oauth: true,
