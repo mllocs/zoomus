@@ -12,7 +12,7 @@ describe Zoom::Actions::Token do
     let(:params) do
       {
         base_uri: 'https://zoom.us/',
-        body: '{"grant_type":"authorization_code","redirect_uri":"http://localhost:3000","code":"xxx"}',
+        body: 'grant_type=authorization_code&redirect_uri=http://localhost:3000&code=xxx',
         headers: {
           'Accept'=>'application/json',
           'Authorization'=>'Basic eHh4Onh4eA==',
