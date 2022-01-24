@@ -34,7 +34,7 @@ module Zoom
         request_options[:query] = params
       when :post, :put, :patch
         request_options[:body] =
-          oauth ? params.map { |key, value| "#{key}=#{value}" }.join('&') : params.to_json
+          oauth ? URI.encode_www_form(params.to_a) : params.to_json
       end
       client.class.public_send(method, parsed_path, **request_options)
     end

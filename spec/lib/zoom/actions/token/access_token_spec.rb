@@ -5,6 +5,7 @@ require 'spec_helper'
 describe Zoom::Actions::Token do
   let(:zc) { oauth_client }
   let(:args) { { grant_type: 'authorization_code', auth_code: 'xxx', redirect_uri: 'http://localhost:3000' } }
+  let(:body) { { grant_type: 'authorization_code', redirect_uri: 'http://localhost:3000', code: 'xxx' } }
 
   describe '#access_tokens action' do
     let(:path) { '/oauth/token' }
@@ -12,7 +13,7 @@ describe Zoom::Actions::Token do
     let(:params) do
       {
         base_uri: 'https://zoom.us/',
-        body: 'grant_type=authorization_code&redirect_uri=http://localhost:3000&code=xxx',
+        body: URI.encode_www_form(body.to_a),
         headers: {
           'Accept'=>'application/json',
           'Authorization'=>'Basic eHh4Onh4eA==',

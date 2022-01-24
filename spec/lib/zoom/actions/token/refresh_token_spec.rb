@@ -12,7 +12,7 @@ describe Zoom::Actions::Token do
     let(:params) do
       {
         base_uri: 'https://zoom.us/',
-        body: 'grant_type=refresh_token&refresh_token=xxx',
+        body: URI.encode_www_form(args.to_a),
         headers: {
           'Accept'=>'application/json',
           'Authorization'=>'Basic eHh4Onh4eA==',
