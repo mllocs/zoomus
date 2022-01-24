@@ -5,6 +5,7 @@ require 'spec_helper'
 describe Zoom::Actions::Token do
   let(:zc) { oauth_client }
   let(:args) { { access_token: 'xxx' } }
+  let(:body) { { token: 'xxx' } }
 
   describe '#revoke_tokens action' do
     let(:path) { '/oauth/revoke' }
@@ -12,7 +13,7 @@ describe Zoom::Actions::Token do
     let(:params) do
       {
         base_uri: 'https://zoom.us/',
-        body: 'token=xxx',
+        body: URI.encode_www_form(body),
         headers: {
           'Accept'=>'application/json',
           'Authorization'=>'Basic eHh4Onh4eA==',
