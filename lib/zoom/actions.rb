@@ -27,13 +27,14 @@ module Zoom
     end
 
     def self.make_request(args)
-      client, method, parsed_path, params, request_options =
-        args.values_at :client, :method, :parsed_path, :params, :request_options
+      client, method, parsed_path, params, request_options, oauth =
+        args.values_at :client, :method, :parsed_path, :params, :request_options, :oauth
       case method
       when :get
         request_options[:query] = params
       when :post, :put, :patch
-        request_options[:body] = params.to_json
+        request_options[:body] =
+          oauth ? params.map { |key, value| "#{key}=#{value}" }.join('&') : params.to_json
       end
       client.class.public_send(method, parsed_path, **request_options)
     end
@@ -57,7 +58,7 @@ module Zoom
           params_without_required.permit(permitted) unless permitted.empty?
           response = Zoom::Actions.make_request({
             client: self, method: method, parsed_path: parsed_path,
-            params: params, request_options: request_options
+            params: params, request_options: request_options, oauth: oauth
           })
           Utils.parse_response(response)
         end

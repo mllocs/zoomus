@@ -4,15 +4,15 @@ require 'spec_helper'
 
 describe Zoom::Actions::Token do
   let(:zc) { oauth_client }
-  let(:args) { { refresh_token: 'xxx' } }
+  let(:args) { { grant_type: 'refresh_token', refresh_token: 'xxx' } }
 
   describe '#refresh_tokens action' do
-    let(:path) { '/oauth/token?grant_type=refresh_token' }
+    let(:path) { '/oauth/token' }
 
     let(:params) do
       {
         base_uri: 'https://zoom.us/',
-        body: '{"refresh_token":"xxx"}',
+        body: 'grant_type=refresh_token&refresh_token=xxx',
         headers: {
           'Accept'=>'application/json',
           'Authorization'=>'Basic eHh4Onh4eA==',
@@ -36,7 +36,7 @@ describe Zoom::Actions::Token do
     end
 
     it "raises an error when args missing" do
-      expect { zc.refresh_tokens }.to raise_error(Zoom::ParameterMissing, [:refresh_token].to_s)
+      expect { zc.refresh_tokens }.to raise_error(Zoom::ParameterMissing, [:grant_type, :refresh_token].to_s)
     end
 
     it 'returns a hash' do

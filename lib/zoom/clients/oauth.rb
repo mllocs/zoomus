@@ -28,13 +28,13 @@ module Zoom
       end
 
       def refresh
-        response = refresh_tokens(refresh_token: @refresh_token)
+        response = refresh_tokens(grant_type: 'refresh_token', refresh_token: @refresh_token)
         set_tokens(response)
         response
       end
 
       def oauth
-        response = access_tokens(auth_code: @auth_code, redirect_uri: @redirect_uri)
+        response = access_tokens(grant_type: 'authorization_code', auth_code: @auth_code, redirect_uri: @redirect_uri)
         set_tokens(response)
         response
       end

@@ -4,15 +4,15 @@ require 'spec_helper'
 
 describe Zoom::Actions::Token do
   let(:zc) { oauth_client }
-  let(:args) { { auth_code: 'xxx', redirect_uri: 'http://localhost:3000' } }
+  let(:args) { { grant_type: 'authorization_code', auth_code: 'xxx', redirect_uri: 'http://localhost:3000' } }
 
   describe '#access_tokens action' do
-    let(:path) { '/oauth/token?grant_type=authorization_code' }
+    let(:path) { '/oauth/token' }
 
     let(:params) do
       {
         base_uri: 'https://zoom.us/',
-        body: '{"redirect_uri":"http://localhost:3000","code":"xxx"}',
+        body: 'grant_type=authorization_code&redirect_uri=http://localhost:3000&code=xxx',
         headers: {
           'Accept'=>'application/json',
           'Authorization'=>'Basic eHh4Onh4eA==',
@@ -36,7 +36,7 @@ describe Zoom::Actions::Token do
     end
 
     it "raises an error when args missing" do
-      expect { zc.access_tokens }.to raise_error(Zoom::ParameterMissing, [:code, :redirect_uri].to_s)
+      expect { zc.access_tokens }.to raise_error(Zoom::ParameterMissing, [:grant_type, :code, :redirect_uri].to_s)
     end
 
     it 'returns a hash' do
