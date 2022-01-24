@@ -13,7 +13,7 @@ describe Zoom::Actions::Token do
     let(:params) do
       {
         base_uri: 'https://zoom.us/',
-        body: URI.encode_www_form(body),
+        body: URI.encode_www_form(body.to_a),
         headers: {
           'Accept'=>'application/json',
           'Authorization'=>'Basic eHh4Onh4eA==',
