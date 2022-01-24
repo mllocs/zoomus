@@ -35,14 +35,20 @@ module Zoom
 
     def oauth_request_headers
       {
-        'Authorization' => "Basic #{auth_token}"
-      }.merge(headers)
+        'Authorization' => "Basic #{auth_token}",
+        'Accept' => 'application/json',
+        'Content-Type' => 'application/x-www-form-urlencoded',
+      }
+    end
+
+    def bearer_authorization_header
+      {
+        'Authorization' => "Bearer #{access_token}"
+      }
     end
 
     def request_headers
-      {
-        'Authorization' => "Bearer #{access_token}"
-      }.merge(headers)
+      bearer_authorization_header.merge(headers)
     end
 
     def auth_token

@@ -23,6 +23,11 @@ describe Zoom::Actions::Token do
 
   describe '#data_compliance action' do
     before :each do
+      Zoom.configure do |config|
+        config.api_key = 'xxx'
+        config.api_secret = 'xxx'
+      end
+
       stub_request(
         :post,
         zoom_auth_url('oauth/data/compliance')
@@ -30,7 +35,7 @@ describe Zoom::Actions::Token do
                     headers: { 'Content-Type' => 'application/json' })
     end
 
-    it "requires an error when args missing" do
+    it "raises an error when args missing" do
       expect { zc.data_compliance }.to raise_error(Zoom::ParameterMissing, [:client_id, :user_id, :account_id, :deauthorization_event_received, :compliance_completed].to_s)
     end
 

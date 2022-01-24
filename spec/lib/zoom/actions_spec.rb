@@ -12,7 +12,7 @@ describe Zoom::Actions do
 
   describe 'self.extract_path_keys' do
     subject { described_class.extract_path_keys(path) }
-    
+
     it { is_expected.to match_array(path_keys) }
   end
 
@@ -23,9 +23,21 @@ describe Zoom::Actions do
   end
 
   describe 'self.make_request' do
-    subject { described_class.make_request(client, method, parsed_path, params, request_options) }
+    subject do
+      described_class.make_request({
+        client: client, method: method, parsed_path: parsed_path,
+        params: params, request_options: request_options
+      })
+    end
 
     let(:request_options) { Zoom::Actions.determine_request_options(client, oauth) }
+
+    before :each do
+      Zoom.configure do |config|
+        config.api_key = 'xxx'
+        config.api_secret = 'xxx'
+      end
+    end
 
     context 'when get' do
       let(:method) { :get }
