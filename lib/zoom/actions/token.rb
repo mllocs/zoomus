@@ -9,6 +9,7 @@ module Zoom
         '/oauth/token',
         oauth: true,
         require: %i[grant_type code redirect_uri],
+        permit: :code_verifier,
         args_to_params: { auth_code: :code }
 
       post 'refresh_tokens',
