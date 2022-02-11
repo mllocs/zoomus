@@ -4,11 +4,11 @@ require 'spec_helper'
 
 describe Zoom::Actions::Token do
   let(:zc) { oauth_client }
-  let(:args) { { grant_type: 'authorization_code', auth_code: 'xxx', redirect_uri: 'http://localhost:3000', code_verifier: 'xxx' } }
-  let(:body) { { grant_type: 'authorization_code', redirect_uri: 'http://localhost:3000', code_verifier: 'xxx', code: 'xxx'  } }
+  let(:args) { { access_token: 'xxx' } }
+  let(:body) { { token: 'xxx' } }
 
-  describe '#access_tokens action' do
-    let(:path) { '/oauth/token' }
+  describe '#revoke_tokens action' do
+    let(:path) { '/oauth/revoke' }
 
     let(:params) do
       {
@@ -37,15 +37,15 @@ describe Zoom::Actions::Token do
     end
 
     it "raises an error when args missing" do
-      expect { zc.access_tokens }.to raise_error(Zoom::ParameterMissing, [:grant_type, :code, :redirect_uri].to_s)
+      expect { zc.revoke_tokens }.to raise_error(Zoom::ParameterMissing, [:token].to_s)
     end
 
     it 'returns a hash' do
-      expect(zc.access_tokens(args)).to be_kind_of(Hash)
+      expect(zc.revoke_tokens(args)).to be_kind_of(Hash)
     end
 
     it 'passes args in the body and sends x-www-form-urlencoded header' do
-      zc.access_tokens(args)
+      zc.revoke_tokens(args)
       expect(Zoom::Client::OAuth).to have_received(:post).with(path, params)
     end
   end
