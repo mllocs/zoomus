@@ -34,7 +34,13 @@ module Zoom
       end
 
       def oauth
-        response = access_tokens(grant_type: 'authorization_code', auth_code: @auth_code, redirect_uri: @redirect_uri)
+        response = access_tokens(
+          grant_type: 'authorization_code',
+          auth_code: @auth_code,
+          redirect_uri: @redirect_uri,
+          code_verifier: @code_verifier
+        )
+
         set_tokens(response)
         response
       end

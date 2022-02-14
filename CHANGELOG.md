@@ -1,3 +1,15 @@
+# 1.1.0
+
+### New features
+* Support the new Zoom API OAuth security measures which are described here:
+  https://marketplace.zoom.us/docs/guides/stay-up-to-date/announcements/#zoom-oauth-security-updates
+* Support the code_verifier parameter in the access_tokens call.
+
+# 1.0.2
+
+### Fixes:
+* Fix meeting_recording_get endpoint.
+
 # 1.0.1
 
 ### Fixes:
