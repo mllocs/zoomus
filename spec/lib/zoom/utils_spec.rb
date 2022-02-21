@@ -29,6 +29,12 @@ describe Zoom::Utils do
       response = {}
       expect { Utils.raise_if_error!(response) }.to_not raise_error
     end
+
+    it 'raises Zoom::Error if http code is not 200' do
+      response = { 'code' => 180, 'message' => 'lol error' }
+      expect { Utils.raise_if_error!(response, 400) }.to raise_error(Zoom::Error)
+    end
+
   end
 
   describe '#extract_options!' do

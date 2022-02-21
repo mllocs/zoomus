@@ -11,14 +11,14 @@ module Zoom
         name ? ArgumentError.new("Unrecognized parameter #{name}") : ArgumentError.new
       end
 
-      def raise_if_error!(response)
+      def raise_if_error!(response, http_code=200)
         return response unless response&.key?('code')
 
         code = response['code']
 
         raise AuthenticationError, build_error(response) if code == 124
         error_hash = build_error(response)
-        raise Error.new(error_hash, error_hash) if code >= 300
+        raise Error.new(error_hash, error_hash) if code >= 300 || http_code >= 400
       end
 
       def build_error(response)
@@ -28,7 +28,7 @@ module Zoom
       end
 
       def parse_response(http_response)
-        raise_if_error!(http_response.parsed_response) || http_response.code
+        raise_if_error!(http_response.parsed_response, http_response.code) || http_response.code
       end
 
       def extract_options!(array)
