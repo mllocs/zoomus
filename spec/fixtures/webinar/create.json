@@ -24,6 +24,12 @@
         "allow_multiple_devices": true,
         "practice_session": false,
         "hd_video": false,
-        "question_answer": true
+        "question_and_answer": {
+            "allow_anonymous_question": true,
+            "answer_questions": "all",
+            "attendees_can_comment": true,
+            "attendees_can_upvote": true,
+            "enable": true
+        }
     }
 }
