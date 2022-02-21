@@ -25,7 +25,7 @@
         "practice_session": false,
         "hd_video": false,
         "question_and_answer": {
-            "allow_anonymous_question": true,
+            "allow_anonymous_questions": true,
             "answer_questions": "all",
             "attendees_can_comment": true,
             "attendees_can_upvote": true,
