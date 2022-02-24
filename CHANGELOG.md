@@ -1,3 +1,10 @@
+# 1.1.1
+
+### Fixes
+* Use correct "question_and_answer" API spec
+* Raise a `Zoom::Error` exception when HTTP status is at or above 400
+* Avoid SimpleCov error by making the gemspec permissive to newer versions
+
 # 1.1.0
 
 ### New features
