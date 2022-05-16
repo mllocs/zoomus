@@ -30,6 +30,11 @@ describe Zoom::Utils do
       expect { Utils.raise_if_error!(response) }.to_not raise_error
     end
 
+    it 'does not raise Zoom::Error if response is not a Hash' do
+      response = 'xxx'
+      expect { Utils.raise_if_error!(response) }.to_not raise_error
+    end
+
     it 'raises Zoom::Error if http code is not 200' do
       response = { 'code' => 180, 'message' => 'lol error' }
       expect { Utils.raise_if_error!(response, 400) }.to raise_error(Zoom::Error)
