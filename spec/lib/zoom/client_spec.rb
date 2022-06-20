@@ -120,4 +120,52 @@ describe Zoom::Client do
       end
     end
   end
+
+  describe 'ServerToServerOAuth client' do
+    let(:access_token) {'xxx'}
+    let(:client) do
+      Zoom::Client::ServerToServerOAuth.new(access_token: access_token, timeout: 30)
+    end
+
+    it 'raises an error if there is no arguments' do
+      expect { Zoom::Client::OAuth.new(timeout: 30) }.to raise_error(Zoom::ParameterMissing)
+    end
+
+    it 'creates instance of Zoom::Client if api_key and api_secret is provided' do
+      expect(client).to be_kind_of(Zoom::Client)
+    end
+
+    it 'has the bearer token in the auth header' do
+      expect(client.request_headers['Authorization']).to eq("Bearer #{access_token}")
+    end
+
+    describe 'set_tokens' do
+      let(:zc) { server_to_server_oauth_client }
+      let(:args) { { account_id: 'xxx', client_id: 'xxx', client_secret: 'xxx' } }
+
+      before :each do
+        Zoom.configure do |config|
+          config.timeout = 20
+        end
+
+        stub_request(
+          :post,
+          zoom_auth_url('oauth/token')
+        ).to_return(body: json_response('token', 'access_token'),
+                    headers: { 'Content-Type' => 'application/json' })
+      end
+
+      it 'sets the access_token, expires_in and expires_at' do
+        expected_values = JSON.parse(json_response('token', 'access_token'))
+        zc.auth
+        expect(zc.access_token).to eq(expected_values['access_token'])
+        expect(zc.expires_in).to eq(expected_values['expires_in'])
+        expect(zc.expires_at).to eq((Time.now + expected_values['expires_in']).to_i)
+      end
+
+      it 'has the basic auth authorization header' do
+        expect(zc.oauth_request_headers['Authorization']).to eq("Basic eHh4Onh4eA==")
+      end
+    end
+  end
 end
