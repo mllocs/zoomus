@@ -7,7 +7,7 @@ module Zoom
 
       def initialize(config)
         Zoom::Params.new(config).permit(%i[access_token account_id client_id client_secret timeout])
-        Zoom::Params.new(config).require_one_of(%i[access_token account_id client_id client_secret])
+        Zoom::Params.new(config).require_one_of(%i[access_token account_id])
 
         config.each { |k, v| instance_variable_set("@#{k}", v) }
         self.class.default_timeout(@timeout || 20)
@@ -20,7 +20,9 @@ module Zoom
       end
 
       def auth_token
-        Base64.urlsafe_encode64("#{@client_id}:#{@client_secret}")
+        return Base64.urlsafe_encode64("#{@client_id}:#{@client_secret}") if @client_id && @client_secret
+
+        Base64.urlsafe_encode64("#{Zoom.configuration.api_key}:#{Zoom.configuration.api_secret}")
       end
 
       private

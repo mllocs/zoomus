@@ -128,7 +128,15 @@ describe Zoom::Client do
     end
 
     it 'raises an error if there is no arguments' do
-      expect { Zoom::Client::OAuth.new(timeout: 30) }.to raise_error(Zoom::ParameterMissing)
+      expect { Zoom::Client::ServerToServerOAuth.new(timeout: 30) }.to raise_error(Zoom::ParameterMissing)
+    end
+
+    it 'requires at least an access token' do
+      expect { Zoom::Client::ServerToServerOAuth.new(access_token: access_token) }.not_to raise_error
+    end
+
+    it 'requires at least an account_id' do
+      expect { Zoom::Client::ServerToServerOAuth.new(access_token: access_token) }.not_to raise_error
     end
 
     it 'creates instance of Zoom::Client if api_key and api_secret is provided' do
@@ -140,8 +148,7 @@ describe Zoom::Client do
     end
 
     describe 'set_tokens' do
-      let(:zc) { server_to_server_oauth_client }
-      let(:args) { { account_id: 'xxx', client_id: 'xxx', client_secret: 'xxx' } }
+      let(:client) { Zoom::Client::ServerToServerOAuth.new(account_id: 'xxx') }
 
       before :each do
         Zoom.configure do |config|
@@ -157,14 +164,24 @@ describe Zoom::Client do
 
       it 'sets the access_token, expires_in and expires_at' do
         expected_values = JSON.parse(json_response('token', 'access_token'))
-        zc.auth
-        expect(zc.access_token).to eq(expected_values['access_token'])
-        expect(zc.expires_in).to eq(expected_values['expires_in'])
-        expect(zc.expires_at).to eq((Time.now + expected_values['expires_in']).to_i)
+        client.auth
+        expect(client.access_token).to eq(expected_values['access_token'])
+        expect(client.expires_in).to eq(expected_values['expires_in'])
+        expect(client.expires_at).to eq((Time.now + expected_values['expires_in']).to_i)
       end
 
-      it 'has the basic auth authorization header' do
-        expect(zc.oauth_request_headers['Authorization']).to eq("Basic eHh4Onh4eA==")
+      context 'when client_id and client_secret is not provided' do
+        it 'has the basic auth authorization header based on api_key and api_secret' do
+          expect(client.oauth_request_headers['Authorization']).to eq("Basic eHh4Onh4eA==")
+        end
+      end
+
+      context 'when client_id and client_secret are provided' do
+        let(:client) { Zoom::Client::ServerToServerOAuth.new(account_id: 'xxx', client_id: 'yyy', client_secret: 'yyy') }
+
+        it 'has the basic auth authorization header based on client_id and client_secret' do
+          expect(client.oauth_request_headers['Authorization']).to eq("Basic eXl5Onl5eQ==")
+        end
       end
     end
   end

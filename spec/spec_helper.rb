@@ -46,7 +46,7 @@ def oauth_client
 end
 
 def server_to_server_oauth_client
-  Zoom::Client::ServerToServerOAuth.new(account_id: 'xxx', client_id: 'xxx', client_secret: 'xxx')
+  Zoom::Client::ServerToServerOAuth.new(account_id: 'xxx')
 end
 
 def zoom_client
