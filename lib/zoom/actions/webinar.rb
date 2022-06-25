@@ -9,15 +9,15 @@ module Zoom
                             monthly_week_day end_times end_date_time].freeze
       SETTINGS_KEYS = [
                         %i[
-                            host_video panelists_video practice_session hd_video approval_type
-                            registration_type audio auto_recording enforce_login
-                            enforce_login_domains alternative_hosts close_registration
-                            show_share_button allow_multiple_devices on_demand
-                            request_permission_to_unmute_participants global_dial_in_countries
-                            contact_name contact_email registrants_restrict_number
-                            post_webinar_survey survey_url registrants_email_notification
-                            meeting_authentication authentication_option
-                            authentication_domains registrants_confirmation_email
+                          host_video panelists_video practice_session hd_video approval_type
+                          registration_type audio auto_recording enforce_login
+                          enforce_login_domains alternative_hosts close_registration
+                          show_share_button allow_multiple_devices on_demand
+                          request_permission_to_unmute_participants global_dial_in_countries
+                          contact_name contact_email registrants_restrict_number
+                          post_webinar_survey survey_url registrants_email_notification
+                          meeting_authentication authentication_option
+                          authentication_domains registrants_confirmation_email
                         ],
                         {
                             language_interpretation: [
