@@ -18,14 +18,18 @@ module Zoom
                           post_webinar_survey survey_url registrants_email_notification
                           meeting_authentication authentication_option
                           authentication_domains registrants_confirmation_email
-                        ].freeze,
+                        ],
                         {
+                            language_interpretation: [
+                            :enable,
+                            interpreters: %i[email languages]
+                          ],
                           question_and_answer: %i[
-                            allow_anonymous_questions, answer_questions, attendees_can_comment,
-                            attendees_can_upvote, enable
+                            allow_anonymous_questions answer_questions attendees_can_comment
+                            attendees_can_upvote enable
                           ]
                         }
-                      ]
+                      ].freeze
 
       get 'webinar_list', '/users/:host_id/webinars',
         permit: %i[page_size page_number]
